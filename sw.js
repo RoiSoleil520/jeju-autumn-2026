@@ -1,11 +1,12 @@
 "use strict";
-const CACHE_NAME = "jeju-autumn-2026-v4";
+const CACHE_NAME = "jeju-autumn-2026-v5";
 const CORE_FILES = [
   "./",
   "./index.html",
   "./style.css",
   "./data.js",
   "./app.js",
+  "./schedule.js",
   "./assets/icon.svg",
   "./assets/seongsan.webp",
   "./assets/saebyeol.webp",

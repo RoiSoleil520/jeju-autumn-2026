@@ -13,6 +13,7 @@
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="stylesheet" href="./style.css" />
     <script src="./data.js" defer></script>
+    <script src="./schedule.js" defer></script>
     <script src="./app.js" defer></script>
   </head>
   <body>
@@ -38,96 +39,156 @@
         ></a
       >
       <nav aria-label="主导航">
-        <a href="#plan">每日行程</a><a href="#map">地点地图</a
-        ><a href="#food">吃点好的</a><a href="#prepare">行前准备</a>
+        <a href="#now">现在做什么</a><a href="#plan">日期行程</a
+        ><a href="#map">地点地图</a><a href="#food">餐饮备选</a
+        ><a href="#prepare">行前准备</a>
       </nav>
       <button class="small-button print-button" id="print-button">
         打印 / 存 PDF <span aria-hidden="true">↗</span>
       </button>
     </header>
     <main id="top">
-      <section class="hero wrap">
-        <div class="hero-copy">
-          <p class="eyebrow">
-            <span></span> THREE FRIENDS, ONE LATE-AUTUMN ISLAND
-          </p>
-          <h1>把晚秋，<br />留给<span class="serif-accent">济州。</span></h1>
-          <p class="hero-description">
-            去海边吹风，去山野看草浪。<br />日落之前，找一杯热咖啡。
-          </p>
-          <div class="trip-pills">
-            <span>2026.11.20 — 11.24</span><span>3 人同行</span
-            ><span>3 个完整白天</span>
+      <section id="now" class="wrap journey-dashboard">
+        <div class="clock-row">
+          <div>
+            <span class="eyebrow" id="clock-mode">韩国时间 · 每分钟更新</span
+            ><strong id="journey-clock">正在读取时间…</strong>
           </div>
-          <a class="primary-button" href="#plan"
-            >翻开旅行计划 <span aria-hidden="true">↓</span></a
-          >
-          <p class="hero-footnote">
-            按你提供的攻略安排 · 新济州乐天免税店附近出发
-          </p>
+          <span class="follow-status" id="follow-status">跟随时间定位</span>
         </div>
-        <figure class="hero-photo">
-          <img
-            src="./assets/seongsan.webp"
-            alt="城山日出峰的火山锥、海岸与蓝色大海"
-            width="1200"
-            height="800"
-            fetchpriority="high"
-          />
-          <div class="photo-overlay">
-            <span>제주도</span
-            ><strong>A little slower.<br />A little closer to the sea.</strong>
+        <div class="dashboard-heading">
+          <div>
+            <p class="eyebrow">JEJU · 2026.11.20 — 11.24 · 3 人同行</p>
+            <h1 id="journey-title">此刻，按计划出发。</h1>
           </div>
-          <figcaption>
-            01 / 城山日出峰 · 景观参考图，非出行当日实况<br />图片：济州观光公社
-            VisitJeju
-          </figcaption>
-          <div class="round-stamp" aria-hidden="true">
-            LATE AUTUMN<br /><b>JEJU</b><br />33° N · 126° E
-          </div>
-        </figure>
-      </section>
-      <section class="trip-summary wrap" aria-label="旅行关键信息">
-        <div>
-          <span class="summary-icon" aria-hidden="true">↗</span>
-          <p>
-            <small>20 日 · 抵达</small><strong>19:55 HGH → 22:30 CJU</strong
-            ><span>春秋 9C8623 · 抵达为韩国时间</span>
-          </p>
+          <button type="button" class="small-button" data-locate-now>
+            ◎ 定位当前安排
+          </button>
         </div>
-        <div>
-          <span class="summary-icon" aria-hidden="true">⌂</span>
-          <p>
-            <small>四晚 · 同一住处</small
-            ><strong>新济州 · 乐天免税店附近</strong
-            ><span>自助入住 · 不换酒店</span>
-          </p>
-        </div>
-        <div>
-          <span class="summary-icon" aria-hidden="true">↗</span>
-          <p>
-            <small>24 日 · 返程</small><strong>07:50 CJU → 08:45 HGH</strong
-            ><span>建议 05:15 接车 · 各地当地时间</span>
-          </p>
-        </div>
-      </section>
-      <div class="wrap travel-note">
-        <span class="note-symbol" aria-hidden="true">↳</span>
-        <p>
-          <strong>三天刚刚好，天气说了算。</strong>
-          东线、西线各一天，最后一天秋色与市区。21
-          日三站为紧凑计划；牛岛停航、候船超时或体力不足，就启用替代路线。<a
-            href="#weather"
-            >先看晚秋天气策略 ↗</a
-          >
+        <p class="dashboard-intro">
+          吃什么、带什么、下一步去哪，都在对应的时间点。以下是计划提醒，实际航班、船况和营业以现场为准。
         </p>
-      </div>
-
+        <div class="preview-banner" id="preview-banner" hidden>
+          正在查看你指定的时间，当前卡片属于预览。<button
+            type="button"
+            id="resume-clock"
+          >
+            恢复真实时间
+          </button>
+        </div>
+        <div class="focus-layout">
+          <article
+            id="current-focus"
+            class="current-focus"
+            aria-label="当前计划"
+          ></article>
+          <aside
+            id="next-focus"
+            class="next-focus"
+            aria-label="下一项计划"
+          ></aside>
+        </div>
+        <details class="time-preview-controls">
+          <summary>按指定日期与时间查看</summary>
+          <form id="preview-form">
+            <label for="preview-time"
+              >济州时间（UTC+9）<input
+                type="datetime-local"
+                id="preview-time"
+                required /></label
+            ><button type="submit" class="primary-button">定位此时 ↗</button>
+            <p>
+              只改变本次查看时间，实时模式下会自动定位当天。旅行开始前显示行前准备；旅行结束后显示回顾。
+            </p>
+          </form>
+        </details>
+      </section>
+      <details class="wrap overview-details">
+        <summary>旅程概览 · 航班、住宿与海岛照片</summary>
+        <section class="hero wrap">
+          <div class="hero-copy">
+            <p class="eyebrow">
+              <span></span> THREE FRIENDS, ONE LATE-AUTUMN ISLAND
+            </p>
+            <h1>把晚秋，<br />留给<span class="serif-accent">济州。</span></h1>
+            <p class="hero-description">
+              去海边吹风，去山野看草浪。<br />日落之前，找一杯热咖啡。
+            </p>
+            <div class="trip-pills">
+              <span>2026.11.20 — 11.24</span><span>3 人同行</span
+              ><span>3 个完整白天</span>
+            </div>
+            <a class="primary-button" href="#plan"
+              >翻开旅行计划 <span aria-hidden="true">↓</span></a
+            >
+            <p class="hero-footnote">
+              按你提供的攻略安排 · 新济州乐天免税店附近出发
+            </p>
+          </div>
+          <figure class="hero-photo">
+            <img
+              src="./assets/seongsan.webp"
+              alt="城山日出峰的火山锥、海岸与蓝色大海"
+              width="1200"
+              height="800"
+              fetchpriority="high"
+            />
+            <div class="photo-overlay">
+              <span>제주도</span
+              ><strong
+                >A little slower.<br />A little closer to the sea.</strong
+              >
+            </div>
+            <figcaption>
+              01 / 城山日出峰 · 景观参考图，非出行当日实况<br />图片：济州观光公社
+              VisitJeju
+            </figcaption>
+            <div class="round-stamp" aria-hidden="true">
+              LATE AUTUMN<br /><b>JEJU</b><br />33° N · 126° E
+            </div>
+          </figure>
+        </section>
+        <section class="trip-summary wrap" aria-label="旅行关键信息">
+          <div>
+            <span class="summary-icon" aria-hidden="true">↗</span>
+            <p>
+              <small>20 日 · 抵达</small><strong>19:55 HGH → 22:30 CJU</strong
+              ><span>春秋 9C8623 · 抵达为韩国时间</span>
+            </p>
+          </div>
+          <div>
+            <span class="summary-icon" aria-hidden="true">⌂</span>
+            <p>
+              <small>四晚 · 同一住处</small
+              ><strong>新济州 · 乐天免税店附近</strong
+              ><span>自助入住 · 不换酒店</span>
+            </p>
+          </div>
+          <div>
+            <span class="summary-icon" aria-hidden="true">↗</span>
+            <p>
+              <small>24 日 · 返程</small><strong>07:50 CJU → 08:45 HGH</strong
+              ><span>建议 05:15 接车 · 各地当地时间</span>
+            </p>
+          </div>
+        </section>
+        <div class="wrap travel-note">
+          <span class="note-symbol" aria-hidden="true">↳</span>
+          <p>
+            <strong>三天刚刚好，天气说了算。</strong>
+            东线、西线各一天，最后一天秋色与市区。21
+            日三站为紧凑计划；牛岛停航、候船超时或体力不足，就启用替代路线。<a
+              href="#weather"
+              >先看晚秋天气策略 ↗</a
+            >
+          </p>
+        </div>
+      </details>
       <section id="plan" class="wrap section-space">
         <div class="section-heading">
           <div>
             <p class="eyebrow">01 / YOUR DAYS IN JEJU</p>
-            <h2>每天，留一点余地。</h2>
+            <h2>一天，一条清楚的时间线。</h2>
           </div>
           <p>
             时间均为韩国时间（UTC+9）<br />比中国快 1 小时；车程为估算，含缓冲。
@@ -139,6 +200,48 @@
           aria-label="选择旅行日期"
           id="day-tabs"
         ></div>
+        <details id="custom-event-details" class="custom-event-details">
+          <summary>＋ 新增自己的安排（日期与时间）</summary>
+          <form id="custom-event-form">
+            <div class="custom-form-grid">
+              <label
+                >日期<input
+                  type="date"
+                  id="custom-date"
+                  name="eventDate"
+                  min="2026-11-13"
+                  max="2026-11-24"
+                  required /></label
+              ><label
+                >时间 · 济州时间<input
+                  type="time"
+                  name="eventTime"
+                  required /></label
+              ><label class="wide-field"
+                >要做什么<input
+                  type="text"
+                  name="eventTitle"
+                  placeholder="例如：取电话卡、餐厅预约、买早餐"
+                  maxlength="100"
+                  required /></label
+              ><label class="wide-field"
+                >补充说明<textarea
+                  name="eventDescription"
+                  maxlength="500"
+                  rows="2"
+                  placeholder="地点、同行人或要带的东西（可选）"
+                ></textarea>
+              </label>
+            </div>
+            <button type="submit" class="primary-button">
+              新增并定位到行程 ↗
+            </button>
+            <p class="fine-print">
+              新增后按所选日期与时间插入，提醒窗口为 30
+              分钟；可以删除。记录仅保存在当前设备与浏览器。
+            </p>
+          </form>
+        </details>
         <div class="plan-layout">
           <div
             class="day-panel"
@@ -146,47 +249,33 @@
             role="tabpanel"
             tabindex="0"
           ></div>
-          <aside class="plan-sidebar">
+          <aside class="plan-sidebar live-sidebar">
             <div class="sidebar-card forest-card">
+              <p class="eyebrow">ONE DAY AT A TIME</p>
+              <h3>随身带好，<br />按时出发。</h3>
+              <p id="day-carry-list"></p>
+              <button type="button" class="sidebar-now-button" data-locate-now>
+                ◎ 定位当前安排 ↗
+              </button>
+            </div>
+            <div class="sidebar-card">
               <p class="eyebrow">OUR LITTLE BASE</p>
-              <h3>每天都回<br />新济州。</h3>
-              <p>乐天免税店附近的民宿，是这次旅行的起点和终点。</p>
-              <div class="base-line">
-                <span>⌂</span>
-                <p>
-                  两房一厅 · 3 人<br /><small
-                    >第三位的沙发床请提前和房东确认</small
-                  >
-                </p>
-              </div>
+              <h3>每天回新济州</h3>
+              <p>
+                乐天免税店附近 · 四晚同一住处。韩文门牌和门锁密码请看私人订单。
+              </p>
               <a
                 href="https://www.airbnb.cn/rooms/1726382007188887219"
                 target="_blank"
                 rel="noopener noreferrer"
-                >查看 Airbnb 房源 ↗</a
+                >住宿房源 ↗</a
               >
-              <p class="fine-print">
-                房源说明距机场约 10 分钟；接送按 15—25
-                分钟留余量。地图仅显示住宿区域，门牌以私人订单为准。
-              </p>
-            </div>
-            <div class="sidebar-card">
-              <p class="eyebrow">SAVE THE SUNLIGHT</p>
-              <div class="sun-line">
-                <span aria-hidden="true">☀</span
-                ><strong>17:28<small>左右日落</small></strong>
-              </div>
-              <p>
-                21—23 日约 17:27—17:28 日落。海岸徒步提前结束，22 日 16:15
-                前去咖啡馆入座。
-              </p>
-              <a href="#sources">日照与信息来源 ↗</a>
             </div>
             <div class="sidebar-card quick-card">
-              <h3>给同行人的一句话</h3>
+              <h3>发给同行人</h3>
               <p id="share-summary"></p>
               <button class="text-button" id="copy-plan">
-                复制当前日行程 ↗
+                复制这一天的安排 ↗
               </button>
             </div>
           </aside>
@@ -344,7 +433,7 @@
         <div class="section-heading">
           <div>
             <p class="eyebrow">03 / GOOD FOOD, WARM DAYS</p>
-            <h2>风吹过了，吃点热的。</h2>
+            <h2>想换口味？备选在这里。</h2>
           </div>
           <p>
             按你的截图补充餐厅与饮品 · 11/13 核对<br />已有价格为预算；未核实标价的店以当天菜单为准。
@@ -502,7 +591,7 @@
         <div class="section-heading">
           <div>
             <p class="eyebrow">05 / BEFORE YOU GO</p>
-            <h2>把小事，提前准备好。</h2>
+            <h2>完整准备清单，查漏补缺。</h2>
           </div>
           <div class="checklist-progress">
             <strong id="checklist-count">0 / 0</strong
@@ -535,7 +624,7 @@
         </div>
         <div id="checklist-groups" class="checklist-grid"></div>
         <p class="fine-print" id="storage-notice">
-          勾选状态仅保存在当前设备与浏览器，不会同步给同行人。浏览器禁止存储时，本次页面仍可勾选。
+          这里的勾选与各时间点内的准备事项同步。状态仅保存在当前设备与浏览器，不会同步给同行人。浏览器禁止存储时，本次页面仍可勾选。
         </p>
       </section>
 
@@ -640,6 +729,7 @@
       >
     </footer>
     <nav class="mobile-nav" aria-label="手机快捷导航">
+      <a href="#now"><span aria-hidden="true">◎</span>现在</a>
       <a href="#plan"><span aria-hidden="true">◷</span>行程</a>
       <a href="#map"><span aria-hidden="true">⌖</span>地图</a>
       <a href="#food"><span aria-hidden="true">♨</span>美食</a>
