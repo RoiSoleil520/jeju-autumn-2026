@@ -6,6 +6,8 @@ const validChecklistIds = new Set(
 let activeDayId = "east";
 let activeMode = "normal";
 let autumnChoice = "saebyeol";
+let activeFoodType = "全部";
+let activeFoodArea = "全部";
 let toastTimer;
 let checkedIds = new Set();
 
@@ -157,17 +159,28 @@ function renderMap(filter = "all") {
     })
     .join("");
 }
-function renderFoods(filter = "全部") {
-  document.querySelector("#food-grid").innerHTML = FOODS.map((food, index) => ({
+function renderFoods(filter = activeFoodType) {
+  activeFoodType = filter;
+  const visibleFoods = FOODS.map((food, index) => ({
     food,
     index,
   }))
-    .filter(({ food }) => filter === "全部" || food.type === filter)
-    .map(
-      ({ food, index }) =>
-        `<article class="food-card"><div class="food-index"><span>0${index + 1}</span><span class="tag">${escapeHtml(food.type)}</span></div><h3>${escapeHtml(food.name)}</h3><p class="food-ko">${escapeHtml(food.ko)}</p><p class="food-shop">${escapeHtml(food.shop)}</p><p class="food-description">${escapeHtml(food.description)}</p><strong class="food-price">${escapeHtml(food.price)}</strong><p class="food-when">${escapeHtml(food.when)}</p><p class="fine-print">${escapeHtml(food.note)}</p><div class="food-links">${externalLink(mapUrl(food.query), "在地图找店 ↗")}${sourceLink(food.source)}</div></article>`,
+    .filter(
+      ({ food }) => activeFoodType === "全部" || food.type === activeFoodType,
     )
-    .join("");
+    .filter(
+      ({ food }) => activeFoodArea === "全部" || food.area === activeFoodArea,
+    );
+  document.querySelector("#food-result-count").textContent =
+    `${visibleFoods.length} 项 · ${activeFoodArea === "全部" ? "所有区域" : activeFoodArea} · ${activeFoodType === "全部" ? "所有类型" : activeFoodType}`;
+  document.querySelector("#food-grid").innerHTML =
+    visibleFoods
+      .map(
+        ({ food, index }) =>
+          `<article class="food-card"><div class="food-index"><span>${String(index + 1).padStart(2, "0")}</span><span class="tag">${escapeHtml(food.area)} · ${escapeHtml(food.type)}</span></div><h3>${escapeHtml(food.name)}</h3><p class="food-ko">${escapeHtml(food.ko)}</p><p class="food-shop">${escapeHtml(food.shop)}</p><p class="food-description">${escapeHtml(food.description)}</p><strong class="food-price">${escapeHtml(food.price)}</strong><p class="food-when">${escapeHtml(food.when)}</p><p class="fine-print">${escapeHtml(food.note)}</p><div class="food-links">${externalLink(mapUrl(food.query), "在地图找店 ↗")}${sourceLink(food.source)}</div></article>`,
+      )
+      .join("") ||
+    '<p class="food-empty">这个组合暂无候选，换个区域或选择“所有类型”看看。</p>';
 }
 function updateChecklistProgress() {
   const total = validChecklistIds.size;
@@ -231,13 +244,13 @@ function dayText(day, useRain = false) {
     .join("\n\n")}\n\n交通：${day.transport}\n提醒：${day.warning}`;
 }
 function fullTextPlan() {
-  return `济州，晚秋见。｜2026.11.20—11.24，3 人旅行手册\n核验日期：2026.11.12\n除杭州航班时间外，行程使用韩国时间 UTC+9（比中国快 1 小时）。\n住宿：新济州乐天免税店附近；精确地址请看私人订单。\n车程和预算均为规划估算，船班和开放情况临行复核。\n\n${DAYS.map((day) => dayText(day) + (day.rain ? "\n\n" + dayText(day, true) : "")).join("\n\n----------------\n\n")}\n\n秋色三选一\n${Object.values(
+  return `济州，晚秋见。｜2026.11.20—11.24，3 人旅行手册\n基础资料核验：2026.11.12；美食补充：2026.11.13\n除杭州航班时间外，行程使用韩国时间 UTC+9（比中国快 1 小时）。\n住宿：新济州乐天免税店附近；精确地址请看私人订单。\n车程和预算均为规划估算，船班和开放情况临行复核。\n\n${DAYS.map((day) => dayText(day) + (day.rain ? "\n\n" + dayText(day, true) : "")).join("\n\n----------------\n\n")}\n\n秋色三选一\n${Object.values(
     AUTUMN_OPTIONS,
   )
     .map((option) => option.name + "：" + option.description)
     .join(
       "\n",
-    )}\n\n吃点好的\n${FOODS.map((food) => `${food.name} / ${food.shop}\n${food.price}（预算）｜${food.when}\n${food.description}\n${food.note}\n${mapUrl(food.query)}`).join("\n\n")}\n\n行前清单\n${CHECKLIST.map((group) => `${group.group}\n${group.items.map(([, title, description]) => "□ " + title + "\n" + description).join("\n")}`).join("\n\n")}\n\n天气\n11 月气候参考：济州机场平均最高 16.4°C、平均最低 10.4°C，不是每日预报。分层穿衣，带防风外层与薄羽绒；大风不出海，雨后不登高。21—23 日日落约 17:27—17:28。\n\n紧急电话\n韩国报警 112；急救 / 消防 119；驻济州总领馆 +82-64-722-8802；领保 +86-10-12308。\n\n资料来源\n${SOURCES.map((source) => source.name + "\n" + source.url + "\n" + source.note).join("\n\n")}`;
+    )}\n\n吃点好的\n${FOODS.map((food) => `${food.name} / ${food.shop}\n区域：${food.area}｜${food.price}｜${food.when}\n${food.description}\n${food.note}\n${mapUrl(food.query)}`).join("\n\n")}\n\n行前清单\n${CHECKLIST.map((group) => `${group.group}\n${group.items.map(([, title, description]) => "□ " + title + "\n" + description).join("\n")}`).join("\n\n")}\n\n天气\n11 月气候参考：济州机场平均最高 16.4°C、平均最低 10.4°C，不是每日预报。分层穿衣，带防风外层与薄羽绒；大风不出海，雨后不登高。21—23 日日落约 17:27—17:28。\n\n紧急电话\n韩国报警 112；急救 / 消防 119；驻济州总领馆 +82-64-722-8802；领保 +86-10-12308。\n\n资料来源\n${SOURCES.map((source) => source.name + "\n" + source.url + "\n" + source.note).join("\n\n")}`;
 }
 function preparePrint() {
   document.querySelector("#print-days")?.remove();
@@ -300,6 +313,14 @@ document.querySelector("#day-panel").addEventListener("change", (event) => {
 for (const [containerId, dataAttribute, render] of [
   ["map-filters", "mapFilter", renderMap],
   ["food-filters", "foodFilter", renderFoods],
+  [
+    "food-area-filters",
+    "foodArea",
+    (area) => {
+      activeFoodArea = area;
+      renderFoods();
+    },
+  ],
 ]) {
   document
     .querySelector(`#${containerId}`)

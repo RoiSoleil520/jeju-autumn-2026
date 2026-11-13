@@ -347,7 +347,27 @@
             <h2>风吹过了，吃点热的。</h2>
           </div>
           <p>
-            以本地菜、就近吃、少排队为原则<br />价格为每人预算区间，非商家报价。
+            按你的截图补充餐厅与饮品 · 11/13 核对<br />已有价格为预算；未核实标价的店以当天菜单为准。
+          </p>
+        </div>
+        <div class="food-route-guide">
+          <h3>接在行程里，每次选一家就好。</h3>
+          <p>
+            <strong>21 日牛岛：</strong>下古水洞可选 Blanc
+            Rocher，留出返船时间；回新济州后，熟成到、DOTDAM、Hayeogum、钱豚选一家吃黑猪肉。
+          </p>
+          <p>
+            <strong>22 日西线：</strong>Team Blow
+            接涯月日落；休止符接挟才。如果留在挟才喝咖啡，就省掉返回涯月的车程。SLOWBOAT
+            作为替换选项，不连刷三家。
+          </p>
+          <p>
+            <strong>23 日市区：</strong>汤面、醒酒汤、Baro 猪蹄、辣炒小章鱼或
+            BHC 按口味替换；不延长晚间行程，仍然早点回民宿整理行李。
+          </p>
+          <p>
+            <strong>东线替代：</strong>Moumoon
+            在月汀里，“缘屋”石锅饭在咸德方向、店名待比对。若保留城山—牛岛—涉地三站，今天不额外绕去。
           </p>
         </div>
         <div class="filter-row" id="food-filters" aria-label="美食类型筛选">
@@ -366,8 +386,47 @@
           >
             咖啡与甜品
           </button>
+          <button class="chip" data-food-filter="日常饮品" aria-pressed="false">
+            日常饮品
+          </button>
         </div>
+        <div
+          class="filter-row"
+          id="food-area-filters"
+          aria-label="美食所在区域筛选"
+        >
+          <button class="chip active" data-food-area="全部" aria-pressed="true">
+            所有区域
+          </button>
+          <button class="chip" data-food-area="市区" aria-pressed="false">
+            市区 · 住处附近
+          </button>
+          <button class="chip" data-food-area="东线" aria-pressed="false">
+            东线 · 月汀里 / 咸德
+          </button>
+          <button class="chip" data-food-area="西线" aria-pressed="false">
+            西线 · 涯月 / 挟才
+          </button>
+          <button class="chip" data-food-area="牛岛" aria-pressed="false">
+            牛岛
+          </button>
+          <button class="chip" data-food-area="沿途" aria-pressed="false">
+            沿途补给
+          </button>
+        </div>
+        <p
+          class="food-result-count"
+          id="food-result-count"
+          role="status"
+          aria-live="polite"
+        ></p>
         <div class="food-grid" id="food-grid"></div>
+        <p class="fine-print food-dining-tips">
+          用餐小提醒：可在 CU / GS25
+          准备早出发时的早餐；三人先少量点再加单。备少量现金并确认可用卡种；用
+          Naver Map 核对分店、营业与最后点单时间，菜单可用 Papago
+          翻译。截图中的“24 小时”“免费配菜”和固定人均价，都需再向具体门店确认。
+        </p>
       </section>
 
       <section id="weather" class="weather-section section-space">
@@ -550,7 +609,8 @@
       <section id="sources" class="wrap sources-section">
         <details>
           <summary>
-            <span>资料来源与核验说明</span><span>2026.11.12 · 展开 ↗</span>
+            <span>资料来源与核验说明</span
+            ><span>基础资料 11/12 · 美食补充 11/13 · 展开 ↗</span>
           </summary>
           <div class="sources-intro">
             <p>
