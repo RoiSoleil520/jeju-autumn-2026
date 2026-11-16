@@ -1,10 +1,10 @@
 :root {
   --ink: #183e36;
-  --muted: #718077;
+  --muted: #526459;
   --paper: #faf8f1;
   --cream: #f1eee3;
   --line: #dddeda;
-  --orange: #cc7946;
+  --orange: #9b542d;
   --light-green: #e9eee4;
   --white: #fffefa;
   --serif: "Songti SC", "Noto Serif CJK SC", "STSong", serif;
@@ -16,6 +16,7 @@
   box-sizing: border-box;
 }
 html {
+  font-size: 100%;
   scroll-behavior: smooth;
   scroll-padding-top: 105px;
 }
@@ -24,8 +25,8 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 15px;
-  line-height: 1.8;
+  font-size: 1.125rem;
+  line-height: 1.9;
   -webkit-font-smoothing: antialiased;
 }
 button,
@@ -109,7 +110,7 @@ img {
   align-items: center;
   gap: 11px;
   font-family: var(--serif);
-  font-size: 23px;
+  font-size: 1.5rem;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -120,7 +121,7 @@ img {
 .brand-sub {
   display: block;
   font-family: var(--sans);
-  font-size: 9px;
+  font-size: 1rem;
   letter-spacing: 2px;
   line-height: 1.6;
   font-weight: 500;
@@ -128,7 +129,7 @@ img {
 .site-header nav {
   display: flex;
   gap: 32px;
-  font-size: 13px;
+  font-size: 1.25rem;
 }
 .site-header nav a {
   position: relative;
@@ -152,7 +153,7 @@ img {
   background: transparent;
   border-radius: 4px;
   padding: 10px 17px;
-  font-size: 12px;
+  font-size: 1.125rem;
   display: inline-flex;
   gap: 22px;
   align-items: center;
@@ -170,7 +171,7 @@ img {
   padding-bottom: 64px;
 }
 .eyebrow {
-  font-size: 10px;
+  font-size: 1rem;
   letter-spacing: 2.2px;
   font-weight: 600;
   line-height: 1.8;
@@ -179,7 +180,7 @@ img {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 9px;
+  font-size: 1rem;
 }
 .hero .eyebrow > span {
   width: 6px;
@@ -200,7 +201,7 @@ h1 {
   color: var(--orange);
 }
 .hero-description {
-  font-size: 16px;
+  font-size: 1.375rem;
   line-height: 1.9;
   letter-spacing: 0.6px;
   color: #607168;
@@ -212,7 +213,7 @@ h1 {
   margin: 25px 0 30px;
 }
 .trip-pills span {
-  font-size: 10px;
+  font-size: 1rem;
   padding: 4px 9px;
   border: 1px solid #d9ddd2;
   border-radius: 3px;
@@ -227,14 +228,14 @@ h1 {
   color: var(--paper);
   border-radius: 3px;
   padding: 13px 22px;
-  font-size: 13px;
+  font-size: 1.25rem;
 }
 .primary-button:hover {
   background: #2b5546;
   color: white;
 }
 .hero-footnote {
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
   margin-top: 15px;
 }
@@ -263,14 +264,14 @@ h1 {
   color: #fff;
 }
 .photo-overlay > span {
-  font-size: 14px;
+  font-size: 1.25rem;
   letter-spacing: 6px;
   display: block;
   margin-bottom: 10px;
 }
 .photo-overlay strong {
   font-family: Georgia, serif;
-  font-size: 25px;
+  font-size: 1.75rem;
   line-height: 1.35;
   font-weight: 400;
   font-style: italic;
@@ -281,7 +282,7 @@ h1 {
   left: 32px;
   color: #eee;
   z-index: 1;
-  font-size: 8px;
+  font-size: 1rem;
   line-height: 1.5;
 }
 .round-stamp {
@@ -298,7 +299,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 8px;
+  font-size: 1rem;
   line-height: 1.5;
   letter-spacing: 1.3px;
   transform: rotate(10deg);
@@ -307,7 +308,7 @@ h1 {
 }
 .round-stamp b {
   font-family: Georgia, serif;
-  font-size: 24px;
+  font-size: 1.75rem;
   line-height: 1;
 }
 .trip-summary {
@@ -330,22 +331,22 @@ h1 {
   border: 0;
 }
 .summary-icon {
-  font-size: 30px;
+  font-size: 2.125rem;
   font-weight: 300;
   color: var(--orange);
 }
 .trip-summary small {
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
   display: block;
 }
 .trip-summary strong {
   display: block;
-  font-size: 13px;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 .trip-summary p > span {
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
 }
 .travel-note {
@@ -353,7 +354,7 @@ h1 {
   gap: 20px;
   padding: 25px 0 0;
   color: #69776e;
-  font-size: 11px;
+  font-size: 1.125rem;
 }
 .travel-note strong {
   color: var(--ink);
@@ -365,7 +366,7 @@ h1 {
 }
 .note-symbol {
   color: var(--orange);
-  font-size: 25px;
+  font-size: 1.75rem;
   line-height: 1;
 }
 .section-space {
@@ -380,7 +381,7 @@ h1 {
 }
 .section-heading h2 {
   font-family: var(--serif);
-  font-size: 36px;
+  font-size: 2.125rem;
   font-weight: 500;
   margin-top: 9px;
   letter-spacing: 0.5px;
@@ -390,7 +391,7 @@ h1 {
   color: var(--orange);
 }
 .section-heading > p {
-  font-size: 11px;
+  font-size: 1.125rem;
   color: var(--muted);
   text-align: right;
   line-height: 1.9;
@@ -414,16 +415,16 @@ h1 {
 }
 .day-tab small {
   display: block;
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
 }
 .day-tab strong {
-  font-size: 17px;
+  font-size: 1.375rem;
   font-weight: 500;
   margin-right: 9px;
 }
 .day-tab span {
-  font-size: 11px;
+  font-size: 1.125rem;
 }
 .day-tab[aria-selected="true"] {
   background: var(--ink);
@@ -459,13 +460,13 @@ h1 {
   margin-bottom: 19px;
 }
 .day-counter {
-  font-size: 11px;
+  font-size: 1.125rem;
   color: var(--orange);
   letter-spacing: 2px;
 }
 .tag {
   display: inline-block;
-  font-size: 10px;
+  font-size: 1rem;
   background: var(--light-green);
   padding: 3px 9px;
   border-radius: 3px;
@@ -473,19 +474,19 @@ h1 {
 }
 .day-panel h3.day-title {
   font-family: var(--serif);
-  font-size: 29px;
+  font-size: 1.75rem;
   font-weight: 500;
   margin-bottom: 10px;
 }
 .day-subtitle {
-  font-size: 13px;
+  font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.9;
 }
 .day-description {
   margin-top: 13px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 1.125rem;
   line-height: 1.9;
 }
 .mode-controls {
@@ -498,7 +499,7 @@ h1 {
   padding: 14px 0;
 }
 .mode-controls > span {
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
 }
 .segmented {
@@ -510,7 +511,7 @@ h1 {
 .segmented button {
   border: 0;
   background: transparent;
-  font-size: 10px;
+  font-size: 1rem;
   border-radius: 3px;
   padding: 7px 13px;
 }
@@ -522,7 +523,7 @@ h1 {
   background: #f8f0e4;
   color: #89653f;
   padding: 14px 16px;
-  font-size: 11px;
+  font-size: 1.125rem;
   line-height: 1.9;
   border-left: 2px solid #d19b65;
   margin: 18px 0;
@@ -563,19 +564,19 @@ h1 {
   box-shadow: 0 0 0 3px #edf1e8;
 }
 .event-time {
-  font-size: 11px;
-  color: #7c8e7e;
+  font-size: 1.125rem;
+  color: #4a604d;
   padding-top: 2px;
   text-align: right;
   line-height: 1.7;
 }
 .event-title {
-  font-size: 14px;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 .event-description {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 1.125rem;
   line-height: 1.9;
   margin-top: 6px;
 }
@@ -586,12 +587,12 @@ h1 {
   margin-top: 8px;
 }
 .event-category {
-  font-size: 9px;
+  font-size: 1rem;
   letter-spacing: 1px;
-  color: #9aa18c;
+  color: #586347;
 }
 .map-link {
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--orange);
   display: inline-flex;
   gap: 4px;
@@ -600,14 +601,14 @@ h1 {
   border-top: 1px solid var(--line);
   margin-top: 5px;
   padding-top: 19px;
-  font-size: 11px;
+  font-size: 1.125rem;
   color: var(--muted);
 }
 .transport-note strong {
   display: block;
   margin-bottom: 5px;
   color: var(--ink);
-  font-size: 12px;
+  font-size: 1.125rem;
 }
 .sidebar-card {
   border: 1px solid var(--line);
@@ -622,16 +623,16 @@ h1 {
 }
 .forest-card .eyebrow {
   color: #c4d1b9;
-  font-size: 9px;
+  font-size: 1rem;
 }
 .forest-card h3 {
   font-family: var(--serif);
-  font-size: 32px;
+  font-size: 2.125rem;
   font-weight: 400;
   margin: 15px 0;
 }
 .sidebar-card > p:not(.eyebrow) {
-  font-size: 11px;
+  font-size: 1.125rem;
   line-height: 1.9;
   color: var(--muted);
 }
@@ -643,18 +644,18 @@ h1 {
   gap: 13px;
   align-items: center;
   margin: 22px 0;
-  font-size: 11px;
+  font-size: 1.125rem;
 }
 .base-line > span {
-  font-size: 28px;
+  font-size: 1.75rem;
 }
 .base-line small {
-  font-size: 9px;
+  font-size: 1rem;
   color: #bac9b7;
 }
 .sidebar-card > a,
 .text-button {
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--orange);
   background: transparent;
   border: 0;
@@ -668,7 +669,7 @@ h1 {
 }
 .forest-card .fine-print {
   margin-top: 20px;
-  font-size: 9px !important;
+  font-size: 1rem !important;
   color: #aebfae !important;
 }
 .sun-line {
@@ -678,17 +679,17 @@ h1 {
   margin: 15px 0;
 }
 .sun-line > span {
-  font-size: 40px;
+  font-size: 2.5rem;
   color: #c79252;
 }
 .sun-line strong {
-  font-size: 33px;
+  font-size: 2.125rem;
   font-weight: 400;
   font-family: Georgia, serif;
   line-height: 1.2;
 }
 .sun-line small {
-  font-size: 9px;
+  font-size: 1rem;
   font-family: var(--sans);
   display: block;
   font-weight: 400;
@@ -698,7 +699,7 @@ h1 {
   margin-top: 14px;
 }
 .quick-card h3 {
-  font-size: 13px;
+  font-size: 1.25rem;
   margin-bottom: 10px;
 }
 .quick-card button {
@@ -709,7 +710,7 @@ h1 {
 }
 .autumn-choice label {
   display: block;
-  font-size: 11px;
+  font-size: 1.125rem;
   font-weight: 600;
   margin-bottom: 7px;
 }
@@ -720,10 +721,10 @@ h1 {
   color: var(--ink);
   border: 1px solid var(--line);
   border-radius: 3px;
-  font-size: 12px;
+  font-size: 1.125rem;
 }
 .autumn-choice > p {
-  font-size: 11px;
+  font-size: 1.125rem;
   color: var(--muted);
   margin-top: 9px;
 }
@@ -742,7 +743,7 @@ h1 {
   border-radius: 3px;
   padding: 7px 15px;
   background: transparent;
-  font-size: 10px;
+  font-size: 1rem;
   line-height: 1.7;
 }
 .chip:hover {
@@ -800,21 +801,21 @@ h1 {
   align-items: center;
 }
 .place-row strong {
-  font-size: 12px;
+  font-size: 1.125rem;
   display: block;
   line-height: 1.5;
 }
 .place-row small {
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
   display: block;
 }
 .place-row > span {
-  font-size: 16px;
+  font-size: 1.375rem;
   color: var(--orange);
 }
 .fine-print {
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
   line-height: 1.9;
 }
@@ -829,12 +830,12 @@ h1 {
   border-radius: 5px;
 }
 .food-route-guide h3 {
-  font-size: 14px;
+  font-size: 1.25rem;
   margin-bottom: 12px;
   font-weight: 500;
 }
 .food-route-guide p {
-  font-size: 11px;
+  font-size: 1.125rem;
   color: var(--muted);
   line-height: 1.9;
   margin-top: 7px;
@@ -849,13 +850,13 @@ h1 {
 .food-result-count {
   margin-bottom: 18px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 1rem;
 }
 .food-empty {
   grid-column: 1 / -1;
   padding: 28px;
   border: 1px solid var(--line);
-  font-size: 12px;
+  font-size: 1.125rem;
 }
 .food-dining-tips {
   margin-top: 22px;
@@ -882,51 +883,51 @@ h1 {
 .food-index > span:first-child {
   font-family: Georgia, serif;
   font-style: italic;
-  font-size: 27px;
+  font-size: 1.75rem;
   color: #c08d58;
 }
 .food-card h3 {
   font-family: var(--serif);
-  font-size: 23px;
+  font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 5px;
 }
 .food-ko {
-  font-size: 11px;
+  font-size: 1.125rem;
   color: var(--muted);
   margin-bottom: 15px;
 }
 .food-shop {
-  font-size: 11px;
+  font-size: 1.125rem;
   font-weight: 600;
 }
 .food-card > p.food-description {
-  font-size: 12px;
+  font-size: 1.125rem;
   line-height: 1.9;
   color: var(--muted);
   margin: 12px 0 16px;
 }
 .food-price {
   font-family: Georgia, var(--sans);
-  font-size: 16px;
+  font-size: 1.375rem;
   color: var(--orange);
   margin-top: auto;
 }
 .food-when {
-  font-size: 10px;
+  font-size: 1rem;
   padding-top: 5px;
   margin-bottom: 17px;
 }
 .food-card .fine-print {
   padding-top: 12px;
   border-top: 1px solid var(--line);
-  font-size: 9px;
+  font-size: 1rem;
 }
 .food-links {
   display: flex;
   gap: 18px;
   margin-top: 14px;
-  font-size: 10px;
+  font-size: 1rem;
 }
 .food-links a {
   color: var(--orange);
@@ -942,12 +943,12 @@ h1 {
   margin-bottom: 40px;
 }
 .weather-label {
-  font-size: 11px;
+  font-size: 1.125rem;
   text-align: right;
   color: #d1d6c5;
 }
 .weather-label > span {
-  font-size: 10px;
+  font-size: 1rem;
   color: #a6bda9;
 }
 .weather-grid {
@@ -957,14 +958,14 @@ h1 {
 }
 .large-number {
   font-family: Georgia, serif;
-  font-size: 105px;
+  font-size: 6.5625rem;
   line-height: 1.2;
   font-weight: 400;
   letter-spacing: -6px;
   color: #e5c39b;
 }
 .large-number small {
-  font-size: 30px;
+  font-size: 2.125rem;
   letter-spacing: 0;
   margin-left: 8px;
   vertical-align: top;
@@ -972,17 +973,17 @@ h1 {
   margin-top: 17px;
 }
 .weather-stat h3 {
-  font-size: 13px;
+  font-size: 1.25rem;
   margin: 12px 0;
 }
 .weather-stat > p {
-  font-size: 12px;
+  font-size: 1.125rem;
   line-height: 2;
   color: #bfcdba;
   max-width: 330px;
 }
 .weather-stat > a {
-  font-size: 10px;
+  font-size: 1rem;
   color: #e2bd91;
   margin-top: 17px;
   display: inline-block;
@@ -1000,17 +1001,17 @@ h1 {
   padding: 0;
 }
 .weather-guide article > span {
-  font-size: 10px;
+  font-size: 1rem;
   color: #d6ad80;
   padding-top: 2px;
 }
 .weather-guide h3 {
-  font-size: 15px;
+  font-size: 1.375rem;
   font-weight: 500;
   margin-bottom: 7px;
 }
 .weather-guide p {
-  font-size: 11px;
+  font-size: 1.125rem;
   color: #bfcdba;
   line-height: 1.9;
 }
@@ -1022,12 +1023,12 @@ h1 {
   border-top: 1px solid #406052;
 }
 .weather-rule > strong {
-  font-size: 12px;
+  font-size: 1.125rem;
   white-space: nowrap;
   color: #e2bd91;
 }
 .weather-rule > p {
-  font-size: 11px;
+  font-size: 1.125rem;
   color: #bfcdba;
 }
 .checklist-progress {
@@ -1037,12 +1038,12 @@ h1 {
 .checklist-progress > strong {
   font-family: Georgia, serif;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 1.75rem;
   display: block;
   line-height: 1.3;
 }
 .checklist-progress > span {
-  font-size: 9px;
+  font-size: 1rem;
   color: var(--muted);
 }
 progress {
@@ -1070,7 +1071,7 @@ progress::-moz-progress-bar {
   padding: 22px 25px;
   border: 1px solid #dbdccb;
   background: #f0f0e5;
-  font-size: 11px;
+  font-size: 1.125rem;
   margin-bottom: 25px;
   line-height: 1.9;
 }
@@ -1090,7 +1091,7 @@ progress::-moz-progress-bar {
   overflow: hidden;
 }
 .checklist-group > h3 {
-  font-size: 13px;
+  font-size: 1.25rem;
   padding: 18px 24px;
   border-bottom: 1px solid var(--line);
   background: #f4f4eb;
@@ -1115,13 +1116,13 @@ progress::-moz-progress-bar {
   flex-shrink: 0;
 }
 .check-item strong {
-  font-size: 12px;
+  font-size: 1.125rem;
   font-weight: 500;
   display: block;
   line-height: 1.8;
 }
 .check-item small {
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
   display: block;
   margin-top: 5px;
@@ -1151,7 +1152,7 @@ progress::-moz-progress-bar {
 }
 .budget-controls label {
   display: block;
-  font-size: 12px;
+  font-size: 1.125rem;
   margin-bottom: 24px;
 }
 .budget-controls select {
@@ -1163,12 +1164,12 @@ progress::-moz-progress-bar {
   color: var(--ink);
   margin-top: 9px;
   border-radius: 3px;
-  font-size: 12px;
+  font-size: 1.125rem;
 }
 .budget-controls output {
   float: right;
   font-family: Georgia, serif;
-  font-size: 16px;
+  font-size: 1.375rem;
   color: var(--orange);
 }
 .budget-controls input[type="range"] {
@@ -1184,23 +1185,23 @@ progress::-moz-progress-bar {
   padding: 35px;
 }
 .budget-total > span {
-  font-size: 11px;
+  font-size: 1.125rem;
 }
 .budget-total > strong {
   display: block;
   font-family: Georgia, serif;
   font-weight: 400;
-  font-size: 42px;
+  font-size: 2.625rem;
   line-height: 1.3;
   margin: 12px 0;
   color: var(--ink);
 }
 .budget-total > p {
-  font-size: 12px;
+  font-size: 1.125rem;
   margin-bottom: 18px;
 }
 .budget-total > small {
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
   line-height: 1.8;
   display: block;
@@ -1215,12 +1216,12 @@ progress::-moz-progress-bar {
 }
 .utility-section h3 {
   font-family: var(--serif);
-  font-size: 22px;
+  font-size: 1.5rem;
   font-weight: 500;
   margin: 9px 0 15px;
 }
 .utility-section p:not(.eyebrow) {
-  font-size: 11px;
+  font-size: 1.125rem;
   line-height: 2;
   color: var(--muted);
 }
@@ -1237,16 +1238,16 @@ progress::-moz-progress-bar {
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 1.125rem;
   padding: 18px 0;
   gap: 20px;
 }
 .sources-section summary > span:last-child {
   color: var(--muted);
-  font-size: 10px;
+  font-size: 1rem;
 }
 .sources-intro {
-  font-size: 11px;
+  font-size: 1.125rem;
   color: var(--muted);
   line-height: 1.9;
   display: grid;
@@ -1263,13 +1264,13 @@ progress::-moz-progress-bar {
 .source-item {
   padding-top: 12px;
   border-top: 1px solid var(--line);
-  font-size: 11px;
+  font-size: 1.125rem;
 }
 .source-item a {
   font-weight: 600;
 }
 .source-item p {
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
   margin-top: 4px;
 }
@@ -1282,19 +1283,19 @@ progress::-moz-progress-bar {
 }
 .footer-brand {
   font-family: var(--serif);
-  font-size: 24px;
+  font-size: 1.75rem;
 }
 .site-footer p {
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
   text-align: center;
 }
 .site-footer p span {
-  font-size: 8px;
+  font-size: 1rem;
   letter-spacing: 1px;
 }
 .site-footer > a:last-child {
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
 }
 .toast {
@@ -1306,7 +1307,7 @@ progress::-moz-progress-bar {
   color: var(--paper);
   padding: 11px 25px;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 1.125rem;
   z-index: 40;
   max-width: 90vw;
   opacity: 0;
@@ -1334,7 +1335,7 @@ progress::-moz-progress-bar {
 .notice {
   padding: 20px;
   background: #f5e6ce;
-  font-size: 12px;
+  font-size: 1.125rem;
 }
 .print-days {
   display: none;
@@ -1359,7 +1360,7 @@ progress::-moz-progress-bar {
     gap: 20px;
   }
   .brand {
-    font-size: 20px;
+    font-size: 1.5rem;
   }
   .hero {
     gap: 35px;
@@ -1368,14 +1369,14 @@ progress::-moz-progress-bar {
     height: 480px;
   }
   .hero .eyebrow {
-    font-size: 8px;
+    font-size: 1rem;
     letter-spacing: 1.3px;
   }
   .trip-summary > div {
     padding-inline: 16px;
   }
   .trip-summary strong {
-    font-size: 11px;
+    font-size: 1.125rem;
   }
   .plan-layout {
     grid-template-columns: minmax(0, 1fr) 248px;
@@ -1433,40 +1434,40 @@ progress::-moz-progress-bar {
     border-top-left-radius: 95px;
   }
   .hero .eyebrow {
-    font-size: 7px;
+    font-size: 1rem;
   }
   .hero-description {
-    font-size: 13px;
+    font-size: 1.25rem;
   }
   .hero h1 {
-    font-size: 55px;
+    font-size: 3.4375rem;
   }
   .trip-pills {
     gap: 6px;
     margin-block: 19px 23px;
   }
   .trip-pills span {
-    font-size: 8px;
+    font-size: 1rem;
   }
   .hero-footnote {
-    font-size: 9px;
+    font-size: 1rem;
   }
   .round-stamp {
     width: 88px;
     height: 88px;
     right: -12px;
-    font-size: 6px;
+    font-size: 1rem;
     top: 20px;
   }
   .photo-overlay {
     left: 22px;
   }
   .photo-overlay strong {
-    font-size: 20px;
+    font-size: 1.5rem;
   }
   .hero-photo figcaption {
     left: 22px;
-    font-size: 7px;
+    font-size: 1rem;
   }
   .trip-summary {
     grid-template-columns: 1fr;
@@ -1488,11 +1489,11 @@ progress::-moz-progress-bar {
     grid-column: 2;
   }
   .trip-summary .summary-icon {
-    font-size: 23px;
+    font-size: 1.5rem;
     width: 25px;
   }
   .trip-summary strong {
-    font-size: 12px;
+    font-size: 1.125rem;
   }
   .trip-summary small {
     grid-row: 1/3;
@@ -1501,7 +1502,7 @@ progress::-moz-progress-bar {
     padding-block: 58px;
   }
   .section-heading h2 {
-    font-size: 31px;
+    font-size: 2.125rem;
   }
   .plan-layout {
     grid-template-columns: 1fr;
@@ -1541,16 +1542,16 @@ progress::-moz-progress-bar {
     gap: 35px;
   }
   .large-number {
-    font-size: 80px;
+    font-size: 5rem;
   }
   .weather-stat h3 {
-    font-size: 12px;
+    font-size: 1.125rem;
   }
   .weather-guide article {
     gap: 15px;
   }
   .weather-guide h3 {
-    font-size: 13px;
+    font-size: 1.25rem;
   }
   .checklist-grid {
     gap: 16px;
@@ -1571,7 +1572,7 @@ progress::-moz-progress-bar {
     padding: 25px;
   }
   .budget-total > strong {
-    font-size: 33px;
+    font-size: 2.125rem;
   }
   .utility-section {
     gap: 35px;
@@ -1585,7 +1586,7 @@ progress::-moz-progress-bar {
     width: calc(100% - 36px);
   }
   body {
-    font-size: 14px;
+    font-size: 1.25rem;
   }
   .site-header {
     height: 72px;
@@ -1593,7 +1594,7 @@ progress::-moz-progress-bar {
     gap: 10px;
   }
   .brand {
-    font-size: 20px;
+    font-size: 1.5rem;
     gap: 8px;
   }
   .brand svg {
@@ -1601,11 +1602,11 @@ progress::-moz-progress-bar {
     height: 29px;
   }
   .brand-sub {
-    font-size: 7px;
+    font-size: 1rem;
     letter-spacing: 1.4px;
   }
   .print-button {
-    font-size: 9px;
+    font-size: 1rem;
     padding: 7px 10px;
     gap: 7px;
   }
@@ -1616,27 +1617,27 @@ progress::-moz-progress-bar {
     padding-bottom: 30px;
   }
   .hero .eyebrow {
-    font-size: 7px;
+    font-size: 1rem;
     letter-spacing: 1.3px;
   }
   .hero h1 {
-    font-size: 64px;
+    font-size: 4rem;
     margin-top: 19px;
     margin-bottom: 17px;
   }
   .hero-description {
-    font-size: 14px;
+    font-size: 1.25rem;
   }
   .trip-pills {
     margin-block: 20px 24px;
   }
   .trip-pills span {
-    font-size: 9px;
+    font-size: 1rem;
     padding: 4px 7px;
   }
   .primary-button {
     padding: 12px 21px;
-    font-size: 12px;
+    font-size: 1.125rem;
   }
   .hero-photo {
     height: 320px;
@@ -1654,10 +1655,10 @@ progress::-moz-progress-bar {
     bottom: 55px;
   }
   .photo-overlay strong {
-    font-size: 22px;
+    font-size: 1.5rem;
   }
   .hero-footnote {
-    font-size: 9px;
+    font-size: 1rem;
   }
   .trip-summary {
     gap: 13px;
@@ -1670,16 +1671,16 @@ progress::-moz-progress-bar {
     gap: 1px 9px;
   }
   .trip-summary strong {
-    font-size: 11px;
+    font-size: 1.125rem;
   }
   .trip-summary p > span {
-    font-size: 9px;
+    font-size: 1rem;
   }
   .trip-summary small {
-    font-size: 9px;
+    font-size: 1rem;
   }
   .travel-note {
-    font-size: 10px;
+    font-size: 1rem;
     gap: 12px;
     padding-top: 20px;
   }
@@ -1694,15 +1695,15 @@ progress::-moz-progress-bar {
     margin-bottom: 23px;
   }
   .section-heading h2 {
-    font-size: 29px;
+    font-size: 1.75rem;
   }
   .section-heading > p {
     text-align: left;
-    font-size: 10px;
+    font-size: 1rem;
     margin-top: 15px;
   }
   .eyebrow {
-    font-size: 8px;
+    font-size: 1rem;
     letter-spacing: 1.8px;
   }
   .day-tabs {
@@ -1713,14 +1714,14 @@ progress::-moz-progress-bar {
     padding: 10px 15px;
   }
   .day-tab strong {
-    font-size: 15px;
+    font-size: 1.375rem;
     margin-right: 5px;
   }
   .day-tab small {
-    font-size: 8px;
+    font-size: 1rem;
   }
   .day-tab span {
-    font-size: 10px;
+    font-size: 1rem;
   }
   .day-panel {
     padding: 23px 19px;
@@ -1730,21 +1731,21 @@ progress::-moz-progress-bar {
     margin-bottom: 17px;
   }
   .day-panel h3.day-title {
-    font-size: 25px;
+    font-size: 1.75rem;
   }
   .tag {
-    font-size: 8px;
+    font-size: 1rem;
     padding: 3px 7px;
   }
   .day-counter {
-    font-size: 9px;
+    font-size: 1rem;
     letter-spacing: 1.3px;
   }
   .day-subtitle {
-    font-size: 11px;
+    font-size: 1.125rem;
   }
   .day-description {
-    font-size: 11px;
+    font-size: 1.125rem;
   }
   .mode-controls {
     display: block;
@@ -1753,17 +1754,17 @@ progress::-moz-progress-bar {
   .mode-controls > span {
     display: block;
     margin-bottom: 7px;
-    font-size: 9px;
+    font-size: 1rem;
   }
   .segmented {
     display: inline-flex;
   }
   .segmented button {
-    font-size: 10px;
+    font-size: 1rem;
     padding: 7px 12px;
   }
   .day-warning {
-    font-size: 10px;
+    font-size: 1rem;
     padding: 12px;
   }
   .timeline-event {
@@ -1783,20 +1784,20 @@ progress::-moz-progress-bar {
   }
   .event-time {
     text-align: left;
-    font-size: 10px;
+    font-size: 1rem;
     padding: 0;
   }
   .event-title {
-    font-size: 13px;
+    font-size: 1.25rem;
   }
   .event-description {
-    font-size: 11px;
+    font-size: 1.125rem;
   }
   .timeline {
     margin-top: 22px;
   }
   .transport-note {
-    font-size: 10px;
+    font-size: 1rem;
   }
   .plan-sidebar {
     grid-template-columns: 1fr 1fr;
@@ -1818,11 +1819,11 @@ progress::-moz-progress-bar {
   .forest-card h3 {
     grid-column: 1;
     grid-row: 2/4;
-    font-size: 28px;
+    font-size: 1.75rem;
     margin: 13px 0;
   }
   .forest-card > p:not(.eyebrow) {
-    font-size: 10px;
+    font-size: 1rem;
     grid-column: 2;
     grid-row: 1/3;
   }
@@ -1835,14 +1836,14 @@ progress::-moz-progress-bar {
     gap: 9px;
   }
   .base-line small {
-    font-size: 8px;
+    font-size: 1rem;
   }
   .base-line > span {
-    font-size: 22px;
+    font-size: 1.5rem;
   }
   .forest-card > a {
     grid-column: 1;
-    font-size: 9px;
+    font-size: 1rem;
     align-self: start;
     justify-self: start;
     margin-top: 4px;
@@ -1851,26 +1852,26 @@ progress::-moz-progress-bar {
     grid-column: 1/-1 !important;
     grid-row: auto !important;
     margin-top: 16px !important;
-    font-size: 9px !important;
+    font-size: 1rem !important;
   }
   .sun-line {
     gap: 10px;
     margin: 13px 0;
   }
   .sun-line strong {
-    font-size: 26px;
+    font-size: 1.75rem;
   }
   .sun-line > span {
-    font-size: 27px;
+    font-size: 1.75rem;
   }
   .sidebar-card > p:not(.eyebrow) {
-    font-size: 10px;
+    font-size: 1rem;
   }
   .sidebar-card > .eyebrow {
-    font-size: 7px;
+    font-size: 1rem;
   }
   .quick-card h3 {
-    font-size: 11px;
+    font-size: 1.125rem;
   }
   .map-section .section-heading p {
     margin-top: 15px;
@@ -1881,7 +1882,7 @@ progress::-moz-progress-bar {
   }
   .chip {
     padding: 6px 10px;
-    font-size: 9px;
+    font-size: 1rem;
   }
   .map-layout {
     gap: 15px;
@@ -1894,10 +1895,10 @@ progress::-moz-progress-bar {
     max-height: 290px;
   }
   .place-row strong {
-    font-size: 11px;
+    font-size: 1.125rem;
   }
   .place-row small {
-    font-size: 9px;
+    font-size: 1rem;
   }
   .food-grid {
     grid-template-columns: 1fr;
@@ -1909,20 +1910,20 @@ progress::-moz-progress-bar {
     margin-bottom: 16px;
   }
   .food-card h3 {
-    font-size: 24px;
+    font-size: 1.75rem;
   }
   .food-description {
-    font-size: 12px !important;
+    font-size: 1.125rem !important;
   }
   .food-ko,
   .food-shop {
-    font-size: 11px;
+    font-size: 1.125rem;
   }
   .food-price {
-    font-size: 17px;
+    font-size: 1.375rem;
   }
   .food-links {
-    font-size: 11px;
+    font-size: 1.125rem;
   }
   .weather-section .section-heading {
     margin-bottom: 25px;
@@ -1930,27 +1931,27 @@ progress::-moz-progress-bar {
   .weather-label {
     text-align: left;
     margin-top: 17px;
-    font-size: 10px;
+    font-size: 1rem;
   }
   .weather-grid {
     grid-template-columns: 1fr;
     gap: 30px;
   }
   .large-number {
-    font-size: 94px;
+    font-size: 5.875rem;
   }
   .weather-stat > p {
     max-width: none;
-    font-size: 11px;
+    font-size: 1.125rem;
   }
   .weather-stat > a {
     margin-top: 13px;
   }
   .weather-guide h3 {
-    font-size: 14px;
+    font-size: 1.25rem;
   }
   .weather-guide p {
-    font-size: 11px;
+    font-size: 1.125rem;
   }
   .weather-rule {
     display: block;
@@ -1967,16 +1968,16 @@ progress::-moz-progress-bar {
   }
   .checklist-progress > strong {
     display: inline-block;
-    font-size: 22px;
+    font-size: 1.5rem;
     margin-right: 8px;
   }
   .checklist-progress > span {
-    font-size: 9px;
+    font-size: 1rem;
   }
   .prepare-intro {
     display: block;
     padding: 18px;
-    font-size: 10px;
+    font-size: 1rem;
   }
   .prepare-intro p + p {
     margin-top: 13px;
@@ -1988,20 +1989,20 @@ progress::-moz-progress-bar {
     padding: 17px 18px;
   }
   .check-item strong {
-    font-size: 12px;
+    font-size: 1.125rem;
   }
   .check-item small {
-    font-size: 10px;
+    font-size: 1rem;
   }
   .budget-layout {
     grid-template-columns: 1fr;
     gap: 15px;
   }
   .budget-controls label {
-    font-size: 11px;
+    font-size: 1.125rem;
   }
   .budget-total > strong {
-    font-size: 39px;
+    font-size: 2.4375rem;
   }
   .utility-section {
     grid-template-columns: 1fr;
@@ -2009,16 +2010,16 @@ progress::-moz-progress-bar {
     gap: 28px;
   }
   .utility-section h3 {
-    font-size: 22px;
+    font-size: 1.5rem;
   }
   .sources-section {
     padding-block: 30px;
   }
   .sources-section summary {
-    font-size: 11px;
+    font-size: 1.125rem;
   }
   .sources-section summary > span:last-child {
-    font-size: 8px;
+    font-size: 1rem;
   }
   .sources-intro,
   #source-list {
@@ -2034,17 +2035,17 @@ progress::-moz-progress-bar {
     margin-block: 15px;
   }
   .footer-brand {
-    font-size: 24px;
+    font-size: 1.75rem;
   }
   .toast {
     bottom: 18px;
-    font-size: 11px;
+    font-size: 1.125rem;
     width: max-content;
     max-width: 90%;
     text-align: center;
   }
   .autumn-choice select {
-    font-size: 11px;
+    font-size: 1.125rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2302,12 +2303,12 @@ progress::-moz-progress-bar {
   }
   .mobile-nav a {
     text-align: center;
-    font-size: 10px;
+    font-size: 1rem;
     line-height: 1.5;
   }
   .mobile-nav span {
     display: block;
-    font-size: 20px;
+    font-size: 1.5rem;
     line-height: 1.3;
   }
   .toast {
@@ -2330,17 +2331,17 @@ progress::-moz-progress-bar {
 .clock-row .eyebrow {
   display: block;
   color: var(--muted);
-  font-size: 9px;
+  font-size: 1rem;
   letter-spacing: 1px;
 }
 .clock-row strong {
   font-family: Georgia, var(--sans);
-  font-size: 22px;
+  font-size: 1.5rem;
   font-weight: 400;
   letter-spacing: 0.5px;
 }
 .follow-status {
-  font-size: 10px;
+  font-size: 1rem;
   padding: 5px 10px;
   background: var(--light-green);
   border-radius: 3px;
@@ -2354,17 +2355,17 @@ progress::-moz-progress-bar {
   margin-top: 25px;
 }
 .dashboard-heading .eyebrow {
-  font-size: 8px;
+  font-size: 1rem;
   color: var(--orange);
 }
 .dashboard-heading h1 {
-  font-size: 43px;
+  font-size: 2.6875rem;
   font-family: var(--serif);
   margin: 9px 0 10px;
   line-height: 1.3;
 }
 .dashboard-intro {
-  font-size: 11px;
+  font-size: 1.125rem;
   color: var(--muted);
   margin-bottom: 23px;
 }
@@ -2384,7 +2385,7 @@ progress::-moz-progress-bar {
   box-shadow: 0 4px 18px #183e3605;
 }
 .focus-label {
-  font-size: 10px;
+  font-size: 1rem;
   letter-spacing: 0.6px;
   color: var(--orange);
   display: block;
@@ -2392,12 +2393,12 @@ progress::-moz-progress-bar {
 }
 .current-focus h2 {
   font-family: var(--serif);
-  font-size: 29px;
+  font-size: 1.75rem;
   font-weight: 500;
   margin-bottom: 11px;
 }
 .current-focus > p {
-  font-size: 12px;
+  font-size: 1.125rem;
   color: var(--muted);
   line-height: 1.9;
 }
@@ -2407,7 +2408,7 @@ progress::-moz-progress-bar {
   color: var(--paper);
   padding: 10px 16px;
   border-radius: 3px;
-  font-size: 11px;
+  font-size: 1.125rem;
   margin-top: 20px;
   cursor: pointer;
 }
@@ -2417,7 +2418,7 @@ progress::-moz-progress-bar {
   border-top: 1px solid var(--line);
 }
 .focus-essential strong {
-  font-size: 11px;
+  font-size: 1.125rem;
   color: var(--ink);
   font-weight: 500;
   margin-right: 6px;
@@ -2433,7 +2434,7 @@ progress::-moz-progress-bar {
   border-radius: 3px;
 }
 .focus-meal strong {
-  font-size: 13px;
+  font-size: 1.25rem;
   font-weight: 500;
 }
 .next-focus {
@@ -2445,20 +2446,20 @@ progress::-moz-progress-bar {
 }
 .next-time {
   font-family: Georgia, serif;
-  font-size: 39px;
+  font-size: 2.4375rem;
   line-height: 1.2;
   margin-bottom: 14px;
   color: #e7c39b;
 }
 .next-focus h3 {
   font-family: var(--serif);
-  font-size: 23px;
+  font-size: 1.5rem;
   font-weight: 400;
   margin-bottom: 10px;
 }
 .next-focus p {
   color: #c1cdbd;
-  font-size: 11px;
+  font-size: 1.125rem;
   line-height: 1.9;
 }
 .next-focus button {
@@ -2468,14 +2469,14 @@ progress::-moz-progress-bar {
   background: transparent;
   color: #e3c095;
   padding: 0 0 5px;
-  font-size: 10px;
+  font-size: 1rem;
 }
 .preview-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 15px;
-  font-size: 11px;
+  font-size: 1.125rem;
   background: #f6e7d1;
   color: #805a37;
   padding: 12px 17px;
@@ -2485,7 +2486,7 @@ progress::-moz-progress-bar {
 .preview-banner button {
   background: transparent;
   border: 1px solid #c7a67d;
-  font-size: 10px;
+  font-size: 1rem;
   padding: 5px 10px;
   white-space: nowrap;
 }
@@ -2496,7 +2497,7 @@ progress::-moz-progress-bar {
 .custom-event-details summary,
 .overview-details > summary {
   cursor: pointer;
-  font-size: 11px;
+  font-size: 1.125rem;
   padding: 11px 0;
   color: var(--muted);
 }
@@ -2511,7 +2512,7 @@ progress::-moz-progress-bar {
   padding: 20px;
 }
 .time-preview-controls label {
-  font-size: 10px;
+  font-size: 1rem;
   display: block;
 }
 .time-preview-controls input {
@@ -2521,16 +2522,16 @@ progress::-moz-progress-bar {
   color: var(--ink);
   padding: 10px;
   margin-top: 5px;
-  font-size: 13px;
+  font-size: 1.25rem;
 }
 .time-preview-controls .primary-button {
   border: 0;
   padding: 11px 20px;
-  font-size: 11px;
+  font-size: 1.125rem;
 }
 .time-preview-controls form > p {
   width: 100%;
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
 }
 .overview-details {
@@ -2544,19 +2545,19 @@ progress::-moz-progress-bar {
   grid-template-columns: 1.4fr 1fr;
 }
 .overview-details .hero h1 {
-  font-size: 43px;
+  font-size: 2.6875rem;
 }
 .overview-details .hero-photo {
   height: 260px;
 }
 .overview-details .hero .eyebrow {
-  font-size: 8px;
+  font-size: 1rem;
 }
 .overview-details .travel-note {
   padding-bottom: 20px;
 }
 .overview-details .hero-description {
-  font-size: 13px;
+  font-size: 1.25rem;
 }
 #plan.section-space {
   padding-top: 35px;
@@ -2581,7 +2582,7 @@ progress::-moz-progress-bar {
 }
 .custom-form-grid label {
   display: block;
-  font-size: 11px;
+  font-size: 1.125rem;
 }
 .custom-form-grid input,
 .custom-form-grid textarea {
@@ -2594,7 +2595,7 @@ progress::-moz-progress-bar {
   width: 100%;
   border-radius: 3px;
   min-width: 0;
-  font-size: 13px;
+  font-size: 1.25rem;
 }
 .custom-form-grid .wide-field {
   grid-column: 1/-1;
@@ -2619,7 +2620,7 @@ progress::-moz-progress-bar {
 .day-context {
   border-block: 1px solid var(--line);
   margin-top: 20px;
-  font-size: 11px;
+  font-size: 1.125rem;
 }
 .day-context summary {
   padding: 12px 0;
@@ -2627,7 +2628,7 @@ progress::-moz-progress-bar {
   color: var(--muted);
 }
 .day-context p {
-  font-size: 11px;
+  font-size: 1.125rem;
   color: var(--muted);
   margin-bottom: 12px;
   line-height: 1.9;
@@ -2640,11 +2641,11 @@ progress::-moz-progress-bar {
   gap: 12px;
 }
 .timeline-heading h4 {
-  font-size: 13px;
+  font-size: 1.25rem;
   font-weight: 500;
 }
 .timeline-heading > span {
-  font-size: 9px;
+  font-size: 1rem;
   color: var(--muted);
 }
 .browse-notice {
@@ -2655,14 +2656,14 @@ progress::-moz-progress-bar {
   background: #f1eee0;
   margin-top: 17px;
   padding: 11px 13px;
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
 }
 .browse-notice button {
   border: 0;
   background: transparent;
   padding: 0;
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--orange);
 }
 .timeline-event {
@@ -2681,7 +2682,7 @@ progress::-moz-progress-bar {
   border-radius: 5px;
 }
 .timeline-event.event-past:not(.event-current) .event-time {
-  color: #99a194;
+  color: #60705e;
 }
 .timeline-event.event-current:after {
   background: var(--orange);
@@ -2696,21 +2697,21 @@ progress::-moz-progress-bar {
 .remove-event {
   background: transparent;
   border: 0;
-  color: #a27859;
-  font-size: 9px;
+  color: #885234;
+  font-size: 1rem;
   padding: 0;
   white-space: nowrap;
 }
 .time-state {
   display: block;
   margin-top: 7px;
-  font-size: 8px;
+  font-size: 1rem;
   color: var(--orange);
   font-weight: 500;
   letter-spacing: 0.5px;
 }
 .local-time-note {
-  font-size: 10px !important;
+  font-size: 1rem !important;
   color: #b27643 !important;
   margin-top: 6px;
   line-height: 1.8;
@@ -2720,17 +2721,17 @@ progress::-moz-progress-bar {
   padding: 10px 13px;
   background: #f1f0e7;
   border-left: 2px solid #c3b17d;
-  font-size: 10px;
+  font-size: 1rem;
   color: var(--muted);
 }
 .event-carry p {
-  font-size: 10px;
+  font-size: 1rem;
 }
 .mini-label {
   display: block;
-  font-size: 9px;
+  font-size: 1rem;
   letter-spacing: 0.5px;
-  color: #86916f;
+  color: #526046;
   margin-bottom: 5px;
 }
 .event-meal {
@@ -2742,18 +2743,18 @@ progress::-moz-progress-bar {
 }
 .event-meal > strong {
   display: block;
-  font-size: 14px;
+  font-size: 1.25rem;
   font-weight: 500;
   margin-top: 7px;
 }
 .event-meal > p {
-  font-size: 11px;
+  font-size: 1.125rem;
   color: var(--muted);
   line-height: 1.9;
   margin-top: 7px;
 }
 .event-meal .meal-note {
-  font-size: 9px;
+  font-size: 1rem;
   border-top: 1px solid #e2e2d5;
   padding-top: 8px;
   margin-top: 10px;
@@ -2767,13 +2768,13 @@ progress::-moz-progress-bar {
   margin-top: 10px;
 }
 .event-meal-links > span {
-  font-size: 10px;
-  color: #8a8c73;
+  font-size: 1rem;
+  color: #586347;
 }
 .meal-picker {
   display: block;
-  font-size: 9px;
-  color: #86916f;
+  font-size: 1rem;
+  color: #526046;
 }
 .meal-picker select {
   display: block;
@@ -2785,7 +2786,7 @@ progress::-moz-progress-bar {
   border-radius: 3px;
   background: var(--white);
   color: var(--ink);
-  font-size: 11px;
+  font-size: 1.125rem;
 }
 .context-checks {
   margin-top: 15px;
@@ -2811,30 +2812,30 @@ progress::-moz-progress-bar {
   flex-shrink: 0;
 }
 .context-check strong {
-  font-size: 11px;
+  font-size: 1.125rem;
   font-weight: 500;
   display: block;
   line-height: 1.8;
 }
 .context-check small {
   display: block;
-  font-size: 9px;
+  font-size: 1rem;
   color: var(--muted);
   line-height: 1.8;
   margin-top: 3px;
 }
 .context-check:has(input:checked) strong {
   text-decoration: line-through;
-  color: #89947d;
+  color: #60705e;
 }
 .live-sidebar .forest-card {
   display: block;
 }
 .live-sidebar .forest-card h3 {
-  font-size: 30px;
+  font-size: 2.125rem;
 }
 .live-sidebar .forest-card #day-carry-list {
-  font-size: 11px;
+  font-size: 1.125rem;
   color: #c8d1be;
   line-height: 2;
 }
@@ -2845,7 +2846,7 @@ progress::-moz-progress-bar {
   border: 0;
   border-bottom: 1px solid #65806c;
   padding: 0 0 5px;
-  font-size: 10px;
+  font-size: 1rem;
 }
 .live-sidebar .sidebar-card h3 {
   margin-bottom: 13px;
@@ -2865,13 +2866,13 @@ progress::-moz-progress-bar {
     padding: 24px;
   }
   .dashboard-heading h1 {
-    font-size: 35px;
+    font-size: 2.125rem;
   }
   .current-focus h2 {
-    font-size: 26px;
+    font-size: 1.75rem;
   }
   .next-focus h3 {
-    font-size: 21px;
+    font-size: 1.5rem;
   }
   .live-sidebar {
     grid-template-columns: 1fr 1fr;
@@ -2891,13 +2892,13 @@ progress::-moz-progress-bar {
     padding-bottom: 13px;
   }
   .clock-row strong {
-    font-size: 18px;
+    font-size: 1.375rem;
   }
   .clock-row .eyebrow {
-    font-size: 14px;
+    font-size: 1.25rem;
   }
   .follow-status {
-    font-size: 14px;
+    font-size: 1.25rem;
     padding: 4px 7px;
   }
   .dashboard-heading {
@@ -2908,22 +2909,22 @@ progress::-moz-progress-bar {
     gap: 12px;
   }
   .dashboard-heading h1 {
-    font-size: 30px;
+    font-size: 2.125rem;
     margin-top: 8px;
   }
   .dashboard-heading .eyebrow {
-    font-size: 7px;
+    font-size: 1rem;
     letter-spacing: 1px;
   }
   .dashboard-heading > .small-button {
-    font-size: 14px;
+    font-size: 1.25rem;
     padding: 8px;
     white-space: nowrap;
     margin-top: 0;
     justify-self: start;
   }
   .dashboard-intro {
-    font-size: 13px;
+    font-size: 1.25rem;
     line-height: 1.9;
     margin-bottom: 17px;
   }
@@ -2936,17 +2937,17 @@ progress::-moz-progress-bar {
     padding: 22px 20px;
   }
   .current-focus h2 {
-    font-size: 25px;
+    font-size: 1.75rem;
   }
   .current-focus > p {
-    font-size: 14px;
+    font-size: 1.25rem;
   }
   .focus-label {
-    font-size: 12px;
+    font-size: 1.125rem;
     margin-bottom: 11px;
   }
   .focus-jump {
-    font-size: 13px;
+    font-size: 1.25rem;
     padding: 10px 14px;
     margin-top: 16px;
   }
@@ -2955,22 +2956,22 @@ progress::-moz-progress-bar {
     gap: 8px;
   }
   .focus-meal strong {
-    font-size: 12px;
+    font-size: 1.125rem;
   }
   .next-focus {
     position: relative;
     padding-right: 20px;
   }
   .next-time {
-    font-size: 24px;
+    font-size: 1.75rem;
     position: static;
     margin-bottom: 10px;
   }
   .next-focus h3 {
-    font-size: 19px;
+    font-size: 1.5rem;
   }
   .next-focus p {
-    font-size: 13px;
+    font-size: 1.25rem;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -2978,20 +2979,20 @@ progress::-moz-progress-bar {
   }
   .next-focus button {
     margin-top: 13px;
-    font-size: 12px;
+    font-size: 1.125rem;
   }
   .preview-banner {
-    font-size: 12px;
+    font-size: 1.125rem;
     padding: 10px 12px;
     align-items: start;
   }
   .preview-banner button {
-    font-size: 14px;
+    font-size: 1.25rem;
   }
   .time-preview-controls summary,
   .overview-details > summary,
   .custom-event-details summary {
-    font-size: 13px;
+    font-size: 1.25rem;
   }
   .time-preview-controls form {
     padding: 15px;
@@ -3003,13 +3004,13 @@ progress::-moz-progress-bar {
   .time-preview-controls input {
     width: 100%;
     min-width: 0;
-    font-size: 13px;
+    font-size: 1.25rem;
   }
   .time-preview-controls .primary-button {
     padding: 10px 15px;
   }
   .time-preview-controls form > p {
-    font-size: 12px;
+    font-size: 1.125rem;
   }
   .overview-details .hero {
     grid-template-columns: 1fr;
@@ -3020,7 +3021,7 @@ progress::-moz-progress-bar {
     height: 220px;
   }
   .overview-details .hero h1 {
-    font-size: 40px;
+    font-size: 2.5rem;
   }
   .overview-details .trip-summary > div p {
     grid-template-columns: 92px 1fr;
@@ -3029,7 +3030,7 @@ progress::-moz-progress-bar {
     margin: 15px 0;
   }
   .overview-details .hero-footnote {
-    font-size: 14px;
+    font-size: 1.25rem;
   }
   #plan.section-space {
     padding-top: 25px;
@@ -3046,24 +3047,24 @@ progress::-moz-progress-bar {
     gap: 12px;
   }
   .custom-form-grid label {
-    font-size: 13px;
+    font-size: 1.25rem;
   }
   .custom-form-grid input,
   .custom-form-grid textarea {
     padding: 10px;
-    font-size: 12px;
+    font-size: 1.125rem;
   }
   .custom-event-details {
     margin-bottom: 19px;
   }
   .custom-event-details .primary-button {
-    font-size: 14px;
+    font-size: 1.25rem;
   }
   .day-panel {
     padding: 22px 17px;
   }
   .day-panel .day-title {
-    font-size: 25px !important;
+    font-size: 1.75rem !important;
   }
   .timeline-event {
     scroll-margin-top: 84px;
@@ -3074,64 +3075,64 @@ progress::-moz-progress-bar {
     padding: 13px 12px;
   }
   .event-time {
-    font-size: 13px;
+    font-size: 1.25rem;
   }
   .time-state {
     display: inline-block;
-    font-size: 14px;
+    font-size: 1.25rem;
     margin: 0 0 0 8px;
   }
   .event-title {
-    font-size: 17px;
+    font-size: 1.375rem;
   }
   .event-description {
-    font-size: 14px;
+    font-size: 1.25rem;
   }
   .event-meal {
     padding: 13px 12px;
   }
   .event-meal > strong {
-    font-size: 16px;
+    font-size: 1.375rem;
   }
   .event-meal > p {
-    font-size: 13px;
+    font-size: 1.25rem;
   }
   .context-check strong {
-    font-size: 14px;
+    font-size: 1.25rem;
   }
   .context-check small {
-    font-size: 12px;
+    font-size: 1.125rem;
   }
   .event-carry {
     padding: 10px;
   }
   .event-carry p {
-    font-size: 12px;
+    font-size: 1.125rem;
   }
   .timeline-heading > span {
-    font-size: 14px;
+    font-size: 1.25rem;
   }
   .browse-notice {
     padding: 10px;
-    font-size: 12px;
+    font-size: 1.125rem;
   }
   .browse-notice button {
-    font-size: 12px;
+    font-size: 1.125rem;
   }
   .day-context p {
-    font-size: 13px;
+    font-size: 1.25rem;
   }
   .day-context summary {
-    font-size: 13px;
+    font-size: 1.25rem;
   }
   .live-sidebar .forest-card {
     display: block;
   }
   .live-sidebar .forest-card h3 {
-    font-size: 27px;
+    font-size: 1.75rem;
   }
   .live-sidebar .forest-card #day-carry-list {
-    font-size: 13px;
+    font-size: 1.25rem;
   }
   .event-meal .meal-note,
   .event-meal-links > span,
@@ -3139,26 +3140,26 @@ progress::-moz-progress-bar {
   .meal-picker,
   .time-state,
   .local-time-note {
-    font-size: 12px !important;
+    font-size: 1.125rem !important;
   }
   .meal-picker select,
   .custom-form-grid input,
   .custom-form-grid textarea,
   .time-preview-controls input {
-    font-size: 16px;
+    font-size: 1.375rem;
   }
   .context-check input {
     width: 20px;
     height: 20px;
   }
   .map-link {
-    font-size: 13px;
+    font-size: 1.25rem;
   }
   .context-check strong {
-    font-size: 14px;
+    font-size: 1.25rem;
   }
   .context-check small {
-    font-size: 13px;
+    font-size: 1.25rem;
   }
   .timeline-heading {
     align-items: start;
@@ -3166,18 +3167,18 @@ progress::-moz-progress-bar {
   .current-focus > p,
   .next-focus p,
   .dashboard-intro {
-    font-size: 14px;
+    font-size: 1.25rem;
   }
   .focus-essential strong,
   .focus-jump,
   .next-focus button {
-    font-size: 13px;
+    font-size: 1.25rem;
   }
   .mobile-nav {
     grid-template-columns: repeat(5, 1fr);
   }
   .mobile-nav a {
-    font-size: 12px;
+    font-size: 1.125rem;
   }
 }
 @media print {
@@ -3238,5 +3239,228 @@ progress::-moz-progress-bar {
   .print-day .timeline-event {
     display: grid;
     padding-left: 0;
+  }
+}
+
+/* Keep the enlarged text readable and controls easy to tap at every width. */
+@media screen {
+  button,
+  select,
+  summary,
+  input:not([type="checkbox"]),
+  .primary-button,
+  .small-button,
+  .chip,
+  .place-row,
+  .map-link {
+    min-height: 48px;
+  }
+  button,
+  select,
+  input,
+  textarea {
+    max-width: 100%;
+  }
+  .small-button,
+  .primary-button {
+    gap: 12px;
+  }
+  .map-link {
+    align-items: center;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .context-check,
+  .check-item {
+    padding-block: 14px;
+  }
+  .context-check input,
+  .check-item input {
+    width: 24px;
+    height: 24px;
+  }
+  .context-check strong,
+  .check-item strong {
+    font-weight: 600;
+  }
+  .event-time {
+    color: #425d49;
+    font-weight: 600;
+  }
+  .event-meta,
+  .event-title-row,
+  .focus-meal,
+  .browse-notice,
+  .clock-row,
+  .day-topline,
+  .mode-controls {
+    flex-wrap: wrap;
+  }
+  .event-meal,
+  .event-body,
+  .current-focus,
+  .next-focus,
+  .food-card,
+  .sidebar-card,
+  .custom-form-grid > label {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .next-focus p {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+  }
+  .day-tab {
+    min-width: 158px;
+    padding: 12px 18px;
+  }
+  .day-tab small {
+    letter-spacing: 0;
+  }
+  .day-panel .timeline-event {
+    scroll-margin-top: 120px;
+  }
+  .timeline-heading {
+    flex-wrap: wrap;
+  }
+  .day-context summary {
+    line-height: 1.7;
+  }
+  .meal-picker select {
+    padding: 10px;
+  }
+  .event-meal .meal-note {
+    color: #526459;
+  }
+  .round-stamp {
+    display: none;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .site-header nav {
+    font-size: 1rem;
+    gap: 12px;
+  }
+  .site-header {
+    gap: 12px;
+    padding-inline: 24px;
+  }
+  .brand {
+    font-size: 1.375rem;
+  }
+  .plan-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .live-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .live-sidebar .forest-card {
+    grid-column: 1/-1;
+  }
+}
+@media screen and (max-width: 580px) {
+  body {
+    font-size: 1.125rem;
+    padding-bottom: 100px;
+  }
+  .site-header {
+    padding-inline: 16px;
+    gap: 8px;
+  }
+  .brand {
+    font-size: 1.375rem;
+    gap: 6px;
+  }
+  .brand svg {
+    width: 26px;
+    height: 26px;
+  }
+  .brand-sub {
+    display: none;
+  }
+  .print-button {
+    font-size: 1rem;
+    gap: 4px;
+    padding: 8px;
+  }
+  .clock-row strong {
+    font-size: 1.375rem;
+  }
+  .clock-row .eyebrow,
+  .follow-status {
+    font-size: 1rem;
+  }
+  .dashboard-heading h1 {
+    font-size: 2rem;
+  }
+  .day-tabs {
+    top: 72px;
+  }
+  .day-tab {
+    min-width: 146px;
+    padding: 12px 15px;
+  }
+  .day-tab strong {
+    font-size: 1.375rem;
+  }
+  .day-tab small,
+  .day-tab span {
+    font-size: 1rem;
+  }
+  .day-panel {
+    padding: 22px 15px;
+  }
+  .day-panel .timeline-event {
+    scroll-margin-top: 120px;
+  }
+  .event-description,
+  .event-meal > p,
+  .current-focus > p,
+  .next-focus p,
+  .dashboard-intro,
+  .context-check strong {
+    font-size: 1.25rem;
+    line-height: 1.9;
+  }
+  .event-title {
+    font-size: 1.5rem;
+    line-height: 1.6;
+  }
+  .event-carry p,
+  .context-check small,
+  .check-item small,
+  .event-meal .meal-note {
+    font-size: 1.125rem !important;
+    line-height: 1.9;
+  }
+  .custom-form-grid,
+  .live-sidebar {
+    grid-template-columns: 1fr;
+  }
+  .live-sidebar > * {
+    grid-column: 1;
+  }
+  .segmented {
+    width: 100%;
+  }
+  .segmented button {
+    flex: 1;
+    padding-inline: 8px;
+  }
+  .mobile-nav {
+    padding: 9px 6px max(9px, env(safe-area-inset-bottom));
+  }
+  .mobile-nav a {
+    font-size: 1rem;
+    min-height: 58px;
+  }
+  .mobile-nav span {
+    font-size: 1.5rem;
+  }
+  .toast {
+    bottom: 100px;
   }
 }

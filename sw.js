@@ -1,5 +1,5 @@
 "use strict";
-const CACHE_NAME = "jeju-autumn-2026-v5";
+const CACHE_NAME = "jeju-autumn-2026-v6";
 const CORE_FILES = [
   "./",
   "./index.html",
