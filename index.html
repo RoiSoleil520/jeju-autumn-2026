@@ -11,11 +11,11 @@
     <title>济州，晚秋见。｜2026 旅行手册</title>
     <link rel="icon" type="image/svg+xml" href="./assets/icon.svg" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./style.css?v=20261116-shops" />
-    <script src="./data.js?v=20261116-shops" defer></script>
-    <script src="./shops.js?v=20261116-shops" defer></script>
-    <script src="./schedule.js?v=20261116-shops" defer></script>
-    <script src="./app.js?v=20261116-shops" defer></script>
+    <link rel="stylesheet" href="./style.css?v=20261116-shop-dialog" />
+    <script src="./data.js?v=20261116-shop-dialog" defer></script>
+    <script src="./shops.js?v=20261116-shop-dialog" defer></script>
+    <script src="./schedule.js?v=20261116-shop-dialog" defer></script>
+    <script src="./app.js?v=20261116-shop-dialog" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#plan">跳到每日行程</a>
@@ -461,9 +461,7 @@
           </p>
         </div>
         <p class="shop-shortcut">
-          <a class="small-button" href="#shops"
-            >新补充：小店图文与原截图配图 ↓</a
-          >
+          <a class="small-button" href="#shops">弹框查看小店图文与配图</a>
         </p>
         <div class="filter-row" id="food-filters" aria-label="美食类型筛选">
           <button
@@ -550,10 +548,9 @@
           </p>
         </div>
         <nav class="shop-area-links" aria-label="小店区域索引">
-          <a href="#shops-old-town">老济州 ↓</a
-          ><a href="#shops-new-jeju">新济州 ↓</a
-          ><a href="#shops-aewol">涯月 ↓</a
-          ><a href="#shops-east-coast">东线替代 ↓</a>
+          <a href="#shops-old-town">老济州</a
+          ><a href="#shops-new-jeju">新济州</a><a href="#shops-aewol">涯月</a
+          ><a href="#shops-east-coast">东线替代</a>
         </nav>
         <div id="shop-groups"></div>
         <p class="fine-print">
@@ -778,6 +775,21 @@
       <a href="#food"><span aria-hidden="true">♨</span>吃逛</a>
       <a href="#prepare"><span aria-hidden="true">☑</span>清单</a>
     </nav>
+    <dialog
+      id="shop-details"
+      class="photo-viewer shop-details"
+      aria-labelledby="shop-details-title"
+    >
+      <div class="shop-details-content">
+        <div class="photo-viewer-toolbar shop-details-toolbar">
+          <h2 id="shop-details-title">小店详情</h2>
+          <button type="button" data-close-shop-details autofocus>
+            关闭，回到原处 ×
+          </button>
+        </div>
+        <div id="shop-details-body"></div>
+      </div>
+    </dialog>
     <dialog
       id="photo-viewer"
       class="photo-viewer"

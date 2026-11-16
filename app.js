@@ -153,25 +153,69 @@ function shopGallery(shop) {
   if (!shop.photos.length) return "";
   return `<div class="shop-gallery ${shop.photos.length === 1 ? "single-photo" : ""}">${shop.photos.map((photo, index) => `<a class="shop-photo" href="./assets/shops/${photo}.webp" data-shop-photo="${photo}" data-shop-name="${escapeHtml(shop.name)}" aria-label="查看 ${escapeHtml(shop.name)} 第 ${index + 1} 张大图"><img src="./assets/shops/${photo}.webp" alt="用户截图中的 ${escapeHtml(shop.name)} 配图 ${index + 1}" loading="lazy" decoding="async"><span>点击看大图 ↗</span></a>`).join("")}</div>`;
 }
-function renderShops() {
-  document.querySelector("#shop-groups").innerHTML = SHOP_GROUPS.map(
-    (group) =>
-      `<section class="shop-area" id="shops-${group.id}" aria-labelledby="shops-heading-${group.id}"><h3 id="shops-heading-${group.id}">${escapeHtml(group.title)}</h3><p class="shop-area-route">${escapeHtml(group.route)}</p><div class="shop-grid">${SHOPS.filter(
-        (shop) => shop.group === group.id,
-      )
-        .map(
-          (shop) =>
-            `<article class="shop-card" id="shop-${shop.id}"><span class="mini-label">${escapeHtml(shop.kind)}</span><h4>${escapeHtml(shop.name)}</h4><p>${escapeHtml(shop.description)}</p>${shopGallery(shop)}<p class="shop-note">${escapeHtml(shop.note)}</p>${externalLink(mapUrl(shop.query), "搜索店铺地图 ↗", "map-link")}</article>`,
-        )
-        .join("")}</div></section>`,
-  ).join("");
+function shopCardHtml(shop, inDialog = false) {
+  return `<article class="shop-card" id="${inDialog ? "dialog-shop" : "shop"}-${shop.id}"><span class="mini-label">${escapeHtml(shop.kind)}</span><h4>${escapeHtml(shop.name)}</h4><p>${escapeHtml(shop.description)}</p>${shopGallery(shop)}<p class="shop-note">${escapeHtml(shop.note)}</p>${externalLink(mapUrl(shop.query), "搜索店铺地图 ↗", "map-link")}</article>`;
 }
+function shopGroupsHtml(groups = SHOP_GROUPS, inDialog = false) {
+  const prefix = inDialog ? "dialog-shops" : "shops";
+  return groups
+    .map(
+      (group) =>
+        `<section class="shop-area" id="${prefix}-${group.id}" aria-labelledby="${prefix}-heading-${group.id}"><h3 id="${prefix}-heading-${group.id}">${escapeHtml(group.title)}</h3><p class="shop-area-route">${escapeHtml(group.route)}</p><div class="shop-grid">${SHOPS.filter(
+          (shop) => shop.group === group.id,
+        )
+          .map((shop) => shopCardHtml(shop, inDialog))
+          .join("")}</div></section>`,
+    )
+    .join("");
+}
+function renderShops() {
+  document.querySelector("#shop-groups").innerHTML = shopGroupsHtml();
+}
+const shopDetails = document.querySelector("#shop-details");
+let shopDialogOrigin = null;
+function openShoppingDialog(hash, trigger = null) {
+  if (typeof shopDetails.showModal !== "function") return false;
+  const shop = SHOPS.find((item) => hash === `#shop-${item.id}`);
+  const group = SHOP_GROUPS.find((item) => hash === `#shops-${item.id}`);
+  if (!shop && !group && hash !== "#shops") return false;
+  if (!shopDetails.open) shopDialogOrigin = { x: scrollX, y: scrollY, trigger };
+  document.querySelector("#shop-details-title").textContent =
+    shop?.name || group?.title || "全部小店图文";
+  document.querySelector("#shop-details-body").innerHTML = shop
+    ? shopCardHtml(shop, true)
+    : shopGroupsHtml(group ? [group] : SHOP_GROUPS, true);
+  if (!shopDetails.open) shopDetails.showModal();
+  shopDetails.scrollTop = 0;
+  return true;
+}
+document.addEventListener("click", (event) => {
+  const link = event.target.closest('a[href^="#shop"]');
+  if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+    return;
+  if (openShoppingDialog(link.getAttribute("href"), link))
+    event.preventDefault();
+});
+shopDetails
+  .querySelector("[data-close-shop-details]")
+  .addEventListener("click", () => shopDetails.close());
+shopDetails.addEventListener("click", (event) => {
+  if (event.target === shopDetails) shopDetails.close();
+});
+shopDetails.addEventListener("close", () => {
+  if (!shopDialogOrigin) return;
+  const { x, y, trigger } = shopDialogOrigin;
+  if (trigger?.isConnected) trigger.focus({ preventScroll: true });
+  window.scrollTo({ left: x, top: y, behavior: "instant" });
+  shopDialogOrigin = null;
+});
+
 function renderShopping(event) {
   if (!event.shopIds?.length) return "";
   const shops = event.shopIds
     .map((id) => SHOPS.find((shop) => shop.id === id))
     .filter(Boolean);
-  return `<div class="event-shopping"><h5>这一段可以逛 · 选 1—2 家就好</h5><ul>${shops.map((shop) => `<li><strong>${escapeHtml(shop.name)}</strong><span>${escapeHtml(shop.kind)}</span><a href="#shop-${shop.id}">看介绍、配图与地图 ↓</a></li>`).join("")}</ul><p>先看地图与营业，顺路再去。全部小店参考在下方图文区。</p><a href="#shops" class="map-link">查看全部小店图文 ↓</a></div>`;
+  return `<div class="event-shopping"><h5>这一段可以逛 · 选 1—2 家就好</h5><ul>${shops.map((shop) => `<li><strong>${escapeHtml(shop.name)}</strong><span>${escapeHtml(shop.kind)}</span><a href="#shop-${shop.id}" aria-haspopup="dialog" aria-controls="shop-details">查看介绍、配图与地图</a></li>`).join("")}</ul><p>先看地图与营业，顺路再去。点开弹框查看，关闭后回到这里。</p><a href="#shops" class="map-link" aria-haspopup="dialog" aria-controls="shop-details">弹框查看全部小店</a></div>`;
 }
 const photoViewer = document.querySelector("#photo-viewer");
 document.addEventListener("click", (event) => {
@@ -243,7 +287,7 @@ function renderDayPanel() {
       : ""
   }<details class="day-context"><summary>出门随身包、交通与执行条件</summary><p><strong>随身带：</strong>${escapeHtml(DAY_CARRY[day.id].join("；"))}</p><p>${escapeHtml(isRain ? day.rain.summary : day.summary)}</p><p>${escapeHtml(day.warning)}</p><p>${escapeHtml(day.transport)}</p></details><div class="timeline-heading"><h4>${day.id === "before" ? "按阶段完成准备" : "这一天的时间线"}</h4><span>${events.length} 项 · 济州时间</span></div><div class="timeline">${events.map((event) => eventHtml(event)).join("")}</div>${
     day.id === "east"
-      ? `<details class="day-context"><summary>仅在改走东部海岸时：月汀里与咸德备选</summary><p>三大景点照常走时，不额外绕去。Moumoon 与“缘屋”只有改为沿海慢游时才选。</p><p>小店也只在改线时考虑：<a href="#shop-studio943">943 Studio（咸德）配图 ↓</a>；<a href="#shop-dalmun">달문굿（月汀里）参考 ↓</a>。</p>${[
+      ? `<details class="day-context"><summary>仅在改走东部海岸时：月汀里与咸德备选</summary><p>三大景点照常走时，不额外绕去。Moumoon 与“缘屋”只有改为沿海慢游时才选。</p><p>小店也只在改线时考虑：<a href="#shop-studio943" aria-haspopup="dialog" aria-controls="shop-details">943 Studio（咸德）详情</a>；<a href="#shop-dalmun" aria-haspopup="dialog" aria-controls="shop-details">달문굿（月汀里）详情</a>。</p>${[
           "moumoon",
           "yeonok",
         ]
@@ -809,11 +853,7 @@ renderMap();
 renderFoods();
 renderShops();
 if (/^#shops(?:$|-)|^#shop-/.test(location.hash)) {
-  requestAnimationFrame(() =>
-    document
-      .getElementById(location.hash.slice(1))
-      ?.scrollIntoView({ block: "start", behavior: "instant" }),
-  );
+  openShoppingDialog(location.hash);
 }
 updateBudget();
 openSourceHash();
