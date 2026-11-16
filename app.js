@@ -149,13 +149,58 @@ function contextualChecks(ids) {
   if (!items.length) return "";
   return `<div class="context-checks"><span class="mini-label">这个时间点，确认这些</span>${items.map(([id, title, description]) => `<label class="context-check"><input type="checkbox" data-check-id="${id}" ${checkedIds.has(id) ? "checked" : ""}><span><strong>${escapeHtml(title)}</strong><small>${escapeHtml(description)}</small></span></label>`).join("")}</div>`;
 }
+function shopGallery(shop) {
+  if (!shop.photos.length) return "";
+  return `<div class="shop-gallery ${shop.photos.length === 1 ? "single-photo" : ""}">${shop.photos.map((photo, index) => `<a class="shop-photo" href="./assets/shops/${photo}.webp" data-shop-photo="${photo}" data-shop-name="${escapeHtml(shop.name)}" aria-label="查看 ${escapeHtml(shop.name)} 第 ${index + 1} 张大图"><img src="./assets/shops/${photo}.webp" alt="用户截图中的 ${escapeHtml(shop.name)} 配图 ${index + 1}" loading="lazy" decoding="async"><span>点击看大图 ↗</span></a>`).join("")}</div>`;
+}
+function renderShops() {
+  document.querySelector("#shop-groups").innerHTML = SHOP_GROUPS.map(
+    (group) =>
+      `<section class="shop-area" id="shops-${group.id}" aria-labelledby="shops-heading-${group.id}"><h3 id="shops-heading-${group.id}">${escapeHtml(group.title)}</h3><p class="shop-area-route">${escapeHtml(group.route)}</p><div class="shop-grid">${SHOPS.filter(
+        (shop) => shop.group === group.id,
+      )
+        .map(
+          (shop) =>
+            `<article class="shop-card" id="shop-${shop.id}"><span class="mini-label">${escapeHtml(shop.kind)}</span><h4>${escapeHtml(shop.name)}</h4><p>${escapeHtml(shop.description)}</p>${shopGallery(shop)}<p class="shop-note">${escapeHtml(shop.note)}</p>${externalLink(mapUrl(shop.query), "搜索店铺地图 ↗", "map-link")}</article>`,
+        )
+        .join("")}</div></section>`,
+  ).join("");
+}
+function renderShopping(event) {
+  if (!event.shopIds?.length) return "";
+  const shops = event.shopIds
+    .map((id) => SHOPS.find((shop) => shop.id === id))
+    .filter(Boolean);
+  return `<div class="event-shopping"><h5>这一段可以逛 · 选 1—2 家就好</h5><ul>${shops.map((shop) => `<li><strong>${escapeHtml(shop.name)}</strong><span>${escapeHtml(shop.kind)}</span><a href="#shop-${shop.id}">看介绍、配图与地图 ↓</a></li>`).join("")}</ul><p>先看地图与营业，顺路再去。全部小店参考在下方图文区。</p><a href="#shops" class="map-link">查看全部小店图文 ↓</a></div>`;
+}
+const photoViewer = document.querySelector("#photo-viewer");
+document.addEventListener("click", (event) => {
+  const link = event.target.closest("[data-shop-photo]");
+  if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+    return;
+  if (typeof photoViewer.showModal !== "function") return;
+  event.preventDefault();
+  const image = photoViewer.querySelector("img");
+  image.src = link.href;
+  image.alt = link.querySelector("img").alt;
+  document.querySelector("#photo-viewer-title").textContent =
+    link.dataset.shopName;
+  photoViewer.showModal();
+});
+photoViewer
+  .querySelector("button")
+  .addEventListener("click", () => photoViewer.close());
+photoViewer.addEventListener("click", (event) => {
+  if (event.target === photoViewer) photoViewer.close();
+});
+
 function eventHtml(event, printing = false) {
   const position = clockPosition();
   const isCurrent = position.current?.id === event.id;
   const isNext = !position.current && position.next?.id === event.id;
   const isPast = event.end <= viewedInstant();
   const place = PLACES[event.placeId];
-  return `<article id="event-${event.id}" tabindex="-1" class="timeline-event ${isCurrent ? "event-current" : ""} ${isNext ? "event-next" : ""} ${isPast ? "event-past" : ""}"><div class="event-time">${escapeHtml(formatEventTime(event))}${isCurrent ? '<span class="time-state">计划进行中</span>' : isNext ? '<span class="time-state">下一项</span>' : ""}</div><div class="event-body"><div class="event-title-row"><h4 class="event-title">${escapeHtml(event.title)}</h4>${event.customId && !printing ? `<button type="button" class="remove-event" data-remove-event="${event.customId}" aria-label="删除自定安排：${escapeHtml(event.title)}">删除</button>` : ""}</div>${event.localHint ? `<p class="local-time-note">${escapeHtml(event.localHint)}</p>` : ""}<p class="event-description">${escapeHtml(event.description)}</p><div class="event-meta"><span class="event-category">${escapeHtml(event.category)}</span>${place ? externalLink(mapUrl(place.query), `${place.ko} ↗`, "map-link") : ""}</div>${event.carry.length ? `<div class="event-carry"><span class="mini-label">随身带</span><p>${escapeHtml(event.carry.join(" · "))}</p></div>` : ""}${renderMeal(event)}${contextualChecks(event.checkIds)}</div></article>`;
+  return `<article id="event-${event.id}" tabindex="-1" class="timeline-event ${isCurrent ? "event-current" : ""} ${isNext ? "event-next" : ""} ${isPast ? "event-past" : ""}"><div class="event-time">${escapeHtml(formatEventTime(event))}${isCurrent ? '<span class="time-state">计划进行中</span>' : isNext ? '<span class="time-state">下一项</span>' : ""}</div><div class="event-body"><div class="event-title-row"><h4 class="event-title">${escapeHtml(event.title)}</h4>${event.customId && !printing ? `<button type="button" class="remove-event" data-remove-event="${event.customId}" aria-label="删除自定安排：${escapeHtml(event.title)}">删除</button>` : ""}</div>${event.localHint ? `<p class="local-time-note">${escapeHtml(event.localHint)}</p>` : ""}<p class="event-description">${escapeHtml(event.description)}</p><div class="event-meta"><span class="event-category">${escapeHtml(event.category)}</span>${place ? externalLink(mapUrl(place.query), `${place.ko} ↗`, "map-link") : ""}</div>${event.carry.length ? `<div class="event-carry"><span class="mini-label">随身带</span><p>${escapeHtml(event.carry.join(" · "))}</p></div>` : ""}${renderMeal(event)}${renderShopping(event)}${contextualChecks(event.checkIds)}</div></article>`;
 }
 function renderDayTabs() {
   const position = clockPosition();
@@ -198,7 +243,7 @@ function renderDayPanel() {
       : ""
   }<details class="day-context"><summary>出门随身包、交通与执行条件</summary><p><strong>随身带：</strong>${escapeHtml(DAY_CARRY[day.id].join("；"))}</p><p>${escapeHtml(isRain ? day.rain.summary : day.summary)}</p><p>${escapeHtml(day.warning)}</p><p>${escapeHtml(day.transport)}</p></details><div class="timeline-heading"><h4>${day.id === "before" ? "按阶段完成准备" : "这一天的时间线"}</h4><span>${events.length} 项 · 济州时间</span></div><div class="timeline">${events.map((event) => eventHtml(event)).join("")}</div>${
     day.id === "east"
-      ? `<details class="day-context"><summary>仅在改走东部海岸时：月汀里与咸德备选</summary><p>三大景点照常走时，不额外绕去。Moumoon 与“缘屋”只有改为沿海慢游时才选。</p>${[
+      ? `<details class="day-context"><summary>仅在改走东部海岸时：月汀里与咸德备选</summary><p>三大景点照常走时，不额外绕去。Moumoon 与“缘屋”只有改为沿海慢游时才选。</p><p>小店也只在改线时考虑：<a href="#shop-studio943">943 Studio（咸德）配图 ↓</a>；<a href="#shop-dalmun">달문굿（月汀里）参考 ↓</a>。</p>${[
           "moumoon",
           "yeonok",
         ]
@@ -292,7 +337,7 @@ function renderNowPanel() {
             : "已全部勾选完成"
         }</p>`
       : "";
-    currentHtml = `<span class="focus-label">${previewInstant !== null ? "预览 · " : ""}计划进行中 · ${escapeHtml(formatEventTime(current))}</span><h2>${escapeHtml(current.title)}</h2><p>${escapeHtml(current.description)}</p>${current.localHint ? `<p class="local-time-note">${escapeHtml(current.localHint)}</p>` : ""}${food ? `<div class="focus-meal"><strong>${escapeHtml(food.name)}</strong>${externalLink(mapUrl(food.query), "餐厅地图 ↗", "map-link")}</div>` : current.mealQuery ? `<div class="focus-meal">${externalLink(mapUrl(current.mealQuery), "查找附近热餐 ↗", "map-link")}</div>` : ""}${current.carry.length ? `<p class="focus-essential"><strong>随身带</strong> ${escapeHtml(current.carry.join(" · "))}</p>` : ""}${checklistSnippet}<button type="button" class="focus-jump" data-jump-event="${current.id}" data-event-day="${current.dayId}">定位到此时段${current.checkIds.length ? " · 查看并勾选" : ""} ↗</button>`;
+    currentHtml = `<span class="focus-label">${previewInstant !== null ? "预览 · " : ""}计划进行中 · ${escapeHtml(formatEventTime(current))}</span><h2>${escapeHtml(current.title)}</h2><p>${escapeHtml(current.description)}</p>${current.localHint ? `<p class="local-time-note">${escapeHtml(current.localHint)}</p>` : ""}${food ? `<div class="focus-meal"><strong>${escapeHtml(food.name)}</strong>${externalLink(mapUrl(food.query), "餐厅地图 ↗", "map-link")}</div>` : current.mealQuery ? `<div class="focus-meal">${externalLink(mapUrl(current.mealQuery), "查找附近热餐 ↗", "map-link")}</div>` : ""}${current.shopIds?.length ? `<p class="focus-essential"><strong>顺路小店</strong> ${escapeHtml(current.shopIds.map((id) => SHOPS.find((shop) => shop.id === id)?.name).join(" / "))}，选 1—2 家即可。</p>` : ""}${current.carry.length ? `<p class="focus-essential"><strong>随身带</strong> ${escapeHtml(current.carry.join(" · "))}</p>` : ""}${checklistSnippet}<button type="button" class="focus-jump" data-jump-event="${current.id}" data-event-day="${current.dayId}">定位到此时段${current.checkIds.length ? " · 查看并勾选" : ""} ↗</button>`;
   }
   document.querySelector("#current-focus").innerHTML = currentHtml;
   document.querySelector("#next-focus").innerHTML = next
@@ -492,6 +537,12 @@ function dayText(day, useRain = false) {
                 .map((id) => FOODS.find((food) => food.id === id)?.shop)
                 .join(" / ")
             : "") +
+          (event.shopIds?.length
+            ? "\n顺路小店：" +
+              event.shopIds
+                .map((id) => SHOPS.find((shop) => shop.id === id)?.name)
+                .join(" / ")
+            : "") +
           (event.checkIds.length
             ? "\n准备：" +
               event.checkIds
@@ -520,7 +571,7 @@ function fullTextPlan() {
     .map((option) => option.name + "：" + option.description)
     .join(
       "\n",
-    )}\n\n吃点好的\n${FOODS.map((food) => `${food.name} / ${food.shop}\n区域：${food.area}｜${food.price}｜${food.when}\n${food.description}\n${food.note}\n${mapUrl(food.query)}`).join("\n\n")}\n\n行前清单\n${CHECKLIST.map((group) => `${group.group}\n${group.items.map(([, title, description]) => "□ " + title + "\n" + description).join("\n")}`).join("\n\n")}\n\n天气\n11 月气候参考：济州机场平均最高 16.4°C、平均最低 10.4°C，不是每日预报。分层穿衣，带防风外层与薄羽绒；大风不出海，雨后不登高。21—23 日日落约 17:27—17:28。\n\n紧急电话\n韩国报警 112；急救 / 消防 119；驻济州总领馆 +82-64-722-8802；领保 +86-10-12308。\n\n资料来源\n${SOURCES.map((source) => source.name + "\n" + source.url + "\n" + source.note).join("\n\n")}`;
+    )}\n\n吃点好的\n${FOODS.map((food) => `${food.name} / ${food.shop}\n区域：${food.area}｜${food.price}｜${food.when}\n${food.description}\n${food.note}\n${mapUrl(food.query)}`).join("\n\n")}\n\n顺路逛小店（用户截图参考，营业与地址临行确认）\n${SHOPS.map((shop) => `${shop.name}｜${SHOP_GROUPS.find((group) => group.id === shop.group).title}\n${shop.description}\n${shop.note}\n${mapUrl(shop.query)}`).join("\n\n")}\n\n行前清单\n${CHECKLIST.map((group) => `${group.group}\n${group.items.map(([, title, description]) => "□ " + title + "\n" + description).join("\n")}`).join("\n\n")}\n\n天气\n11 月气候参考：济州机场平均最高 16.4°C、平均最低 10.4°C，不是每日预报。分层穿衣，带防风外层与薄羽绒；大风不出海，雨后不登高。21—23 日日落约 17:27—17:28。\n\n紧急电话\n韩国报警 112；急救 / 消防 119；驻济州总领馆 +82-64-722-8802；领保 +86-10-12308。\n\n资料来源\n${SOURCES.map((source) => source.name + "\n" + source.url + "\n" + source.note).join("\n\n")}`;
 }
 function preparePrint() {
   document.querySelector("#print-days")?.remove();
@@ -756,6 +807,14 @@ loadChecklist();
 locateCurrentTime(false);
 renderMap();
 renderFoods();
+renderShops();
+if (/^#shops(?:$|-)|^#shop-/.test(location.hash)) {
+  requestAnimationFrame(() =>
+    document
+      .getElementById(location.hash.slice(1))
+      ?.scrollIntoView({ block: "start", behavior: "instant" }),
+  );
+}
 updateBudget();
 openSourceHash();
 startClockUpdates();

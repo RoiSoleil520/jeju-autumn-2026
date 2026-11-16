@@ -1,15 +1,30 @@
 "use strict";
-const CACHE_NAME = "jeju-autumn-2026-v6";
+const CACHE_NAME = "jeju-autumn-2026-v7";
 const CORE_FILES = [
   "./",
   "./index.html",
-  "./style.css",
-  "./data.js",
-  "./app.js",
-  "./schedule.js",
+  "./style.css?v=20261116-shops",
+  "./data.js?v=20261116-shops",
+  "./app.js?v=20261116-shops",
+  "./schedule.js?v=20261116-shops",
+  "./shops.js?v=20261116-shops",
   "./assets/icon.svg",
   "./assets/seongsan.webp",
   "./assets/saebyeol.webp",
+  "./assets/shops/barnnet.webp",
+  "./assets/shops/islander.webp",
+  "./assets/shops/mood.webp",
+  "./assets/shops/planer.webp",
+  "./assets/shops/slomo.webp",
+  "./assets/shops/studio943-1.webp",
+  "./assets/shops/studio943-2.webp",
+  "./assets/shops/studio943-3.webp",
+  "./assets/shops/triple-1.webp",
+  "./assets/shops/triple-2.webp",
+  "./assets/shops/triple-3.webp",
+  "./assets/shops/vintage-1.webp",
+  "./assets/shops/vintage-2.webp",
+  "./assets/shops/vintage-3.webp",
   "./manifest.webmanifest",
 ];
 self.addEventListener("install", (event) => {

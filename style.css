@@ -3464,3 +3464,297 @@ progress::-moz-progress-bar {
     bottom: 100px;
   }
 }
+
+/* Shopping notes stay visible; photos have one simple enlargement action. */
+.shop-shortcut {
+  margin-bottom: 25px;
+}
+.shop-intro {
+  padding: 22px;
+  background: var(--light-green);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.shop-intro p + p {
+  margin-top: 12px;
+}
+.shop-intro p {
+  font-size: 1.125rem;
+  line-height: 1.9;
+}
+.shop-area-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0;
+}
+.shop-area-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 8px 16px;
+  border: 1px solid #b9c4ba;
+  border-radius: 4px;
+  font-size: 1.125rem;
+}
+.shop-area {
+  margin-top: 40px;
+  scroll-margin-top: 24px;
+}
+.shop-area h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+.shop-area-route {
+  color: var(--muted);
+  font-size: 1.125rem;
+  margin: 12px 0 22px;
+}
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.shop-card {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 26px;
+  background: var(--white);
+  scroll-margin-top: 24px;
+}
+.shop-card h4 {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  margin: 6px 0 12px;
+  overflow-wrap: anywhere;
+}
+.shop-card > p {
+  font-size: 1.125rem;
+  line-height: 1.9;
+}
+.shop-card .shop-note {
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  margin-top: 18px;
+  padding-top: 15px;
+  font-size: 1rem;
+}
+.shop-card > .map-link {
+  margin-top: 10px;
+}
+.shop-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+.shop-gallery.single-photo {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 280px;
+  margin-inline: auto;
+}
+.shop-photo {
+  display: block;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--cream);
+}
+.shop-photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+}
+.shop-photo span {
+  display: block;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+  padding: 10px 4px;
+  color: var(--ink);
+}
+.event-shopping {
+  margin-top: 18px;
+  padding: 18px;
+  background: #f3efe4;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+}
+.event-shopping h5 {
+  font-size: 1.125rem;
+  margin: 0 0 12px;
+}
+.event-shopping ul {
+  padding-left: 20px;
+  margin: 0;
+}
+.event-shopping li {
+  font-size: 1.125rem;
+  margin-bottom: 18px;
+}
+.event-shopping li strong,
+.event-shopping li span,
+.event-shopping li a {
+  display: block;
+}
+.event-shopping li span,
+.event-shopping > p {
+  font-size: 1rem;
+  color: var(--muted);
+}
+.event-shopping li a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  padding-block: 6px;
+}
+.event-shopping > .map-link {
+  margin-top: 10px;
+}
+.photo-viewer {
+  width: min(960px, calc(100vw - 24px));
+  max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 24px);
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  color: var(--ink);
+  background: var(--paper);
+}
+.photo-viewer::backdrop {
+  background: #0a1716d9;
+}
+.photo-viewer-content {
+  padding: 0 18px 18px;
+}
+.photo-viewer-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  padding: 14px 0;
+  background: var(--paper);
+}
+.photo-viewer-toolbar h2 {
+  font-family: var(--sans);
+  font-size: 1.25rem;
+  overflow-wrap: anywhere;
+}
+.photo-viewer-toolbar button {
+  min-height: 48px;
+  flex-shrink: 0;
+  font-size: 1.125rem;
+  padding: 8px 12px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: white;
+  color: var(--ink);
+}
+.photo-viewer img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+  object-fit: contain;
+}
+@media (max-width: 700px) {
+  .shop-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .shop-card {
+    padding: 20px 17px;
+  }
+  .shop-card > p,
+  .shop-area-route {
+    font-size: 1.25rem;
+  }
+  .shop-card .shop-note {
+    font-size: 1.125rem;
+  }
+  .shop-intro {
+    padding: 18px;
+  }
+  .shop-area h3 {
+    font-size: 1.5rem;
+  }
+  .shop-gallery {
+    gap: 7px;
+  }
+  .shop-photo span {
+    font-size: 1rem;
+    padding: 8px 3px;
+  }
+  .photo-viewer-toolbar {
+    flex-wrap: wrap;
+  }
+  .photo-viewer-toolbar h2 {
+    font-size: 1.125rem;
+  }
+  .photo-viewer-content {
+    padding-inline: 12px;
+  }
+  .event-shopping {
+    padding: 14px;
+  }
+}
+@media print {
+  .photo-viewer,
+  .shop-shortcut,
+  .shop-area-links,
+  .shop-photo span {
+    display: none !important;
+  }
+  .shop-grid {
+    display: block;
+  }
+  .shop-card {
+    padding: 12pt;
+    margin-bottom: 14pt;
+    break-inside: avoid;
+  }
+  .shop-card h4 {
+    font-size: 14pt;
+  }
+  .shop-card p,
+  .shop-card .shop-note,
+  .shop-area-route,
+  .shop-intro p {
+    font-size: 10pt;
+  }
+  .shop-gallery {
+    display: flex;
+    justify-content: start;
+  }
+  .shop-gallery.single-photo {
+    max-width: none;
+  }
+  .shop-photo {
+    max-width: 30%;
+  }
+  .shop-photo img {
+    height: 130pt;
+    width: auto;
+    max-width: 100%;
+  }
+  .event-shopping {
+    break-inside: avoid;
+    padding: 8pt;
+  }
+  .event-shopping h5,
+  .event-shopping li,
+  .event-shopping p,
+  .event-shopping a {
+    font-size: 9pt;
+  }
+}
+
+@media screen {
+  body:has(.photo-viewer[open]) {
+    overflow: hidden;
+  }
+}

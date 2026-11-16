@@ -11,10 +11,11 @@
     <title>济州，晚秋见。｜2026 旅行手册</title>
     <link rel="icon" type="image/svg+xml" href="./assets/icon.svg" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./style.css" />
-    <script src="./data.js" defer></script>
-    <script src="./schedule.js" defer></script>
-    <script src="./app.js" defer></script>
+    <link rel="stylesheet" href="./style.css?v=20261116-shops" />
+    <script src="./data.js?v=20261116-shops" defer></script>
+    <script src="./shops.js?v=20261116-shops" defer></script>
+    <script src="./schedule.js?v=20261116-shops" defer></script>
+    <script src="./app.js?v=20261116-shops" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#plan">跳到每日行程</a>
@@ -40,7 +41,7 @@
       >
       <nav aria-label="主导航">
         <a href="#now">现在做什么</a><a href="#plan">日期行程</a
-        ><a href="#map">地点地图</a><a href="#food">餐饮备选</a
+        ><a href="#map">地点地图</a><a href="#food">美食小店</a
         ><a href="#prepare">行前准备</a>
       </nav>
       <button class="small-button print-button" id="print-button">
@@ -459,6 +460,11 @@
             在月汀里，“缘屋”石锅饭在咸德方向、店名待比对。若保留城山—牛岛—涉地三站，今天不额外绕去。
           </p>
         </div>
+        <p class="shop-shortcut">
+          <a class="small-button" href="#shops"
+            >新补充：小店图文与原截图配图 ↓</a
+          >
+        </p>
         <div class="filter-row" id="food-filters" aria-label="美食类型筛选">
           <button
             class="chip active"
@@ -515,6 +521,43 @@
           准备早出发时的早餐；三人先少量点再加单。备少量现金并确认可用卡种；用
           Naver Map 核对分店、营业与最后点单时间，菜单可用 Papago
           翻译。截图中的“24 小时”“免费配菜”和固定人均价，都需再向具体门店确认。
+        </p>
+      </section>
+
+      <section
+        id="shops"
+        class="wrap section-space shops-section"
+        aria-labelledby="shops-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">LITTLE SHOPS · YOUR PHOTO NOTES</p>
+            <h2 id="shops-title">顺路逛一逛，把喜欢的带回家。</h2>
+          </div>
+          <p>
+            按你补充的截图整理 · 14 组小店参考<br />图片直接可见，点击即可看大图。
+          </p>
+        </div>
+        <div class="shop-intro">
+          <p>
+            <strong>23 日下午：</strong>先老济州、再回新济州；每个区域选 1—2
+            家，不把所有店打卡一遍。<strong>22 日西线：</strong
+            >涯月的店顺路再逛，优先留出看海与日落的时间。
+          </p>
+          <p>
+            店铺描述、区域线索和配图来自你提供的截图；营业、地址、库存与价格未逐店核实，出发前点地图复核。截图中的固定人民币价、开门时间和“20—30
+            分钟车程”不作为行程保证。
+          </p>
+        </div>
+        <nav class="shop-area-links" aria-label="小店区域索引">
+          <a href="#shops-old-town">老济州 ↓</a
+          ><a href="#shops-new-jeju">新济州 ↓</a
+          ><a href="#shops-aewol">涯月 ↓</a
+          ><a href="#shops-east-coast">东线替代 ↓</a>
+        </nav>
+        <div id="shop-groups"></div>
+        <p class="fine-print">
+          配图从你提供的长截图中提取，仅保留原有画面；不是门店当前实况。小店常有临时休息，没开门就跳过。买器皿先考虑易碎包装，香水注意液体携带，海边逛店仍要穿好防风外套。
         </p>
       </section>
 
@@ -699,7 +742,7 @@
         <details>
           <summary>
             <span>资料来源与核验说明</span
-            ><span>基础资料 11/12 · 美食补充 11/13 · 展开 ↗</span>
+            ><span>基础资料 11/12 · 美食 11/13 · 小店 11/16 · 展开 ↗</span>
           </summary>
           <div class="sources-intro">
             <p>
@@ -732,9 +775,22 @@
       <a href="#now"><span aria-hidden="true">◎</span>现在</a>
       <a href="#plan"><span aria-hidden="true">◷</span>行程</a>
       <a href="#map"><span aria-hidden="true">⌖</span>地图</a>
-      <a href="#food"><span aria-hidden="true">♨</span>美食</a>
+      <a href="#food"><span aria-hidden="true">♨</span>吃逛</a>
       <a href="#prepare"><span aria-hidden="true">☑</span>清单</a>
     </nav>
+    <dialog
+      id="photo-viewer"
+      class="photo-viewer"
+      aria-labelledby="photo-viewer-title"
+    >
+      <div class="photo-viewer-content">
+        <div class="photo-viewer-toolbar">
+          <h2 id="photo-viewer-title">店铺配图</h2>
+          <button type="button" autofocus>关闭大图 ×</button>
+        </div>
+        <img alt="" />
+      </div>
+    </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
   </body>
 </html>

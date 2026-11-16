@@ -91,6 +91,7 @@ function makeScheduledEvent(dayId, id, start, end, info = {}) {
     category: "安排",
     placeId: null,
     foodIds: [],
+    shopIds: [],
     checkIds: [],
     carry: [],
     ...info,
@@ -308,7 +309,9 @@ function normalEvents(dayId, autumnChoice) {
         checkIds: ["weather", "money"],
       }),
       base(0, "09:00", "10:15"),
-      base(1, "10:15", "11:30"),
+      base(1, "10:15", "11:30", {
+        shopIds: ["barnnet", "verish"],
+      }),
       base(2, "11:30", "12:30", { foodIds: ["fish"] }),
       base(3, "12:30", "13:20"),
       base(4, "13:20", "14:45"),
@@ -356,8 +359,17 @@ function normalEvents(dayId, autumnChoice) {
         placeId: option.place,
       }),
       base(2, "11:15", "12:30", { foodIds: ["noodles", "woojin"] }),
-      base(3, "13:30", "15:00", { foodIds: ["juice"] }),
-      base(4, "15:30", "17:30"),
+      base(3, "13:30", "15:00", {
+        foodIds: ["juice"],
+        shopIds: ["islander", "classic", "slomo", "vintage"],
+        description:
+          "东门市场与七星街一带买一点伴手礼，顺路从文创、器皿或古着店里挑 1—2 家。其他老济州小店留作替换，不逐家打卡；15:00 左右开始回新济州。",
+      }),
+      base(4, "15:30", "17:30", {
+        shopIds: ["triple", "planer", "sumtarr"],
+        description:
+          "回保健路、新济州住处附近，衣服、杂货、蛋挞按兴趣选；新罗或乐天免税购物按实际需求取舍。先查地图和营业，17:30 收尾，不跨回老济州。",
+      }),
       add("early-dinner", "18:00", "19:00", {
         title: "住宿附近吃早晚餐",
         description:
@@ -465,7 +477,10 @@ function rainEvents(dayId) {
       category: "午餐",
       foodIds: ["noodles", "woojin"],
     }),
-    base(1, "13:30", "17:30", { foodIds: ["juice"] }),
+    base(1, "13:30", "17:30", {
+      foodIds: ["juice"],
+      shopIds: ["triple", "planer", "sumtarr"],
+    }),
     add("dinner", "18:00", "19:00", {
       title: "住宿附近吃早晚餐",
       description: "今日不再远行，少量点餐，留时间打包。",
