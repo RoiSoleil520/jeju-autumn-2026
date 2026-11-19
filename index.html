@@ -11,12 +11,12 @@
     <title>济州，晚秋见。｜2026 旅行手册</title>
     <link rel="icon" type="image/svg+xml" href="./assets/icon.svg" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <script src="./appearance.js?v=20261119-quiet-settings"></script>
-    <link rel="stylesheet" href="./style.css?v=20261119-quiet-settings" />
-    <script src="./data.js?v=20261119-quiet-settings" defer></script>
-    <script src="./shops.js?v=20261119-quiet-settings" defer></script>
-    <script src="./schedule.js?v=20261119-quiet-settings" defer></script>
-    <script src="./app.js?v=20261119-quiet-settings" defer></script>
+    <script src="./appearance.js?v=20261119-top-settings"></script>
+    <link rel="stylesheet" href="./style.css?v=20261119-top-settings" />
+    <script src="./data.js?v=20261119-top-settings" defer></script>
+    <script src="./shops.js?v=20261119-top-settings" defer></script>
+    <script src="./schedule.js?v=20261119-top-settings" defer></script>
+    <script src="./app.js?v=20261119-top-settings" defer></script>
   </head>
   <body>
     <svg
@@ -74,14 +74,45 @@
         ><a href="#map">地点地图</a><a href="#food">美食小店</a
         ><a href="#prepare">行前准备</a>
       </nav>
-      <button
-        class="small-button print-button"
-        id="print-button"
-        aria-label="打印或存为 PDF"
-      >
-        <span class="print-full-label">打印 / 存 PDF ↗</span
-        ><span class="print-short-label">打印</span>
-      </button>
+      <div class="header-actions">
+        <details class="reading-settings">
+          <summary
+            aria-label="阅读设置"
+            title="阅读设置"
+            aria-controls="reading-options"
+          >
+            字号
+          </summary>
+          <div id="reading-options" class="reading-controls">
+            <span id="text-size-label">阅读模式</span>
+            <div
+              id="text-size-controls"
+              class="text-size-switch"
+              role="group"
+              aria-labelledby="text-size-label"
+            >
+              <button type="button" data-text-size="large" aria-pressed="true">
+                大字舒适
+              </button>
+              <button
+                type="button"
+                data-text-size="normal"
+                aria-pressed="false"
+              >
+                普通紧凑
+              </button>
+            </div>
+          </div>
+        </details>
+        <button
+          class="small-button print-button"
+          id="print-button"
+          aria-label="打印或存为 PDF"
+        >
+          <span class="print-full-label">打印 / 存 PDF ↗</span
+          ><span class="print-short-label">打印</span>
+        </button>
+      </div>
     </header>
     <main id="top">
       <section id="now" class="wrap journey-dashboard">
@@ -750,33 +781,6 @@
           <button class="small-button" id="download-plan">
             下载完整文字行程 ↓
           </button>
-          <details class="reading-settings">
-            <summary>阅读设置</summary>
-            <div class="reading-controls">
-              <span id="text-size-label">阅读模式</span>
-              <div
-                id="text-size-controls"
-                class="text-size-switch"
-                role="group"
-                aria-labelledby="text-size-label"
-              >
-                <button
-                  type="button"
-                  data-text-size="large"
-                  aria-pressed="true"
-                >
-                  大字舒适
-                </button>
-                <button
-                  type="button"
-                  data-text-size="normal"
-                  aria-pressed="false"
-                >
-                  普通紧凑
-                </button>
-              </div>
-            </div>
-          </details>
         </div>
       </section>
       <section id="sources" class="wrap sources-section">

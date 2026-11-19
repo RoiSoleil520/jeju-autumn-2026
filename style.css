@@ -4194,26 +4194,59 @@ progress::-moz-progress-bar {
   }
 }
 
-/* Keep infrequent appearance preferences next to the page utilities. */
+/* A quiet header entry opens preferences without shifting the itinerary. */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
 .reading-settings {
-  margin-top: 16px;
+  position: relative;
 }
 .reading-settings > summary {
-  width: fit-content;
-  padding-block: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+  list-style: none;
   color: var(--muted);
-  font-size: 1rem;
+  font-size: max(1rem, 16px);
+  line-height: 1.5;
   cursor: pointer;
+  border-radius: 4px;
+}
+.reading-settings > summary::-webkit-details-marker {
+  display: none;
+}
+.reading-settings > summary:hover,
+.reading-settings[open] > summary {
+  background: var(--light-green);
 }
 .reading-settings .reading-controls {
-  justify-content: flex-start;
-  margin-bottom: 0;
-  padding: 12px 0 0;
-  border: 0;
-  background: transparent;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  box-shadow: 0 6px 24px #183e3620;
 }
-.utility-section .reading-settings button {
-  margin-top: 0;
+@media screen and (max-width: 580px) {
+  .header-actions {
+    gap: 4px;
+  }
+  .header-actions .print-button {
+    padding-inline: 8px;
+  }
 }
 @media print {
   .reading-settings {

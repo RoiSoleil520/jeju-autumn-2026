@@ -15,6 +15,18 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     const controls = document.querySelector("#text-size-controls");
+    const settings = document.querySelector(".reading-settings");
+    const settingsTrigger = settings.querySelector("summary");
+
+    document.addEventListener("click", (event) => {
+      if (!settings.contains(event.target)) settings.open = false;
+    });
+    settings.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || !settings.open) return;
+      event.preventDefault();
+      settings.open = false;
+      settingsTrigger.focus({ preventScroll: true });
+    });
     function updateButtons() {
       for (const button of controls.querySelectorAll("[data-text-size]")) {
         button.setAttribute(
@@ -30,6 +42,8 @@
         return;
       root.dataset.textSize = button.dataset.textSize;
       updateButtons();
+      settings.open = false;
+      settingsTrigger.focus({ preventScroll: true });
       try {
         localStorage.setItem(storageKey, root.dataset.textSize);
       } catch {
