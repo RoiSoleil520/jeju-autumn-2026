@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-text-size="large">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -11,11 +11,12 @@
     <title>济州，晚秋见。｜2026 旅行手册</title>
     <link rel="icon" type="image/svg+xml" href="./assets/icon.svg" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./style.css?v=20261119-city-east-west" />
-    <script src="./data.js?v=20261119-city-east-west" defer></script>
-    <script src="./shops.js?v=20261119-city-east-west" defer></script>
-    <script src="./schedule.js?v=20261119-city-east-west" defer></script>
-    <script src="./app.js?v=20261119-city-east-west" defer></script>
+    <script src="./appearance.js?v=20261119-text-size"></script>
+    <link rel="stylesheet" href="./style.css?v=20261119-text-size" />
+    <script src="./data.js?v=20261119-text-size" defer></script>
+    <script src="./shops.js?v=20261119-text-size" defer></script>
+    <script src="./schedule.js?v=20261119-text-size" defer></script>
+    <script src="./app.js?v=20261119-text-size" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#plan">跳到每日行程</a>
@@ -50,6 +51,22 @@
     </header>
     <main id="top">
       <section id="now" class="wrap journey-dashboard">
+        <div class="reading-controls">
+          <span id="text-size-label">阅读字号</span>
+          <div
+            id="text-size-controls"
+            class="text-size-switch"
+            role="group"
+            aria-labelledby="text-size-label"
+          >
+            <button type="button" data-text-size="large" aria-pressed="true">
+              大字
+            </button>
+            <button type="button" data-text-size="normal" aria-pressed="false">
+              普通
+            </button>
+          </div>
+        </div>
         <div class="clock-row">
           <div>
             <span class="eyebrow" id="clock-mode">韩国时间 · 每分钟更新</span

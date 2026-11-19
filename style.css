@@ -3829,3 +3829,60 @@ progress::-moz-progress-bar {
     display: none !important;
   }
 }
+
+/* Keep large text as the default; normal mode scales the existing rem typography. */
+@media screen {
+  html[data-text-size="normal"] {
+    font-size: 80%;
+  }
+}
+.reading-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--white);
+}
+.reading-controls > span {
+  font-size: max(1rem, 16px);
+  font-weight: 600;
+}
+.text-size-switch {
+  display: inline-flex;
+  gap: 4px;
+  padding: 3px;
+  background: var(--light-green);
+  border-radius: 5px;
+}
+.text-size-switch button {
+  min-height: 48px;
+  min-width: 64px;
+  padding: 7px 14px;
+  font-size: max(1rem, 16px);
+  line-height: 1.5;
+  border: 0;
+  border-radius: 4px;
+  color: var(--ink);
+  background: transparent;
+}
+.text-size-switch button[aria-pressed="true"] {
+  color: var(--paper);
+  background: var(--ink);
+}
+@media (max-width: 580px) {
+  .reading-controls {
+    justify-content: space-between;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+}
+@media print {
+  .reading-controls {
+    display: none !important;
+  }
+}
