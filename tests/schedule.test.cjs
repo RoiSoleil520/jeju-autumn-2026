@@ -4,7 +4,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
 const context = vm.createContext({});
-for (const name of ["data.js", "schedule.js"]) {
+for (const name of ["data.js", "shops.js", "schedule.js"]) {
   vm.runInContext(
     fs.readFileSync(path.join(__dirname, "..", name), "utf8"),
     context,
@@ -52,31 +52,32 @@ test("late-night arrival remains on arrival itinerary after midnight", () => {
   const afterMidnight = at("2026-11-21", "00:20");
   assert.equal(afterMidnight.dayId, "arrival");
   assert.equal(afterMidnight.current.id, "arrival-bedtime");
-  assert.equal(at("2026-11-21", "01:00").dayId, "east");
+  assert.equal(at("2026-11-21", "01:00").dayId, "city");
 });
 
 test("exact interval boundary moves to the next event", () => {
-  assert.equal(at("2026-11-21", "08:59").current.id, "east-depart");
-  assert.equal(at("2026-11-21", "09:00").current.id, "east-normal-1");
+  assert.equal(at("2026-11-22", "08:59").current.id, "east-depart");
+  assert.equal(at("2026-11-22", "09:00").current.id, "east-normal-1");
 });
 
 test("a gap is shown as a gap, never as an ongoing visit", () => {
-  const gap = at("2026-11-21", "15:05");
+  const gap = at("2026-11-22", "15:05");
   assert.equal(gap.current, null);
   assert.equal(gap.next.id, "east-normal-5");
 });
 
 test("lunch and dinner carry food options at their actual planned times", () => {
-  const lunch = at("2026-11-21", "12:15").current;
+  const lunch = at("2026-11-22", "12:15").current;
   assert.equal(lunch.id, "east-udo-lunch");
   assert.match(lunch.mealQuery, /우도/);
-  const dinner = at("2026-11-21", "18:30").current;
+  const dinner = at("2026-11-22", "18:30").current;
   assert.equal(dinner.id, "east-pork-dinner");
-  assert.equal(dinner.foodIds.length, 4);
+  assert.ok(dinner.foodIds.includes("woojin"));
+  assert.ok(dinner.foodIds.includes("hayeogum"));
 });
 
 test("rain schedule replaces outdoor activities and keeps meals", () => {
-  const rain = at("2026-11-21", "12:15", { mode: "rain" });
+  const rain = at("2026-11-22", "12:15", { mode: "rain" });
   assert.equal(rain.current.id, "east-rain-lunch");
   assert.ok(rain.current.foodIds.includes("woojin"));
   assert.ok(
@@ -86,9 +87,26 @@ test("rain schedule replaces outdoor activities and keeps meals", () => {
   );
 });
 
-test("autumn choice changes the scheduled location", () => {
-  const position = at("2026-11-23", "10:00", { autumnChoice: "university" });
-  assert.equal(position.current.placeId, "university");
+test("city day starts late and follows the supplied city route", () => {
+  assert.equal(at("2026-11-21", "08:00").current, null);
+  assert.equal(at("2026-11-21", "10:15").current.id, "city-brunch");
+  assert.equal(at("2026-11-21", "11:45").current.placeId, "museum");
+  assert.equal(at("2026-11-21", "13:30").current.placeId, "dongmun");
+  assert.ok(at("2026-11-21", "17:45").current.foodIds.includes("heukdonga"));
+});
+
+test("city weather choice changes only the afternoon destination", () => {
+  assert.equal(at("2026-11-21", "15:30").current.placeId, "tapdong");
+  assert.equal(
+    at("2026-11-21", "15:30", { mode: "rain" }).current.placeId,
+    "underground",
+  );
+  const normal = buildDaySchedule("city");
+  const rain = buildDaySchedule("city", { mode: "rain" });
+  assert.deepEqual(
+    normal.filter((e) => e.id !== "city-afternoon-choice").map((e) => e.title),
+    rain.filter((e) => e.id !== "city-afternoon-choice").map((e) => e.title),
+  );
 });
 
 test("return-flight completion uses Hangzhou local arrival offset", () => {
@@ -109,12 +127,12 @@ test("custom appointments join the selected date and get their own focus window"
     },
   ];
   const position = at("2026-11-22", "12:50", { customEvents });
-  assert.equal(position.dayId, "west");
+  assert.equal(position.dayId, "east");
   assert.equal(position.current.customId, "appointment-1");
   assert.equal(position.current.end - position.current.start, 30 * 60000);
   assert.equal(
     at("2026-11-22", "13:15", { customEvents }).current.id,
-    "west-normal-3",
+    "east-udo-dessert",
   );
 });
 
@@ -163,5 +181,50 @@ test("regular day schedules are ordered, have durations and never overlap", () =
             `Overlap: ${events[i - 1].id} / ${event.id}`,
           );
       }
+    }
+});
+
+test("trip dates are city Saturday, east Sunday and west Monday", () => {
+  const tripDays = days.filter((day) =>
+    ["city", "east", "west"].includes(day.id),
+  );
+  assert.deepEqual(
+    Array.from(tripDays, (day) => `${day.isoDate}:${day.id}:${day.weekday}`),
+    ["2026-11-21:city:周六", "2026-11-22:east:周日", "2026-11-23:west:周一"],
+  );
+  assert.ok(!days.some((day) => day.id === "autumn"));
+});
+
+test("Sunday east-line meals never send travelers to closed Ollae Guksu", () => {
+  for (const mode of ["normal", "rain"])
+    for (const event of buildDaySchedule("east", { mode }))
+      assert.ok(!event.foodIds.includes("noodles"), event.id);
+});
+
+test("last evening keeps packing and early transfer checks in every weather plan", () => {
+  for (const mode of ["normal", "rain"]) {
+    const evening = at("2026-11-23", "20:00", { mode }).current;
+    assert.equal(evening.dayId, "west");
+    assert.ok(evening.checkIds.includes("departure"));
+    assert.ok(evening.checkIds.includes("checkout"));
+    assert.equal(koreaDateTime(evening.end).time, "20:30");
+  }
+});
+
+test("all scheduled locations, alternatives and shopping references resolve", () => {
+  const { places, shops } = vm.runInContext(
+    "({places:PLACES,shops:SHOPS})",
+    context,
+  );
+  for (const mode of ["normal", "rain"])
+    for (const event of fullSchedule({ mode })) {
+      if (event.placeId) assert.ok(places[event.placeId], event.id);
+      if (event.alternativePlaceId)
+        assert.ok(places[event.alternativePlaceId], event.id);
+      for (const id of event.shopIds)
+        assert.ok(
+          shops.some((shop) => shop.id === id),
+          id,
+        );
     }
 });

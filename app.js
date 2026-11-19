@@ -5,7 +5,6 @@ const validChecklistIds = new Set(
 );
 let activeDayId = "before";
 let activeMode = "normal";
-let autumnChoice = "saebyeol";
 let activeFoodType = "全部";
 let activeFoodArea = "全部";
 let toastTimer;
@@ -42,7 +41,6 @@ function loadPlanSettings() {
   const defaults = {
     dayModes: {},
     foodChoices: {},
-    autumnChoice: "saebyeol",
     customEvents: [],
   };
   try {
@@ -57,9 +55,6 @@ function loadPlanSettings() {
         saved.foodChoices && typeof saved.foodChoices === "object"
           ? saved.foodChoices
           : {},
-      autumnChoice: Object.hasOwn(AUTUMN_OPTIONS, saved.autumnChoice)
-        ? saved.autumnChoice
-        : "saebyeol",
       customEvents: Array.isArray(saved.customEvents)
         ? saved.customEvents.filter(validCustomEvent)
         : [],
@@ -85,7 +80,6 @@ function validCustomEvent(item) {
   );
 }
 const planSettings = loadPlanSettings();
-autumnChoice = planSettings.autumnChoice;
 let previewInstant = null;
 let followsClock = true;
 let lastClockEventId = "";
@@ -102,7 +96,6 @@ function viewedInstant() {
 function currentEvents(day, useRain = false) {
   return buildDaySchedule(day.id, {
     mode: useRain ? "rain" : "normal",
-    autumnChoice,
     customEvents: planSettings.customEvents,
   });
 }
@@ -244,7 +237,8 @@ function eventHtml(event, printing = false) {
   const isNext = !position.current && position.next?.id === event.id;
   const isPast = event.end <= viewedInstant();
   const place = PLACES[event.placeId];
-  return `<article id="event-${event.id}" tabindex="-1" class="timeline-event ${isCurrent ? "event-current" : ""} ${isNext ? "event-next" : ""} ${isPast ? "event-past" : ""}"><div class="event-time">${escapeHtml(formatEventTime(event))}${isCurrent ? '<span class="time-state">计划进行中</span>' : isNext ? '<span class="time-state">下一项</span>' : ""}</div><div class="event-body"><div class="event-title-row"><h4 class="event-title">${escapeHtml(event.title)}</h4>${event.customId && !printing ? `<button type="button" class="remove-event" data-remove-event="${event.customId}" aria-label="删除自定安排：${escapeHtml(event.title)}">删除</button>` : ""}</div>${event.localHint ? `<p class="local-time-note">${escapeHtml(event.localHint)}</p>` : ""}<p class="event-description">${escapeHtml(event.description)}</p><div class="event-meta"><span class="event-category">${escapeHtml(event.category)}</span>${place ? externalLink(mapUrl(place.query), `${place.ko} ↗`, "map-link") : ""}</div>${event.carry.length ? `<div class="event-carry"><span class="mini-label">随身带</span><p>${escapeHtml(event.carry.join(" · "))}</p></div>` : ""}${renderMeal(event)}${renderShopping(event)}${contextualChecks(event.checkIds)}</div></article>`;
+  const alternativePlace = PLACES[event.alternativePlaceId];
+  return `<article id="event-${event.id}" tabindex="-1" class="timeline-event ${isCurrent ? "event-current" : ""} ${isNext ? "event-next" : ""} ${isPast ? "event-past" : ""}"><div class="event-time">${escapeHtml(formatEventTime(event))}${isCurrent ? '<span class="time-state">计划进行中</span>' : isNext ? '<span class="time-state">下一项</span>' : ""}</div><div class="event-body"><div class="event-title-row"><h4 class="event-title">${escapeHtml(event.title)}</h4>${event.customId && !printing ? `<button type="button" class="remove-event" data-remove-event="${event.customId}" aria-label="删除自定安排：${escapeHtml(event.title)}">删除</button>` : ""}</div>${event.localHint ? `<p class="local-time-note">${escapeHtml(event.localHint)}</p>` : ""}<p class="event-description">${escapeHtml(event.description)}</p><div class="event-meta"><span class="event-category">${escapeHtml(event.category)}</span>${place ? externalLink(mapUrl(place.query), `${place.ko} ↗`, "map-link") : ""}${alternativePlace ? externalLink(mapUrl(alternativePlace.query), `雨天改去：${alternativePlace.name} ↗`, "map-link") : ""}</div>${event.carry.length ? `<div class="event-carry"><span class="mini-label">随身带</span><p>${escapeHtml(event.carry.join(" · "))}</p></div>` : ""}${renderMeal(event)}${renderShopping(event)}${contextualChecks(event.checkIds)}</div></article>`;
 }
 function renderDayTabs() {
   const position = clockPosition();
@@ -274,18 +268,7 @@ function renderDayPanel() {
   panel.setAttribute("aria-labelledby", `tab-${day.id}`);
   const position = clockPosition();
   const browsing = day.id !== position.dayId || !followsClock;
-  panel.innerHTML = `<div class="day-topline"><span class="day-counter">${day.id === "before" ? "BEFORE DEPARTURE" : day.date + " / " + day.weekday}</span><span class="tag">${escapeHtml(day.badge)}</span></div><h3 class="day-title">${escapeHtml(day.id === "before" ? day.title : day.date + " · " + day.label)}</h3><p class="day-subtitle">${escapeHtml(day.subtitle)}</p>${browsing ? '<div class="browse-notice">正在浏览这一天的计划 <button type="button" data-locate-now>定位' + (previewInstant === null ? "当前时间" : "预览时间") + " ↗</button></div>" : ""}${day.rain ? `<div class="mode-controls"><span>根据实际天气选择，切换只调整计划</span><div class="segmented"><button type="button" data-mode="normal" aria-pressed="${!isRain}">原计划</button><button type="button" data-mode="rain" aria-pressed="${isRain}">大风 / 下雨备选</button></div></div>` : ""}${
-    day.id === "autumn" && !isRain
-      ? `<div class="autumn-choice"><label for="autumn-choice">上午只选一条秋色线</label><select id="autumn-choice">${Object.entries(
-          AUTUMN_OPTIONS,
-        )
-          .map(
-            ([id, option]) =>
-              `<option value="${id}" ${id === autumnChoice ? "selected" : ""}>${escapeHtml(option.name)}</option>`,
-          )
-          .join("")}</select></div>`
-      : ""
-  }<details class="day-context"><summary>出门随身包、交通与执行条件</summary><p><strong>随身带：</strong>${escapeHtml(DAY_CARRY[day.id].join("；"))}</p><p>${escapeHtml(isRain ? day.rain.summary : day.summary)}</p><p>${escapeHtml(day.warning)}</p><p>${escapeHtml(day.transport)}</p></details><div class="timeline-heading"><h4>${day.id === "before" ? "按阶段完成准备" : "这一天的时间线"}</h4><span>${events.length} 项 · 济州时间</span></div><div class="timeline">${events.map((event) => eventHtml(event)).join("")}</div>${
+  panel.innerHTML = `<div class="day-topline"><span class="day-counter">${day.id === "before" ? "BEFORE DEPARTURE" : day.date + " / " + day.weekday}</span><span class="tag">${escapeHtml(day.badge)}</span></div><h3 class="day-title">${escapeHtml(day.id === "before" ? day.title : day.date + " · " + day.label)}</h3><p class="day-subtitle">${escapeHtml(day.subtitle)}</p>${browsing ? '<div class="browse-notice">正在浏览这一天的计划 <button type="button" data-locate-now>定位' + (previewInstant === null ? "当前时间" : "预览时间") + " ↗</button></div>" : ""}${day.rain ? `<div class="mode-controls"><span>${day.id === "city" ? "15:00 下午二选一，上午安排不变" : "根据实际天气选择，切换只调整计划"}</span><div class="segmented"><button type="button" data-mode="normal" aria-pressed="${!isRain}">${day.id === "city" ? "风小：塔洞海边" : "原计划"}</button><button type="button" data-mode="rain" aria-pressed="${isRain}">${day.id === "city" ? "下雨：地下商街" : "大风 / 下雨备选"}</button></div></div>` : ""}<details class="day-context"><summary>出门随身包、交通与执行条件</summary><p><strong>随身带：</strong>${escapeHtml(DAY_CARRY[day.id].join("；"))}</p><p>${escapeHtml(isRain ? day.rain.summary : day.summary)}</p><p>${escapeHtml(day.warning)}</p><p>${escapeHtml(day.transport)}</p></details><div class="timeline-heading"><h4>${day.id === "before" ? "按阶段完成准备" : "这一天的时间线"}</h4><span>${events.length} 项 · 济州时间</span></div><div class="timeline">${events.map((event) => eventHtml(event)).join("")}</div>${
     day.id === "east"
       ? `<details class="day-context"><summary>仅在改走东部海岸时：月汀里与咸德备选</summary><p>三大景点照常走时，不额外绕去。Moumoon 与“缘屋”只有改为沿海慢游时才选。</p><p>小店也只在改线时考虑：<a href="#shop-studio943" aria-haspopup="dialog" aria-controls="shop-details">943 Studio（咸德）详情</a>；<a href="#shop-dalmun" aria-haspopup="dialog" aria-controls="shop-details">달문굿（月汀里）详情</a>。</p>${[
           "moumoon",
@@ -455,10 +438,12 @@ function renderMap(filter = "all") {
     airport: [-46, -16],
     arte: [-35, 26],
     museum: [5, 18],
+    tapdong: [40, -22],
+    underground: [55, 25],
   };
   document.querySelector("#map-pins").innerHTML = entries
     .map(([id, place]) => {
-      const [dx, dy] = labelOffsets[id];
+      const [dx, dy] = labelOffsets[id] || [10, 20];
       const shortName =
         {
           stay: "住宿区域",
@@ -467,6 +452,8 @@ function renderMap(filter = "all") {
           university: "济州大学",
           nuwemaru: "保健路",
           museum: "博物馆",
+          tapdong: "塔洞海边",
+          underground: "地下商街",
           airport: "机场",
           hyeopjae: "挟才",
           arte: "ARTE",
@@ -609,7 +596,7 @@ function dayText(day, useRain = false) {
   );
 }
 function fullTextPlan() {
-  return `济州，晚秋见。｜2026.11.20—11.24，3 人旅行手册\n基础资料核验：2026.11.12；美食补充：2026.11.13\n时间线统一使用韩国时间 UTC+9（比中国快 1 小时）；杭州起降的当地时间另行注明。\n住宿：新济州乐天免税店附近；精确地址请看私人订单。\n车程和预算均为规划估算，船班和开放情况临行复核。\n\n${TRIP_DAYS.map((day) => dayText(day) + (day.rain ? "\n\n" + dayText(day, true) : "")).join("\n\n----------------\n\n")}\n\n秋色三选一\n${Object.values(
+  return `济州，晚秋见。｜2026.11.20—11.24，3 人旅行手册\n路线调整：2026.11.19；市区与营业资料复核：2026.11.19\n时间线统一使用韩国时间 UTC+9（比中国快 1 小时）；杭州起降的当地时间另行注明。\n住宿：新济州乐天免税店附近；精确地址请看私人订单。\n车程和预算均为规划估算，船班和开放情况临行复核。\n\n${TRIP_DAYS.map((day) => dayText(day) + (day.rain ? "\n\n" + dayText(day, true) : "")).join("\n\n----------------\n\n")}\n\n秋色备用参考（不在当前市区、东线、西线主线内；若要去，需要替换当天安排）\n${Object.values(
     AUTUMN_OPTIONS,
   )
     .map((option) => option.name + "：" + option.description)
@@ -631,17 +618,7 @@ function preparePrint() {
         .map((event) => eventHtml(event, true))
         .join(
           "",
-        )}</div><p class="transport-note">交通：${escapeHtml(day.transport)}</p>${
-        day.id === "autumn"
-          ? '<p class="transport-note">秋色选择：' +
-            Object.values(AUTUMN_OPTIONS)
-              .map((option) =>
-                escapeHtml(option.name + "：" + option.description),
-              )
-              .join("<br>") +
-            "</p>"
-          : ""
-      }${day.rain ? '<p class="day-warning">大风 / 下雨：' + escapeHtml(day.rain.summary) + "</p>" : ""}</section>`,
+        )}</div><p class="transport-note">交通：${escapeHtml(day.transport)}</p>${day.rain ? '<p class="day-warning">大风 / 下雨：' + escapeHtml(day.rain.summary) + "</p>" : ""}</section>`,
   ).join("");
   document.querySelector("#plan").append(printDays);
   document.querySelector("#sources details").open = true;
@@ -679,15 +656,7 @@ document.querySelector("#day-panel").addEventListener("click", (event) => {
   renderDayPanel();
   document.querySelector(`[data-mode="${activeMode}"]`).focus();
 });
-document.querySelector("#day-panel").addEventListener("change", (event) => {
-  if (event.target.id !== "autumn-choice") return;
-  autumnChoice = event.target.value;
-  planSettings.autumnChoice = autumnChoice;
-  savePlanSettings();
-  renderNowPanel();
-  renderDayPanel();
-  document.querySelector("#autumn-choice").focus();
-});
+
 for (const [containerId, dataAttribute, render] of [
   ["map-filters", "mapFilter", renderMap],
   ["food-filters", "foodFilter", renderFoods],

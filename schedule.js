@@ -12,7 +12,7 @@ const PREPARATION_DAY = {
   summary:
     "按时间完成准备事项。清单与各时间段内的勾选共用同一份本机记录，买好不等于已装包。",
   transport:
-    "先落实 20 日深夜接机和 24 日 05:15 送机，再确认 21 日东线的一日游或包车。",
+    "先落实 20 日深夜接机和 24 日 05:15 送机，再确认 22 日东线的一日游或包车。",
   warning:
     "3 张电话卡会赠送 3 个转换插头，收到后核对并装包。所有准备和新增安排仅保存在当前浏览器。",
 };
@@ -54,7 +54,11 @@ const DAY_CARRY = {
     "防风外套、防滑鞋",
     "充电宝、水、纸巾、小垃圾袋",
   ],
-  autumn: ["防滑鞋与外套", "购物所需护照及银行卡", "充电宝、纸巾、小垃圾袋"],
+  city: [
+    "防风外套、便于穿脱的内层",
+    "手机、交通卡、少量现金",
+    "充电宝、水、纸巾、小垃圾袋",
+  ],
   return: [
     "3 人护照、手机、钱包、机票",
     "随身充电宝与托运行李",
@@ -175,7 +179,101 @@ function prepareEvents() {
     ),
   ];
 }
-function normalEvents(dayId, autumnChoice) {
+function cityEvents(isRain = false) {
+  const add = (id, start, end, info) =>
+    extraEvent("city", id, start, end, info);
+  return [
+    add("slow-start", "09:30", "10:00", {
+      title: "睡饱再出门，不赶早集合",
+      description:
+        "昨晚较晚入住，让妈妈多休息。先喝水、洗漱，饿了可在住处简单垫一点，约 10:00 再吃早午餐。",
+      category: "出门准备",
+      carry: DAY_CARRY.city,
+      checkIds: ["weather", "money"],
+    }),
+    add("brunch", "10:00", "11:00", {
+      title: "猪肉汤面当早午餐",
+      description:
+        "Ollae Guksu（올래국수）每人一碗热汤面。今天周六，官方列 08:20—15:00；如果候位超过约 20 分钟，就改住处附近汤饭，别为一家店站太久。",
+      category: "早午餐",
+      foodIds: ["noodles", "woojin"],
+    }),
+    add("to-museum", "11:00", "11:30", {
+      title: "分段打车去国立济州博物馆",
+      description:
+        "预留约 30 分钟给叫车、上下车和交通，以实际住处门牌与路况为准；这是交通缓冲，不是承诺车程。",
+      category: "交通",
+      placeId: "museum",
+    }),
+    add("museum", "11:30", "13:00", {
+      title: "国立济州博物馆，慢慢看 1—1.5 小时",
+      description:
+        "看看济州历史、石文化和当地生活。馆方列 09:00—18:00、周一闭馆，常设展免费，收费特别展另计。今天周六；妈妈累了或不感兴趣就跳过，改附近坐坐。",
+      category: "室内",
+      placeId: "museum",
+    }),
+    add("to-market", "13:00", "13:20", {
+      title: "打车去东门传统市场",
+      description:
+        "预留约 20 分钟衔接，用地图确认上下车入口；到得晚就缩短逛市场的时间，不追赶时间表。",
+      category: "交通",
+      placeId: "dongmun",
+    }),
+    add("market", "13:20", "15:00", {
+      title: "东门市场：小吃、柑橘与伴手礼",
+      description:
+        "三人买几样分着尝，不必刚吃完面又吃撑。柑橘在当地少量吃，包装好的柑橘巧克力可选伴手礼；海鲜和熟食先确认总价。市场并非全程密闭，小吃不一定有座位，妈妈累了就进咖啡馆。小店挑 1 家顺路看即可。",
+      category: "逛吃",
+      placeId: "dongmun",
+      foodIds: ["juice"],
+      shopIds: ["islander", "classic", "slomo", "vintage"],
+    }),
+    add("afternoon-choice", "15:00", "16:30", {
+      title: isRain
+        ? "下雨或想购物：中央地下商街"
+        : "风小再看海；下雨就选地下商街",
+      description: isRain
+        ? "取消塔洞海边。中央地下商街在东门市场、中央路一带，按地图走短距离，逛衣服和小店；店铺各自营业。雨大或妈妈累了，就找有座位的咖啡馆，不再串街找店。"
+        : "二选一：雨小、风不大时去塔洞广场看看海、喝咖啡，走累就回室内；下雨或更想购物，就改中央地下商街。不要两处都赶，也不用再绕去其他远处小店。",
+      category: "天气二选一",
+      placeId: isRain ? "underground" : "tapdong",
+      alternativePlaceId: isRain ? null : "underground",
+    }),
+    add("back-to-yeondong", "16:30", "17:30", {
+      title: "回莲洞 / 老衡洞，留一点休息缓冲",
+      description:
+        "从老济州分段打车回住处附近，路况与候车按当天为准。提前到就先休息，不额外加景点。",
+      category: "交通与休息",
+      placeId: "stay",
+    }),
+    add("dinner", "17:30", "19:00", {
+      title: "住处附近晚餐：黑猪肉或热汤",
+      description:
+        "黑豚家济州本店是新截图的候选，Hayeogum 可替换；想清淡就吃脊骨汤。三人先少量点，确认克重和总价，候位久就换店，不要求每天都吃烤肉。",
+      category: "晚餐",
+      placeId: "stay",
+      foodIds: ["heukdonga", "hayeogum", "gamjatang"],
+    }),
+    add("optional-nearby-shops", "19:00", "19:30", {
+      title: "有体力再逛保健路；累了直接回民宿",
+      description:
+        "这是可取消的短逛，不是必做。新济州小店按营业与位置挑 1 家，未开门就跳过；不再折返老济州。",
+      category: "可选购物",
+      placeId: "nuwemaru",
+      shopIds: ["triple", "planer", "sumtarr"],
+    }),
+    add("prepare-east", "19:30", "20:00", {
+      title: "确认明日东线：集合、船况、护照",
+      description:
+        "22 日约 07:30 集合，今晚核对实际接车点、渡轮与退改安排。买好便利店早餐，3 人护照原件、防风外套、充电宝放随身包，手机充电后早点睡。",
+      category: "明日准备",
+      checkIds: ["tour", "weather", "power"],
+      carry: DAY_CARRY.east,
+    }),
+  ];
+}
+
+function normalEvents(dayId) {
   if (dayId === "before") return prepareEvents();
   const add = (id, start, end, info) => extraEvent(dayId, id, start, end, info);
   const base = (index, start, end, info) =>
@@ -224,15 +322,16 @@ function normalEvents(dayId, autumnChoice) {
         koreaInstant("2026-11-21", "00:10"),
         koreaInstant("2026-11-21", "00:40"),
         {
-          title: "入住后充电，确认集合就休息",
+          title: "入住、充电后休息，明天市区晚起",
           description:
-            "洗漱，给手机充电，设置早餐与 07:30 集合闹钟。检查船况与旅行社通知，明早出发带 3 人护照。",
+            "洗漱、给手机充电后休息。明天 21 日先市区慢游，约 10:00 再吃早午餐，不设置东线 07:30 集合闹钟；22 日东线事项在明晚确认。",
           category: "休息",
-          checkIds: ["tour", "weather"],
+          checkIds: ["weather"],
           carry: ["牙刷牙膏、拖鞋、浴巾或洗脸巾", "转换插头和充电线"],
         },
       ),
     ];
+  if (dayId === "city") return cityEvents();
   if (dayId === "east")
     return [
       base(0, "07:00", "07:25", {
@@ -283,26 +382,41 @@ function normalEvents(dayId, autumnChoice) {
         placeId: "stay",
       }),
       add("pork-dinner", "18:15", "19:30", {
-        title: "新济州黑猪肉晚餐，四选一",
+        title: "东线回城晚餐，热汤或烤肉选一家",
         description:
-          "选住处附近的一家，不连刷烤肉店。候位超过 30 分钟就换店；下面选中的餐厅会显示地图和菜单提示。",
+          "21 日若已吃烤肉，今天可换热汤、猪蹄或辣炒小章鱼；仍想吃烤肉也只选一家。候位超过 30 分钟就换店，下面可查看地图。",
         category: "晚餐",
-        foodIds: ["hayeogum", "sukseongdo", "dotdam", "donsadon"],
+        foodIds: [
+          "woojin",
+          "octopus",
+          "baro",
+          "hayeogum",
+          "sukseongdo",
+          "dotdam",
+          "donsadon",
+        ],
       }),
       add("next-day", "20:30", "21:00", {
         title: "回住处，准备明日西线",
         description:
-          "查天气和公交，买一点早餐，给设备充电。湿衣物晾干，出门包放好交通卡、现金和围巾。",
+          "查明日西线天气和回城用车，预收返程衣物、纪念品与行李。买好早餐、给设备充电；明天看完日落回城后只留最后打包，别到最后一晚才找送机车。",
         category: "明日准备",
-        checkIds: ["weather", "money", "power"],
+        checkIds: ["weather", "money", "power", "departure"],
       }),
     ];
   if (dayId === "west")
     return [
+      add("pre-pack", "07:45", "08:15", {
+        title: "出门前预收行李，确认回城与送机",
+        description:
+          "今天是最后一个游玩日。把不再用的衣物、伴手礼先装箱；留出今晚与明早的洗漱用品，确认 24 日 05:15 接车和今晚海边回城车辆。",
+        category: "返程准备",
+        carry: DAY_CARRY.return,
+      }),
       add("breakfast", "08:15", "08:50", {
         title: "早餐与西线出门准备",
         description:
-          "今天周日，Ollae Guksu 休息。便利店饭团、三明治配热饮更灵活；先查当天公交和回程交通。",
+          "今天周一，仍以便利店饭团、三明治和热饮作为灵活早餐。先查天气与西线回程车辆；不在最后一天为热门早餐排长队。",
         category: "早餐",
         foodIds: ["storecoffee"],
         carry: DAY_CARRY.west,
@@ -325,70 +439,28 @@ function normalEvents(dayId, autumnChoice) {
         foodNote:
           "三家只选一家。选择挟才或下贵的店时，相应调整上一段移动；先确认营业与座位，不保证晚霞。",
       }),
-      base(7, "18:30", "19:45", {
+      add("return-to-city", "17:35", "19:00", {
+        title: "结束海边活动，预约车辆回新济州",
+        description:
+          "约 17:35 启程，给候车与回城留到 19:00 的规划余量。涯月与挟才的返程距离不同，以实际路况为准；优先提前约车。迟到就简化晚餐，不压缩 19:40—20:30 打包。",
+        category: "返程交通",
+        placeId: "stay",
+      }),
+      base(7, "19:00", "19:40", {
         foodIds: ["baro", "woojin", "bhc"],
         description:
-          "回新济州再吃：猪蹄、热汤或炸鸡选一种。先少量点再加单；公交回程先查实时班次与末班。",
+          "回新济州就近吃热汤、猪蹄或炸鸡，先少量点。排队长就改外带或便利店；19:40 开始最后打包，不为餐厅延长行程。",
       }),
-      add("next-day", "20:30", "21:00", {
-        title: "确认明日秋色点与返程送机",
+      add("next-day", "19:40", "20:30", {
+        title: "打包早睡，确认明早 05:15 接车",
         description:
-          "秋色只选一条，查近期实拍和天气；先向司机确认 24 日 05:15 接车，不等最后一晚临时找车。",
-        category: "明日准备",
-        checkIds: ["weather", "departure"],
-      }),
-    ];
-  if (dayId === "autumn") {
-    const option = AUTUMN_OPTIONS[autumnChoice] || AUTUMN_OPTIONS.saebyeol;
-    return [
-      add("breakfast", "07:45", "08:20", {
-        title: "早餐，带好秋色散步用品",
-        description:
-          "先吃简单早餐再出发，按天气决定是否登高。今天下午回市区，晚上早点收尾。",
-        category: "早餐",
-        foodIds: ["storecoffee"],
-        carry: DAY_CARRY.autumn,
-        checkIds: ["weather", "shoes"],
-      }),
-      base(0, "08:30", "09:30", {
-        description: `今天选择${option.name}。往返车提前约好；具体通行与车程按当天确认。`,
-      }),
-      base(1, "09:30", "11:15", {
-        title: option.name,
-        description: option.description,
-        placeId: option.place,
-      }),
-      base(2, "11:15", "12:30", { foodIds: ["noodles", "woojin"] }),
-      base(3, "13:30", "15:00", {
-        foodIds: ["juice"],
-        shopIds: ["islander", "classic", "slomo", "vintage"],
-        description:
-          "东门市场与七星街一带买一点伴手礼，顺路从文创、器皿或古着店里挑 1—2 家。其他老济州小店留作替换，不逐家打卡；15:00 左右开始回新济州。",
-      }),
-      base(4, "15:30", "17:30", {
-        shopIds: ["triple", "planer", "sumtarr"],
-        description:
-          "回保健路、新济州住处附近，衣服、杂货、蛋挞按兴趣选；新罗或乐天免税购物按实际需求取舍。先查地图和营业，17:30 收尾，不跨回老济州。",
-      }),
-      add("early-dinner", "18:00", "19:00", {
-        title: "住宿附近吃早晚餐",
-        description:
-          "Baro 猪蹄、辣炒小章鱼或 BHC 炸鸡按口味选一种；不为排队或打卡延长晚上行程。",
-        category: "晚餐",
-        foodIds: ["baro", "octopus", "bhc"],
-      }),
-      base(5, "19:00", "20:30", {
-        title: "行李打包，确认 05:15 接车",
-        description:
-          "买好明早早餐，洗漱用品放在最后可收的位置。确认司机、行李件数、退房步骤和两组闹钟，20:30 前完成收尾。",
+          "买好明早早餐，检查司机、入口、行李件数和退房步骤。护照、手机、钱包放随身包，设置两组 04:45 闹钟，20:30 前完成行李收尾。",
+        category: "返程准备",
         checkIds: ["departure", "checkout"],
-        carry: [
-          "3 人护照、手机、钱包集中放随身包",
-          "明早洗漱后记得收牙刷牙膏、梳子和充电器",
-        ],
+        carry: DAY_CARRY.return,
       }),
     ];
-  }
+
   return [
     base(0, "04:45", "05:15", {
       checkIds: ["departure", "checkout"],
@@ -402,6 +474,7 @@ function normalEvents(dayId, autumnChoice) {
   ];
 }
 function rainEvents(dayId) {
+  if (dayId === "city") return cityEvents(true);
   const base = (index, start, end, extra) =>
     tripEvent(dayId, index, start, end, extra, "rain");
   const add = (id, start, end, info) =>
@@ -421,9 +494,10 @@ function rainEvents(dayId) {
       base(1, "10:00", "12:00"),
       add("lunch", "12:00", "13:00", {
         title: "市区吃一顿热午餐",
-        description: "宇进醒酒汤或猪肉汤面，少排队、就近吃。",
+        description:
+          "今天周日，Ollae Guksu 休息；选宇进醒酒汤或附近脊骨汤，少排队、就近吃。",
         category: "午餐",
-        foodIds: ["woojin", "noodles"],
+        foodIds: ["woojin", "gamjatang"],
       }),
       base(2, "13:30", "17:30"),
       add("dinner", "18:00", "19:00", {
@@ -438,7 +512,7 @@ function rainEvents(dayId) {
       add("breakfast", "08:30", "09:00", {
         title: "热早餐，检查天气与往返车",
         description:
-          "今天周日不去 Ollae Guksu。确认 ARTE 开放、道路与返程用车；恶劣天气就留新济州。",
+          "今天周一国立济州博物馆闭馆。确认 ARTE 开放、道路与返程用车；恶劣天气就留新济州，不另加远处景点。",
         category: "早餐",
         foodIds: ["storecoffee"],
         checkIds: ["weather"],
@@ -460,47 +534,22 @@ function rainEvents(dayId) {
         category: "晚餐",
         foodIds: ["woojin", "baro", "bhc"],
       }),
+      add("pack", "19:40", "20:30", {
+        title: "最后打包，确认 05:15 接车",
+        description:
+          "晚餐后不再出门。核对护照、行李、退房与司机，设置两组 04:45 闹钟，20:30 前收尾。",
+        category: "返程准备",
+        checkIds: ["departure", "checkout"],
+        carry: DAY_CARRY.return,
+      }),
     ];
-  return [
-    add("breakfast", "08:30", "09:15", {
-      title: "慢早餐，取消登高",
-      description:
-        "今天周一，国立济州博物馆闭馆。根据天气选 ARTE 或直接在市区休息。",
-      category: "早餐",
-      foodIds: ["storecoffee"],
-      checkIds: ["weather"],
-    }),
-    base(0, "09:30", "12:00"),
-    add("lunch", "12:00", "13:00", {
-      title: "回市区午餐",
-      description: "猪肉汤面或醒酒汤选一家，营业以当日信息为准。",
-      category: "午餐",
-      foodIds: ["noodles", "woojin"],
-    }),
-    base(1, "13:30", "17:30", {
-      foodIds: ["juice"],
-      shopIds: ["triple", "planer", "sumtarr"],
-    }),
-    add("dinner", "18:00", "19:00", {
-      title: "住宿附近吃早晚餐",
-      description: "今日不再远行，少量点餐，留时间打包。",
-      category: "晚餐",
-      foodIds: ["baro", "octopus", "bhc"],
-    }),
-    base(2, "19:00", "20:30", {
-      checkIds: ["departure", "checkout"],
-      carry: DAY_CARRY.return,
-    }),
-  ];
+  return normalEvents(dayId);
 }
-function buildDaySchedule(
-  dayId,
-  { mode = "normal", autumnChoice = "saebyeol", customEvents = [] } = {},
-) {
+function buildDaySchedule(dayId, { mode = "normal", customEvents = [] } = {}) {
   const events =
-    mode === "rain" && ["east", "west", "autumn"].includes(dayId)
+    mode === "rain" && ["city", "east", "west"].includes(dayId)
       ? rainEvents(dayId)
-      : normalEvents(dayId, autumnChoice);
+      : normalEvents(dayId);
   for (const item of customEvents) {
     const itemDay =
       item.date < "2026-11-20"
