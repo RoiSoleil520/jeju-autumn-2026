@@ -4193,3 +4193,30 @@ progress::-moz-progress-bar {
     display: inline;
   }
 }
+
+/* Keep infrequent appearance preferences next to the page utilities. */
+.reading-settings {
+  margin-top: 16px;
+}
+.reading-settings > summary {
+  width: fit-content;
+  padding-block: 10px;
+  color: var(--muted);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.reading-settings .reading-controls {
+  justify-content: flex-start;
+  margin-bottom: 0;
+  padding: 12px 0 0;
+  border: 0;
+  background: transparent;
+}
+.utility-section .reading-settings button {
+  margin-top: 0;
+}
+@media print {
+  .reading-settings {
+    display: none !important;
+  }
+}

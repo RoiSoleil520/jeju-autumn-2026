@@ -11,12 +11,12 @@
     <title>济州，晚秋见。｜2026 旅行手册</title>
     <link rel="icon" type="image/svg+xml" href="./assets/icon.svg" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <script src="./appearance.js?v=20261119-reading-modes"></script>
-    <link rel="stylesheet" href="./style.css?v=20261119-reading-modes" />
-    <script src="./data.js?v=20261119-reading-modes" defer></script>
-    <script src="./shops.js?v=20261119-reading-modes" defer></script>
-    <script src="./schedule.js?v=20261119-reading-modes" defer></script>
-    <script src="./app.js?v=20261119-reading-modes" defer></script>
+    <script src="./appearance.js?v=20261119-quiet-settings"></script>
+    <link rel="stylesheet" href="./style.css?v=20261119-quiet-settings" />
+    <script src="./data.js?v=20261119-quiet-settings" defer></script>
+    <script src="./shops.js?v=20261119-quiet-settings" defer></script>
+    <script src="./schedule.js?v=20261119-quiet-settings" defer></script>
+    <script src="./app.js?v=20261119-quiet-settings" defer></script>
   </head>
   <body>
     <svg
@@ -85,22 +85,6 @@
     </header>
     <main id="top">
       <section id="now" class="wrap journey-dashboard">
-        <div class="reading-controls">
-          <span id="text-size-label">阅读模式</span>
-          <div
-            id="text-size-controls"
-            class="text-size-switch"
-            role="group"
-            aria-labelledby="text-size-label"
-          >
-            <button type="button" data-text-size="large" aria-pressed="true">
-              大字舒适
-            </button>
-            <button type="button" data-text-size="normal" aria-pressed="false">
-              普通紧凑
-            </button>
-          </div>
-        </div>
         <div class="clock-row">
           <div>
             <span class="eyebrow" id="clock-mode">韩国时间 · 每分钟更新</span
@@ -766,6 +750,33 @@
           <button class="small-button" id="download-plan">
             下载完整文字行程 ↓
           </button>
+          <details class="reading-settings">
+            <summary>阅读设置</summary>
+            <div class="reading-controls">
+              <span id="text-size-label">阅读模式</span>
+              <div
+                id="text-size-controls"
+                class="text-size-switch"
+                role="group"
+                aria-labelledby="text-size-label"
+              >
+                <button
+                  type="button"
+                  data-text-size="large"
+                  aria-pressed="true"
+                >
+                  大字舒适
+                </button>
+                <button
+                  type="button"
+                  data-text-size="normal"
+                  aria-pressed="false"
+                >
+                  普通紧凑
+                </button>
+              </div>
+            </div>
+          </details>
         </div>
       </section>
       <section id="sources" class="wrap sources-section">
