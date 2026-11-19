@@ -3833,7 +3833,7 @@ progress::-moz-progress-bar {
 /* Keep large text as the default; normal mode scales the existing rem typography. */
 @media screen {
   html[data-text-size="normal"] {
-    font-size: 80%;
+    font-size: 70%;
   }
 }
 .reading-controls {

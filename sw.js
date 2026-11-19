@@ -1,14 +1,14 @@
 "use strict";
-const CACHE_NAME = "jeju-autumn-2026-v13";
+const CACHE_NAME = "jeju-autumn-2026-v14";
 const CORE_FILES = [
   "./",
   "./index.html",
-  "./appearance.js?v=20261119-top-settings",
-  "./style.css?v=20261119-top-settings",
-  "./data.js?v=20261119-top-settings",
-  "./app.js?v=20261119-top-settings",
-  "./schedule.js?v=20261119-top-settings",
-  "./shops.js?v=20261119-top-settings",
+  "./appearance.js?v=20261119-compact-small",
+  "./style.css?v=20261119-compact-small",
+  "./data.js?v=20261119-compact-small",
+  "./app.js?v=20261119-compact-small",
+  "./schedule.js?v=20261119-compact-small",
+  "./shops.js?v=20261119-compact-small",
   "./assets/icon.svg",
   "./assets/seongsan.webp",
   "./assets/saebyeol.webp",
