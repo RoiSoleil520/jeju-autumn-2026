@@ -3886,3 +3886,310 @@ progress::-moz-progress-bar {
     display: none !important;
   }
 }
+
+/* Reading modes change the whole rhythm, while sticky navigation keeps its offsets. */
+@media screen {
+  :root {
+    --reading-card: 28px;
+    --reading-inset: 18px;
+    --reading-gap: 24px;
+    --reading-small-gap: 12px;
+    --reading-section: 72px;
+    --reading-control: 52px;
+    --reading-icon: 28px;
+    --reading-check: 24px;
+    --reading-leading: 1.85;
+    --reading-event-space: 32px;
+  }
+  html[data-text-size="normal"] {
+    --reading-card: 18px;
+    --reading-inset: 12px;
+    --reading-gap: 16px;
+    --reading-small-gap: 8px;
+    --reading-section: 48px;
+    --reading-control: 44px;
+    --reading-icon: 20px;
+    --reading-check: 20px;
+    --reading-leading: 1.65;
+    --reading-event-space: 20px;
+  }
+  body {
+    line-height: var(--reading-leading);
+  }
+  .section-space {
+    padding-block: var(--reading-section);
+  }
+  .section-heading {
+    gap: var(--reading-gap);
+    margin-bottom: var(--reading-gap);
+  }
+  .focus-layout,
+  .plan-layout,
+  .food-grid,
+  .shop-grid,
+  .checklist-grid,
+  .map-layout,
+  .custom-form-grid {
+    gap: var(--reading-gap);
+  }
+  .current-focus,
+  .next-focus,
+  .day-panel,
+  .sidebar-card,
+  .food-card,
+  .shop-card,
+  .checklist-group,
+  .food-route-guide,
+  .shop-intro {
+    padding: var(--reading-card);
+  }
+  .reading-controls,
+  .preview-banner,
+  .event-carry,
+  .event-meal,
+  .event-shopping,
+  .focus-meal,
+  .time-preview-controls form,
+  .custom-event-details form,
+  .day-context {
+    padding: var(--reading-inset);
+    gap: var(--reading-small-gap);
+  }
+  .reading-controls,
+  .dashboard-intro,
+  .day-tabs,
+  .day-topline {
+    margin-bottom: var(--reading-gap);
+  }
+  .timeline-event {
+    padding-bottom: var(--reading-event-space);
+  }
+  .timeline-event.event-current .event-body,
+  .timeline-event.event-next .event-body {
+    padding: var(--reading-inset);
+  }
+  .event-carry,
+  .event-meal,
+  .event-shopping,
+  .context-checks,
+  .focus-essential,
+  .focus-meal,
+  .shop-gallery,
+  .shop-card .shop-note {
+    margin-top: var(--reading-gap);
+  }
+  .event-title-row,
+  .event-meta,
+  .event-meal-links,
+  .filter-row,
+  .mode-controls,
+  .shop-area-links,
+  .dashboard-heading {
+    gap: var(--reading-small-gap);
+  }
+  .event-description,
+  .event-meal > p,
+  .context-check strong,
+  .context-check small,
+  .current-focus > p,
+  .next-focus p,
+  .shop-card > p,
+  .food-card > p.food-description,
+  .day-subtitle,
+  .check-item small,
+  .shop-area-route,
+  .section-heading > p {
+    line-height: var(--reading-leading);
+  }
+  .context-check,
+  .check-item {
+    gap: var(--reading-small-gap);
+    padding-block: var(--reading-small-gap);
+    min-height: var(--reading-control);
+  }
+  .context-check input,
+  .check-item input {
+    width: var(--reading-check);
+    height: var(--reading-check);
+    margin-top: 5px;
+  }
+  button,
+  summary,
+  input:not([type="checkbox"]),
+  select,
+  .primary-button,
+  .small-button,
+  .chip,
+  .text-size-switch button,
+  .segmented button,
+  .photo-viewer-toolbar button,
+  .shop-area-links a,
+  .map-link,
+  .mobile-nav a,
+  .meal-picker select,
+  .custom-form-grid input,
+  .time-preview-controls input {
+    min-height: var(--reading-control);
+  }
+  .map-link {
+    display: inline-flex;
+    align-items: center;
+  }
+  .primary-button,
+  .small-button,
+  .chip,
+  .segmented button,
+  .text-size-switch button,
+  .focus-jump,
+  .meal-picker select {
+    padding: var(--reading-small-gap) var(--reading-inset);
+  }
+  .text-size-switch button {
+    padding-inline: 12px;
+  }
+  .text-size-switch,
+  .segmented {
+    gap: 4px;
+  }
+  .day-tab {
+    padding: var(--reading-small-gap) var(--reading-inset);
+    min-width: 148px;
+  }
+  html[data-text-size="normal"] .day-tab {
+    min-width: 112px;
+  }
+  .shop-area {
+    margin-top: var(--reading-event-space);
+  }
+  .shop-area-route {
+    margin: var(--reading-small-gap) 0 var(--reading-gap);
+  }
+  .shop-details-content {
+    padding: 0 var(--reading-card) var(--reading-card);
+  }
+  .shop-details-toolbar {
+    padding-block: var(--reading-inset);
+    gap: var(--reading-small-gap);
+  }
+  .shop-details .shop-card {
+    padding: var(--reading-inset);
+  }
+  .shop-details > .shop-details-content > #shop-details-body > .shop-card {
+    padding: 0;
+  }
+  .ui-icon {
+    width: var(--reading-icon);
+    height: var(--reading-icon);
+    flex: 0 0 auto;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vertical-align: middle;
+  }
+  [data-locate-now] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--reading-small-gap);
+  }
+  .site-header,
+  .day-tabs {
+    background: var(--paper);
+  }
+  .brand svg {
+    width: var(--reading-icon);
+    height: var(--reading-icon);
+  }
+  .summary-icon {
+    font-size: calc(var(--reading-icon) * 1.3);
+  }
+  .checklist-progress > span {
+    height: var(--reading-small-gap);
+  }
+}
+.icon-definitions {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+@media screen and (max-width: 580px) {
+  :root {
+    --reading-card: 20px;
+    --reading-inset: 14px;
+    --reading-section: 44px;
+  }
+  html[data-text-size="normal"] {
+    --reading-card: 14px;
+    --reading-inset: 10px;
+    --reading-section: 30px;
+  }
+  .journey-dashboard {
+    padding-top: var(--reading-gap);
+  }
+  .reading-controls {
+    padding: var(--reading-small-gap);
+  }
+  .day-tab {
+    min-width: 132px;
+  }
+  html[data-text-size="normal"] .day-tab {
+    min-width: 104px;
+  }
+  .timeline-event {
+    padding-left: 20px;
+  }
+  html[data-text-size="normal"] .timeline-event {
+    padding-left: 16px;
+  }
+  .mobile-nav {
+    padding-top: var(--reading-small-gap);
+    padding-bottom: max(var(--reading-small-gap), env(safe-area-inset-bottom));
+  }
+  .mobile-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    line-height: 1.4;
+  }
+  .mobile-nav .ui-icon {
+    display: block;
+  }
+  body {
+    padding-bottom: calc(
+      var(--reading-control) + 2 * var(--reading-small-gap) +
+        env(safe-area-inset-bottom)
+    );
+  }
+}
+@media print {
+  .ui-icon {
+    display: none;
+  }
+}
+
+.print-short-label {
+  display: none;
+}
+@media screen and (max-width: 580px) {
+  .site-header {
+    flex-wrap: nowrap;
+  }
+  .brand,
+  .print-button {
+    white-space: nowrap;
+  }
+  .print-button {
+    flex-shrink: 0;
+  }
+  .print-full-label {
+    display: none;
+  }
+  .print-short-label {
+    display: inline;
+  }
+}

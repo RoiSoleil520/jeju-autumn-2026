@@ -126,28 +126,28 @@ function renderMeal(event) {
       : "";
   const selector =
     event.foodIds.length > 1
-      ? `<label class="meal-picker">这一餐选一家<select data-meal-event="${event.id}" aria-label="${escapeHtml(event.title)}的餐厅选择">${event.foodIds
+      ? `<label class="meal-picker">餐厅选择<select data-meal-event="${event.id}" aria-label="${escapeHtml(event.title)}的餐厅选择">${event.foodIds
           .map((id) => {
             const option = FOODS.find((item) => item.id === id);
             return `<option value="${id}" ${id === food.id ? "selected" : ""}>${escapeHtml(option.shop)}</option>`;
           })
           .join("")}</select></label>`
-      : '<span class="mini-label">这一餐 / 饮品</span>';
-  return `<div class="event-meal">${selector}<strong>${escapeHtml(food.name)}</strong><p>${escapeHtml(food.description)}</p><div class="event-meal-links">${externalLink(mapUrl(food.query), "打开韩文地图 ↗", "map-link")}<span>${escapeHtml(food.price)}</span></div><p class="meal-note">${escapeHtml(event.foodNote || food.note)}</p></div>`;
+      : '<span class="mini-label">餐饮</span>';
+  return `<div class="event-meal">${selector}<strong>${escapeHtml(food.name)}</strong><p>${escapeHtml(food.description)}</p><div class="event-meal-links">${externalLink(mapUrl(food.query), "打开地图 ↗", "map-link")}<span>${escapeHtml(food.price)}</span></div><p class="meal-note">${escapeHtml(event.foodNote || food.note)}</p></div>`;
 }
 function contextualChecks(ids) {
   const items = ids
     .map((id) => ALL_CHECKLIST_ITEMS.find((item) => item[0] === id))
     .filter(Boolean);
   if (!items.length) return "";
-  return `<div class="context-checks"><span class="mini-label">这个时间点，确认这些</span>${items.map(([id, title, description]) => `<label class="context-check"><input type="checkbox" data-check-id="${id}" ${checkedIds.has(id) ? "checked" : ""}><span><strong>${escapeHtml(title)}</strong><small>${escapeHtml(description)}</small></span></label>`).join("")}</div>`;
+  return `<div class="context-checks"><span class="mini-label">出发前确认</span>${items.map(([id, title, description]) => `<label class="context-check"><input type="checkbox" data-check-id="${id}" ${checkedIds.has(id) ? "checked" : ""}><span><strong>${escapeHtml(title)}</strong><small>${escapeHtml(description)}</small></span></label>`).join("")}</div>`;
 }
 function shopGallery(shop) {
   if (!shop.photos.length) return "";
-  return `<div class="shop-gallery ${shop.photos.length === 1 ? "single-photo" : ""}">${shop.photos.map((photo, index) => `<a class="shop-photo" href="./assets/shops/${photo}.webp" data-shop-photo="${photo}" data-shop-name="${escapeHtml(shop.name)}" aria-label="查看 ${escapeHtml(shop.name)} 第 ${index + 1} 张大图"><img src="./assets/shops/${photo}.webp" alt="用户截图中的 ${escapeHtml(shop.name)} 配图 ${index + 1}" loading="lazy" decoding="async"><span>点击看大图 ↗</span></a>`).join("")}</div>`;
+  return `<div class="shop-gallery ${shop.photos.length === 1 ? "single-photo" : ""}">${shop.photos.map((photo, index) => `<a class="shop-photo" href="./assets/shops/${photo}.webp" data-shop-photo="${photo}" data-shop-name="${escapeHtml(shop.name)}" aria-label="查看 ${escapeHtml(shop.name)} 第 ${index + 1} 张大图"><img src="./assets/shops/${photo}.webp" alt="用户截图中的 ${escapeHtml(shop.name)} 配图 ${index + 1}" loading="lazy" decoding="async"><span>看大图 ↗</span></a>`).join("")}</div>`;
 }
 function shopCardHtml(shop, inDialog = false) {
-  return `<article class="shop-card" id="${inDialog ? "dialog-shop" : "shop"}-${shop.id}"><span class="mini-label">${escapeHtml(shop.kind)}</span><h4>${escapeHtml(shop.name)}</h4><p>${escapeHtml(shop.description)}</p>${shopGallery(shop)}<p class="shop-note">${escapeHtml(shop.note)}</p>${externalLink(mapUrl(shop.query), "搜索店铺地图 ↗", "map-link")}</article>`;
+  return `<article class="shop-card" id="${inDialog ? "dialog-shop" : "shop"}-${shop.id}"><span class="mini-label">${escapeHtml(shop.kind)}</span><h4>${escapeHtml(shop.name)}</h4><p>${escapeHtml(shop.description)}</p>${shopGallery(shop)}<p class="shop-note">${escapeHtml(shop.note)}</p>${externalLink(mapUrl(shop.query), "店铺地图 ↗", "map-link")}</article>`;
 }
 function shopGroupsHtml(groups = SHOP_GROUPS, inDialog = false) {
   const prefix = inDialog ? "dialog-shops" : "shops";
@@ -208,7 +208,7 @@ function renderShopping(event) {
   const shops = event.shopIds
     .map((id) => SHOPS.find((shop) => shop.id === id))
     .filter(Boolean);
-  return `<div class="event-shopping"><h5>这一段可以逛 · 选 1—2 家就好</h5><ul>${shops.map((shop) => `<li><strong>${escapeHtml(shop.name)}</strong><span>${escapeHtml(shop.kind)}</span><a href="#shop-${shop.id}" aria-haspopup="dialog" aria-controls="shop-details">查看介绍、配图与地图</a></li>`).join("")}</ul><p>先看地图与营业，顺路再去。点开弹框查看，关闭后回到这里。</p><a href="#shops" class="map-link" aria-haspopup="dialog" aria-controls="shop-details">弹框查看全部小店</a></div>`;
+  return `<div class="event-shopping"><h5>顺路小店 · 选一家</h5><ul>${shops.map((shop) => `<li><strong>${escapeHtml(shop.name)}</strong><span>${escapeHtml(shop.kind)}</span><a href="#shop-${shop.id}" aria-haspopup="dialog" aria-controls="shop-details">查看详情</a></li>`).join("")}</ul><p>先查营业，顺路再去。</p><a href="#shops" class="map-link" aria-haspopup="dialog" aria-controls="shop-details">全部小店 ↗</a></div>`;
 }
 const photoViewer = document.querySelector("#photo-viewer");
 document.addEventListener("click", (event) => {
@@ -244,7 +244,7 @@ function renderDayTabs() {
   const position = clockPosition();
   document.querySelector("#day-tabs").innerHTML = TRIP_DAYS.map(
     (day) =>
-      `<button type="button" class="day-tab ${day.id === position.dayId ? "clock-day" : ""}" role="tab" id="tab-${day.id}" aria-controls="day-panel" aria-selected="${day.id === activeDayId}" tabindex="${day.id === activeDayId ? 0 : -1}" data-day="${day.id}"><small>${day.id === "before" ? day.weekday : day.weekday + (day.id === position.dayId ? " · 当前日期" : "")}</small><strong>${day.date}</strong><span>${day.label}</span></button>`,
+      `<button type="button" class="day-tab ${day.id === position.dayId ? "clock-day" : ""}" role="tab" id="tab-${day.id}" aria-controls="day-panel" aria-selected="${day.id === activeDayId}" tabindex="${day.id === activeDayId ? 0 : -1}" data-day="${day.id}"><small>${day.id === "before" ? day.weekday : day.weekday + (day.id === position.dayId ? " · 今天" : "")}</small><strong>${day.date}</strong><span>${day.label}</span></button>`,
   ).join("");
   const tabs = document.querySelector("#day-tabs");
   const selected = tabs.querySelector('[aria-selected="true"]');
@@ -268,7 +268,7 @@ function renderDayPanel() {
   panel.setAttribute("aria-labelledby", `tab-${day.id}`);
   const position = clockPosition();
   const browsing = day.id !== position.dayId || !followsClock;
-  panel.innerHTML = `<div class="day-topline"><span class="day-counter">${day.id === "before" ? "BEFORE DEPARTURE" : day.date + " / " + day.weekday}</span><span class="tag">${escapeHtml(day.badge)}</span></div><h3 class="day-title">${escapeHtml(day.id === "before" ? day.title : day.date + " · " + day.label)}</h3><p class="day-subtitle">${escapeHtml(day.subtitle)}</p>${browsing ? '<div class="browse-notice">正在浏览这一天的计划 <button type="button" data-locate-now>定位' + (previewInstant === null ? "当前时间" : "预览时间") + " ↗</button></div>" : ""}${day.rain ? `<div class="mode-controls"><span>${day.id === "city" ? "15:00 下午二选一，上午安排不变" : "根据实际天气选择，切换只调整计划"}</span><div class="segmented"><button type="button" data-mode="normal" aria-pressed="${!isRain}">${day.id === "city" ? "风小：塔洞海边" : "原计划"}</button><button type="button" data-mode="rain" aria-pressed="${isRain}">${day.id === "city" ? "下雨：地下商街" : "大风 / 下雨备选"}</button></div></div>` : ""}<details class="day-context"><summary>出门随身包、交通与执行条件</summary><p><strong>随身带：</strong>${escapeHtml(DAY_CARRY[day.id].join("；"))}</p><p>${escapeHtml(isRain ? day.rain.summary : day.summary)}</p><p>${escapeHtml(day.warning)}</p><p>${escapeHtml(day.transport)}</p></details><div class="timeline-heading"><h4>${day.id === "before" ? "按阶段完成准备" : "这一天的时间线"}</h4><span>${events.length} 项 · 济州时间</span></div><div class="timeline">${events.map((event) => eventHtml(event)).join("")}</div>${
+  panel.innerHTML = `<div class="day-topline"><span class="day-counter">${day.id === "before" ? "BEFORE DEPARTURE" : day.date + " / " + day.weekday}</span><span class="tag">${escapeHtml(day.badge)}</span></div><h3 class="day-title">${escapeHtml(day.id === "before" ? day.title : day.date + " · " + day.label)}</h3><p class="day-subtitle">${escapeHtml(day.subtitle)}</p>${browsing ? '<div class="browse-notice">正在浏览这一天的计划 <button type="button" data-locate-now>定位' + (previewInstant === null ? "当前时间" : "预览时间") + " ↗</button></div>" : ""}${day.rain ? `<div class="mode-controls"><span>${day.id === "city" ? "下午二选一" : "按天气选路线"}</span><div class="segmented"><button type="button" data-mode="normal" aria-pressed="${!isRain}">${day.id === "city" ? "风小：塔洞海边" : "原计划"}</button><button type="button" data-mode="rain" aria-pressed="${isRain}">${day.id === "city" ? "下雨：地下商街" : "风雨备选"}</button></div></div>` : ""}<details class="day-context"><summary>随身物品与交通提醒</summary><p><strong>随身带：</strong>${escapeHtml(DAY_CARRY[day.id].join("；"))}</p><p>${escapeHtml(isRain ? day.rain.summary : day.summary)}</p><p>${escapeHtml(day.warning)}</p><p>${escapeHtml(day.transport)}</p></details><div class="timeline-heading"><h4>${day.id === "before" ? "准备清单" : "今日安排"}</h4><span>${events.length} 项 · 济州时间</span></div><div class="timeline">${events.map((event) => eventHtml(event)).join("")}</div>${
     day.id === "east"
       ? `<details class="day-context"><summary>仅在改走东部海岸时：月汀里与咸德备选</summary><p>三大景点照常走时，不额外绕去。Moumoon 与“缘屋”只有改为沿海慢游时才选。</p><p>小店也只在改线时考虑：<a href="#shop-studio943" aria-haspopup="dialog" aria-controls="shop-details">943 Studio（咸德）详情</a>；<a href="#shop-dalmun" aria-haspopup="dialog" aria-controls="shop-details">달문굿（月汀里）详情</a>。</p>${[
           "moumoon",
@@ -346,7 +346,7 @@ function renderNowPanel() {
     currentHtml =
       '<span class="focus-label">旅程已结束</span><h2>计划已走到杭州返程抵达</h2><p>可以回看各天路线、餐厅和清单；若航班有变化，请以实际航班通知为准。</p><button type="button" data-view-day="return" class="small-button">回看返程日 ↗</button>';
   else if (!current)
-    currentHtml = `<span class="focus-label">${position.phase === "before" ? "行前准备" : "计划间隙 / 休息与交通缓冲"}</span><h2>${next ? "接下来，" + escapeHtml(next.title) : "今天的计划时段已结束"}</h2><p>${next ? "下一项从 " + escapeHtml(koreaDateTime(next.start).date + " " + koreaDateTime(next.start).time) + " 开始。当前不标记为活动已经进行。" : "先休息，按实际天气、航班与服务方通知调整。"}</p>${focus ? `<button type="button" class="focus-jump" data-jump-event="${focus.id}" data-event-day="${focus.dayId}">查看下一项完整安排 ↗</button>` : ""}`;
+    currentHtml = `<span class="focus-label">${position.phase === "before" ? "行前准备" : "休息与交通缓冲"}</span><h2>${next ? "接下来，" + escapeHtml(next.title) : "今天的计划时段已结束"}</h2><p>${next ? "下一项从 " + escapeHtml(koreaDateTime(next.start).date + " " + koreaDateTime(next.start).time) + " 开始，先休息或做好准备。" : "先休息，按实际天气、航班与服务方通知调整。"}</p>${focus ? `<button type="button" class="focus-jump" data-jump-event="${focus.id}" data-event-day="${focus.dayId}">查看下一项 ↗</button>` : ""}`;
   else {
     const food = chosenFood(current);
     const pending = current.checkIds
@@ -364,11 +364,11 @@ function renderNowPanel() {
             : "已全部勾选完成"
         }</p>`
       : "";
-    currentHtml = `<span class="focus-label">${previewInstant !== null ? "预览 · " : ""}计划进行中 · ${escapeHtml(formatEventTime(current))}</span><h2>${escapeHtml(current.title)}</h2><p>${escapeHtml(current.description)}</p>${current.localHint ? `<p class="local-time-note">${escapeHtml(current.localHint)}</p>` : ""}${food ? `<div class="focus-meal"><strong>${escapeHtml(food.name)}</strong>${externalLink(mapUrl(food.query), "餐厅地图 ↗", "map-link")}</div>` : current.mealQuery ? `<div class="focus-meal">${externalLink(mapUrl(current.mealQuery), "查找附近热餐 ↗", "map-link")}</div>` : ""}${current.shopIds?.length ? `<p class="focus-essential"><strong>顺路小店</strong> ${escapeHtml(current.shopIds.map((id) => SHOPS.find((shop) => shop.id === id)?.name).join(" / "))}，选 1—2 家即可。</p>` : ""}${current.carry.length ? `<p class="focus-essential"><strong>随身带</strong> ${escapeHtml(current.carry.join(" · "))}</p>` : ""}${checklistSnippet}<button type="button" class="focus-jump" data-jump-event="${current.id}" data-event-day="${current.dayId}">定位到此时段${current.checkIds.length ? " · 查看并勾选" : ""} ↗</button>`;
+    currentHtml = `<span class="focus-label">${previewInstant !== null ? "预览 · " : ""}计划进行中 · ${escapeHtml(formatEventTime(current))}</span><h2>${escapeHtml(current.title)}</h2><p>${escapeHtml(current.description)}</p>${current.localHint ? `<p class="local-time-note">${escapeHtml(current.localHint)}</p>` : ""}${food ? `<div class="focus-meal"><strong>${escapeHtml(food.name)}</strong>${externalLink(mapUrl(food.query), "餐厅地图 ↗", "map-link")}</div>` : current.mealQuery ? `<div class="focus-meal">${externalLink(mapUrl(current.mealQuery), "查找附近热餐 ↗", "map-link")}</div>` : ""}${current.shopIds?.length ? `<p class="focus-essential"><strong>顺路小店</strong> ${escapeHtml(current.shopIds.map((id) => SHOPS.find((shop) => shop.id === id)?.name).join(" / "))}，选 1—2 家即可。</p>` : ""}${current.carry.length ? `<p class="focus-essential"><strong>随身带</strong> ${escapeHtml(current.carry.join(" · "))}</p>` : ""}${checklistSnippet}<button type="button" class="focus-jump" data-jump-event="${current.id}" data-event-day="${current.dayId}">查看当前安排${current.checkIds.length ? " · 勾选清单" : ""} ↗</button>`;
   }
   document.querySelector("#current-focus").innerHTML = currentHtml;
   document.querySelector("#next-focus").innerHTML = next
-    ? `<span class="focus-label">接下来 · ${escapeHtml(koreaDateTime(next.start).date.slice(5).replace("-", "/"))}</span><div class="next-time">${escapeHtml(next.label || koreaDateTime(next.start).time)}</div><h3>${escapeHtml(next.title)}</h3><p>${escapeHtml(next.description)}</p><button type="button" data-jump-event="${next.id}" data-event-day="${next.dayId}">提前看看要准备什么 ↗</button>`
+    ? `<span class="focus-label">接下来 · ${escapeHtml(koreaDateTime(next.start).date.slice(5).replace("-", "/"))}</span><div class="next-time">${escapeHtml(next.label || koreaDateTime(next.start).time)}</div><h3>${escapeHtml(next.title)}</h3><button type="button" data-jump-event="${next.id}" data-event-day="${next.dayId}">查看下一项 ↗</button>`
     : '<span class="focus-label">接下来</span><h3>没有后续计划了</h3><p>保留订单与行李，确认已顺利抵达。你也可以新增自己的安排。</p>';
 }
 function locateCurrentTime(scroll = true) {
@@ -549,7 +549,7 @@ function dayText(day, useRain = false) {
     day.weekday +
     "｜" +
     day.subtitle +
-    (useRain ? "（大风 / 下雨备选）" : "") +
+    (useRain ? "（风雨备选）" : "") +
     "\n" +
     (useRain && day.rain ? day.rain.summary : day.summary) +
     "\n\n" +

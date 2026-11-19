@@ -11,14 +11,43 @@
     <title>济州，晚秋见。｜2026 旅行手册</title>
     <link rel="icon" type="image/svg+xml" href="./assets/icon.svg" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <script src="./appearance.js?v=20261119-text-size"></script>
-    <link rel="stylesheet" href="./style.css?v=20261119-text-size" />
-    <script src="./data.js?v=20261119-text-size" defer></script>
-    <script src="./shops.js?v=20261119-text-size" defer></script>
-    <script src="./schedule.js?v=20261119-text-size" defer></script>
-    <script src="./app.js?v=20261119-text-size" defer></script>
+    <script src="./appearance.js?v=20261119-reading-modes"></script>
+    <link rel="stylesheet" href="./style.css?v=20261119-reading-modes" />
+    <script src="./data.js?v=20261119-reading-modes" defer></script>
+    <script src="./shops.js?v=20261119-reading-modes" defer></script>
+    <script src="./schedule.js?v=20261119-reading-modes" defer></script>
+    <script src="./app.js?v=20261119-reading-modes" defer></script>
   </head>
   <body>
+    <svg
+      class="icon-definitions"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        <symbol id="icon-now" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="6" />
+          <circle cx="12" cy="12" r="2" />
+          <path d="M12 2v3m0 14v3M2 12h3m14 0h3" />
+        </symbol>
+        <symbol id="icon-calendar" viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="16" rx="2" />
+          <path d="M7 3v4m10-4v4M3 11h18m-13 4h2m4 0h2" />
+        </symbol>
+        <symbol id="icon-map" viewBox="0 0 24 24">
+          <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Zm6-3v15m6-12v15" />
+        </symbol>
+        <symbol id="icon-food" viewBox="0 0 24 24">
+          <path
+            d="M5 3v6m3-6v6M3 3v5a3 3 0 0 0 6 0V3M6 11v10M18 3c-3 3-4 8 0 9h2V3h-2Zm2 9v9"
+          />
+        </symbol>
+        <symbol id="icon-check" viewBox="0 0 24 24">
+          <rect x="4" y="4" width="16" height="17" rx="2" />
+          <path d="M9 4V2h6v2m-7 9 3 3 5-6" />
+        </symbol>
+      </defs>
+    </svg>
     <a class="skip-link" href="#plan">跳到每日行程</a>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="济州晚秋旅行手册首页"
@@ -45,14 +74,19 @@
         ><a href="#map">地点地图</a><a href="#food">美食小店</a
         ><a href="#prepare">行前准备</a>
       </nav>
-      <button class="small-button print-button" id="print-button">
-        打印 / 存 PDF <span aria-hidden="true">↗</span>
+      <button
+        class="small-button print-button"
+        id="print-button"
+        aria-label="打印或存为 PDF"
+      >
+        <span class="print-full-label">打印 / 存 PDF ↗</span
+        ><span class="print-short-label">打印</span>
       </button>
     </header>
     <main id="top">
       <section id="now" class="wrap journey-dashboard">
         <div class="reading-controls">
-          <span id="text-size-label">阅读字号</span>
+          <span id="text-size-label">阅读模式</span>
           <div
             id="text-size-controls"
             class="text-size-switch"
@@ -60,10 +94,10 @@
             aria-labelledby="text-size-label"
           >
             <button type="button" data-text-size="large" aria-pressed="true">
-              大字
+              大字舒适
             </button>
             <button type="button" data-text-size="normal" aria-pressed="false">
-              普通
+              普通紧凑
             </button>
           </div>
         </div>
@@ -80,17 +114,17 @@
             <h1 id="journey-title">此刻，按计划出发。</h1>
           </div>
           <button type="button" class="small-button" data-locate-now>
-            ◎ 定位当前安排
+            <svg class="ui-icon" aria-hidden="true">
+              <use href="#icon-now"></use>
+            </svg>
+            当前安排
           </button>
         </div>
         <p class="dashboard-intro">
-          吃什么、带什么、下一步去哪，都在对应的时间点。以下是计划提醒，实际航班、船况和营业以现场为准。
+          按时间看行程：去哪、吃什么、带什么，都在一起。
         </p>
         <div class="preview-banner" id="preview-banner" hidden>
-          正在查看你指定的时间，当前卡片属于预览。<button
-            type="button"
-            id="resume-clock"
-          >
+          正在预览指定时间。<button type="button" id="resume-clock">
             恢复真实时间
           </button>
         </div>
@@ -115,9 +149,7 @@
                 id="preview-time"
                 required /></label
             ><button type="submit" class="primary-button">定位此时 ↗</button>
-            <p>
-              只改变本次查看时间，实时模式下会自动定位当天。旅行开始前显示行前准备；旅行结束后显示回顾。
-            </p>
+            <p>仅预览，不改变真实时间。可随时恢复。</p>
           </form>
         </details>
       </section>
@@ -206,7 +238,7 @@
         <div class="section-heading">
           <div>
             <p class="eyebrow">01 / YOUR DAYS IN JEJU</p>
-            <h2>一天，一条清楚的时间线。</h2>
+            <h2>每天，照着行程走。</h2>
           </div>
           <p>
             时间均为韩国时间（UTC+9）<br />比中国快 1 小时；车程为估算，含缓冲。
@@ -255,8 +287,7 @@
               新增并定位到行程 ↗
             </button>
             <p class="fine-print">
-              新增后按所选日期与时间插入，提醒窗口为 30
-              分钟；可以删除。记录仅保存在当前设备与浏览器。
+              自动排入时间线，可删除。仅保存在当前浏览器，提醒时段为 30 分钟。
             </p>
           </form>
         </details>
@@ -273,15 +304,16 @@
               <h3>随身带好，<br />按时出发。</h3>
               <p id="day-carry-list"></p>
               <button type="button" class="sidebar-now-button" data-locate-now>
-                ◎ 定位当前安排 ↗
+                <svg class="ui-icon" aria-hidden="true">
+                  <use href="#icon-now"></use>
+                </svg>
+                当前安排 ↗
               </button>
             </div>
             <div class="sidebar-card">
               <p class="eyebrow">OUR LITTLE BASE</p>
               <h3>每天回新济州</h3>
-              <p>
-                乐天免税店附近 · 四晚同一住处。韩文门牌和门锁密码请看私人订单。
-              </p>
+              <p>乐天免税店附近，四晚同住。地址和门锁信息看私人订单。</p>
               <a
                 href="https://www.airbnb.cn/rooms/1726382007188887219"
                 target="_blank"
@@ -459,30 +491,19 @@
           </p>
         </div>
         <div class="food-route-guide">
-          <h3>按新顺序吃，每次选一家就好。</h3>
+          <h3>三天吃什么</h3>
+          <p><strong>21 日市区：</strong>汤面 → 市场小吃 → 黑猪肉或热汤。</p>
           <p>
-            <strong>21 日市区：</strong>10:00 Ollae Guksu
-            汤面当早午餐；下午东门市场小吃分着尝，17:30
-            回莲洞／老衡洞。黑豚家为截图推荐，Hayeogum
-            或热汤可替换，先看份量与价格。
+            <strong>22 日东线：</strong>便利店早餐 → 牛岛热餐 → 回城晚餐。周日
+            Ollae 休息。
           </p>
           <p>
-            <strong>22 日东线：</strong>周日 Ollae Guksu
-            休息，早餐用便利店热食；牛岛下古水洞可选 Blanc
-            Rocher，不为排队影响返船。回城可换醒酒汤、猪蹄或辣炒小章鱼，烤肉按需选一家。
-          </p>
-          <p>
-            <strong>23 日西线：</strong>Team Blow 接涯月，休止符接挟才，SLOWBOAT
-            作替换；海景咖啡只选一家。17:35 左右启程回城，19:00
-            简单晚餐，19:40—20:30 收行李。
-          </p>
-          <p>
-            <strong>东线替代：</strong>Moumoon
-            在月汀里，“缘屋”在咸德方向、店名待比对；只有改走海岸慢游时才考虑，不再加进城山—牛岛—涉地三站。
+            <strong>23 日西线：</strong>海鲜午餐 → 一家海景咖啡 →
+            简单晚餐，19:40 打包。
           </p>
         </div>
         <p class="shop-shortcut">
-          <a class="small-button" href="#shops">弹框查看小店图文与配图</a>
+          <a class="small-button" href="#shops">查看小店图文 ↗</a>
         </p>
         <div class="filter-row" id="food-filters" aria-label="美食类型筛选">
           <button
@@ -536,10 +557,8 @@
         ></p>
         <div class="food-grid" id="food-grid"></div>
         <p class="fine-print food-dining-tips">
-          用餐小提醒：可在 CU / GS25
-          准备早出发时的早餐；三人先少量点再加单。备少量现金并确认可用卡种；用
-          Naver Map 核对分店、营业与最后点单时间，菜单可用 Papago
-          翻译。截图中的“24 小时”“免费配菜”和固定人均价，都需再向具体门店确认。
+          三人先少量点，按当天菜单计价；营业、候位和最后点单先查地图。菜单可用
+          Papago 翻译。
         </p>
       </section>
 
@@ -551,22 +570,15 @@
         <div class="section-heading">
           <div>
             <p class="eyebrow">LITTLE SHOPS · YOUR PHOTO NOTES</p>
-            <h2 id="shops-title">顺路逛一逛，把喜欢的带回家。</h2>
+            <h2 id="shops-title">小店收藏，顺路再逛。</h2>
           </div>
           <p>
             按你补充的截图整理 · 14 组小店参考<br />图片直接可见，点击即可看大图。
           </p>
         </div>
         <div class="shop-intro">
-          <p>
-            <strong>21 日市区：</strong>东门市场与七星街的小店顺路挑 1
-            家；回莲洞后有体力再短逛。<strong>23 日西线：</strong
-            >涯月的店顺路再逛，优先留出看海与日落的时间。
-          </p>
-          <p>
-            店铺描述、区域线索和配图来自你提供的截图；营业、地址、库存与价格未逐店核实，出发前点地图复核。截图中的固定人民币价、开门时间和“20—30
-            分钟车程”不作为行程保证。
-          </p>
+          <p>21 日逛市场与住处附近，23 日涯月顺路看；每段挑一家即可。</p>
+          <p>店铺与配图来自你的截图，地址、营业和库存请先查地图。</p>
         </div>
         <nav class="shop-area-links" aria-label="小店区域索引">
           <a href="#shops-old-town">老济州</a
@@ -790,11 +802,31 @@
       >
     </footer>
     <nav class="mobile-nav" aria-label="手机快捷导航">
-      <a href="#now"><span aria-hidden="true">◎</span>现在</a>
-      <a href="#plan"><span aria-hidden="true">◷</span>行程</a>
-      <a href="#map"><span aria-hidden="true">⌖</span>地图</a>
-      <a href="#food"><span aria-hidden="true">♨</span>吃逛</a>
-      <a href="#prepare"><span aria-hidden="true">☑</span>清单</a>
+      <a href="#now"
+        ><svg class="ui-icon" aria-hidden="true">
+          <use href="#icon-now"></use></svg
+        >现在</a
+      >
+      <a href="#plan"
+        ><svg class="ui-icon" aria-hidden="true">
+          <use href="#icon-calendar"></use></svg
+        >行程</a
+      >
+      <a href="#map"
+        ><svg class="ui-icon" aria-hidden="true">
+          <use href="#icon-map"></use></svg
+        >地图</a
+      >
+      <a href="#food"
+        ><svg class="ui-icon" aria-hidden="true">
+          <use href="#icon-food"></use></svg
+        >吃逛</a
+      >
+      <a href="#prepare"
+        ><svg class="ui-icon" aria-hidden="true">
+          <use href="#icon-check"></use></svg
+        >清单</a
+      >
     </nav>
     <dialog
       id="shop-details"
@@ -805,7 +837,7 @@
         <div class="photo-viewer-toolbar shop-details-toolbar">
           <h2 id="shop-details-title">小店详情</h2>
           <button type="button" data-close-shop-details autofocus>
-            关闭，回到原处 ×
+            关闭 ×
           </button>
         </div>
         <div id="shop-details-body"></div>

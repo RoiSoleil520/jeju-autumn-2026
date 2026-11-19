@@ -142,10 +142,10 @@ function prepareEvents() {
       koreaInstant("2026-11-17", "00:00"),
       {
         label: "11/13—16",
-        title: "先落实证件、住宿与接送",
+        title: "确认订单与接送",
         category: "行前准备",
         description:
-          "核对 3 人护照和机票，联系房东拿到深夜入住与清晨退房说明，落实东线出行及两次机场接送。",
+          "核对 3 人护照、机票和住宿，确认深夜入住、清晨退房、东线用车及机场接送。",
         checkIds: ["passport", "stay", "tour", "car", "baggage"],
       },
     ),
@@ -156,10 +156,10 @@ function prepareEvents() {
       koreaInstant("2026-11-19", "20:00"),
       {
         label: "11/17—19",
-        title: "入境申报、电话卡与天气复核",
+        title: "申报入境 · 核对电话卡",
         category: "行前准备",
         description:
-          "在这个准备阶段内完成即可，无需凌晨操作。进入抵达前 3 天的官方申报窗口后按适用要求填写。3 张电话卡已买，核对收货、有效期和激活方式，并保存地图与订单。",
+          "按适用要求完成官方入境申报（抵达前 3 天开放）。核对电话卡有效期与激活方式，离线保存订单和地图。",
         checkIds: ["entry", "documents", "data", "money", "weather"],
       },
     ),
@@ -170,10 +170,10 @@ function prepareEvents() {
       koreaInstant("2026-11-20", "00:00"),
       {
         label: "11/19 20:00 起",
-        title: "出发前夜：把行李真正装好",
+        title: "装好行李",
         category: "打包",
         description:
-          "衣物、洗漱与生活用品一次装包。电话卡赠送的 3 个转换插头也放进行李；确认明日到机场的交通。",
+          "装好衣物、洗漱用品、电话卡和 3 个赠送插头，确认明日去机场的交通。",
         checkIds: PACKING_IDS,
       },
     ),
@@ -184,9 +184,8 @@ function cityEvents(isRain = false) {
     extraEvent("city", id, start, end, info);
   return [
     add("slow-start", "09:30", "10:00", {
-      title: "睡饱再出门，不赶早集合",
-      description:
-        "昨晚较晚入住，让妈妈多休息。先喝水、洗漱，饿了可在住处简单垫一点，约 10:00 再吃早午餐。",
+      title: "睡饱再出门",
+      description: "昨晚到得晚，让妈妈睡饱。饿了先垫一点，约 10:00 吃早午餐。",
       category: "出门准备",
       carry: DAY_CARRY.city,
       checkIds: ["weather", "money"],
@@ -194,78 +193,72 @@ function cityEvents(isRain = false) {
     add("brunch", "10:00", "11:00", {
       title: "猪肉汤面当早午餐",
       description:
-        "Ollae Guksu（올래국수）每人一碗热汤面。今天周六，官方列 08:20—15:00；如果候位超过约 20 分钟，就改住处附近汤饭，别为一家店站太久。",
+        "Ollae 每人一碗热汤面。周六 08:20—15:00；候位超过 20 分钟就换附近汤饭。",
       category: "早午餐",
       foodIds: ["noodles", "woojin"],
     }),
     add("to-museum", "11:00", "11:30", {
-      title: "分段打车去国立济州博物馆",
-      description:
-        "预留约 30 分钟给叫车、上下车和交通，以实际住处门牌与路况为准；这是交通缓冲，不是承诺车程。",
+      title: "打车去博物馆",
+      description: "打车去博物馆，预留约 30 分钟，含叫车和上下车。实际看路况。",
       category: "交通",
       placeId: "museum",
     }),
     add("museum", "11:30", "13:00", {
-      title: "国立济州博物馆，慢慢看 1—1.5 小时",
+      title: "国立济州博物馆",
       description:
-        "看看济州历史、石文化和当地生活。馆方列 09:00—18:00、周一闭馆，常设展免费，收费特别展另计。今天周六；妈妈累了或不感兴趣就跳过，改附近坐坐。",
+        "看济州历史与石文化，逛 1—1.5 小时。09:00—18:00，常设展免费；周一闭馆。累了可跳过。",
       category: "室内",
       placeId: "museum",
     }),
     add("to-market", "13:00", "13:20", {
-      title: "打车去东门传统市场",
-      description:
-        "预留约 20 分钟衔接，用地图确认上下车入口；到得晚就缩短逛市场的时间，不追赶时间表。",
+      title: "打车去东门市场",
+      description: "打车去东门市场，预留约 20 分钟。到得晚就少逛一会儿。",
       category: "交通",
       placeId: "dongmun",
     }),
     add("market", "13:20", "15:00", {
-      title: "东门市场：小吃、柑橘与伴手礼",
+      title: "东门市场逛吃",
       description:
-        "三人买几样分着尝，不必刚吃完面又吃撑。柑橘在当地少量吃，包装好的柑橘巧克力可选伴手礼；海鲜和熟食先确认总价。市场并非全程密闭，小吃不一定有座位，妈妈累了就进咖啡馆。小店挑 1 家顺路看即可。",
+        "小吃三人分着尝，海鲜先问总价；柑橘就地吃，巧克力可作伴手礼。市场不全遮雨、未必有座位，累了进咖啡馆。",
       category: "逛吃",
       placeId: "dongmun",
       foodIds: ["juice"],
       shopIds: ["islander", "classic", "slomo", "vintage"],
     }),
     add("afternoon-choice", "15:00", "16:30", {
-      title: isRain
-        ? "下雨或想购物：中央地下商街"
-        : "风小再看海；下雨就选地下商街",
+      title: isRain ? "中央地下商街" : "塔洞看海 / 地下商街",
       description: isRain
-        ? "取消塔洞海边。中央地下商街在东门市场、中央路一带，按地图走短距离，逛衣服和小店；店铺各自营业。雨大或妈妈累了，就找有座位的咖啡馆，不再串街找店。"
-        : "二选一：雨小、风不大时去塔洞广场看看海、喝咖啡，走累就回室内；下雨或更想购物，就改中央地下商街。不要两处都赶，也不用再绕去其他远处小店。",
+        ? "取消海边，去东门市场附近的中央地下商街。雨大或累了，就找咖啡馆坐下。"
+        : "风小去塔洞看海、喝咖啡；下雨改中央地下商街。两处选一处，累了就坐下休息。",
       category: "天气二选一",
       placeId: isRain ? "underground" : "tapdong",
       alternativePlaceId: isRain ? null : "underground",
     }),
     add("back-to-yeondong", "16:30", "17:30", {
-      title: "回莲洞 / 老衡洞，留一点休息缓冲",
-      description:
-        "从老济州分段打车回住处附近，路况与候车按当天为准。提前到就先休息，不额外加景点。",
+      title: "回住处附近休息",
+      description: "打车回莲洞 / 老衡洞，提前到就休息，不加景点。",
       category: "交通与休息",
       placeId: "stay",
     }),
     add("dinner", "17:30", "19:00", {
-      title: "住处附近晚餐：黑猪肉或热汤",
+      title: "黑猪肉 / 热汤晚餐",
       description:
-        "黑豚家济州本店是新截图的候选，Hayeogum 可替换；想清淡就吃脊骨汤。三人先少量点，确认克重和总价，候位久就换店，不要求每天都吃烤肉。",
+        "黑豚家、Hayeogum 二选一；想清淡就吃脊骨汤。先确认克重和总价，候位久就换店。",
       category: "晚餐",
       placeId: "stay",
       foodIds: ["heukdonga", "hayeogum", "gamjatang"],
     }),
     add("optional-nearby-shops", "19:00", "19:30", {
-      title: "有体力再逛保健路；累了直接回民宿",
-      description:
-        "这是可取消的短逛，不是必做。新济州小店按营业与位置挑 1 家，未开门就跳过；不再折返老济州。",
+      title: "保健路短逛 · 可跳过",
+      description: "还有体力就顺路逛 1 家。没开门或累了，直接回民宿。",
       category: "可选购物",
       placeId: "nuwemaru",
       shopIds: ["triple", "planer", "sumtarr"],
     }),
     add("prepare-east", "19:30", "20:00", {
-      title: "确认明日东线：集合、船况、护照",
+      title: "准备明日东线",
       description:
-        "22 日约 07:30 集合，今晚核对实际接车点、渡轮与退改安排。买好便利店早餐，3 人护照原件、防风外套、充电宝放随身包，手机充电后早点睡。",
+        "确认明日约 07:30 集合点、船况和停航退改。买好早餐，3 人护照原件放随身包，充电早睡。",
       category: "明日准备",
       checkIds: ["tour", "weather", "power"],
       carry: DAY_CARRY.east,
@@ -281,9 +274,9 @@ function normalEvents(dayId) {
   if (dayId === "arrival")
     return [
       add("final-pack", "09:00", "10:00", {
-        title: "出发当天，再查一次行李",
+        title: "出发前再查行李",
         description:
-          "洗漱后把牙刷牙膏、梳子、拖鞋、浴巾或洗脸巾放回洗漱包。确认 3 张电话卡和 3 个转换插头已装包。",
+          "洗漱后收好牙刷牙膏、梳子、拖鞋和浴巾。再查 3 张电话卡、3 个转换插头。",
         category: "准备",
         checkIds: ["documents", "data", ...PACKING_IDS],
         carry: DAY_CARRY.arrival,
@@ -295,13 +288,13 @@ function normalEvents(dayId) {
       add("airport-dinner", "18:45", "19:30", {
         title: "在杭州机场吃晚餐",
         description:
-          "这班机截图显示无餐食，安检后按登机牌时间就近吃。下面的济州餐厅不适用于杭州机场，今晚不为落地宵夜延后休息。",
+          "航班无餐食，安检后就近吃，按登机牌时间候机。落地太晚不再专程找宵夜。",
         category: "晚餐",
       }),
       add("boarding", "19:30", "20:55", {
-        title: "安检后候机，按登机牌登机",
+        title: "候机与登机",
         description:
-          "核对登机口和航班动态，护照与手机放随身包。20:55 是济州时间，对应杭州 19:55。",
+          "核对登机口，护照、手机放随身包。此处 20:55 对应杭州 19:55。",
         category: "机场",
         carry: ["护照、手机、登机牌", "充电宝按航司要求随身携带"],
       }),
@@ -322,9 +315,9 @@ function normalEvents(dayId) {
         koreaInstant("2026-11-21", "00:10"),
         koreaInstant("2026-11-21", "00:40"),
         {
-          title: "入住、充电后休息，明天市区晚起",
+          title: "入住后洗漱休息",
           description:
-            "洗漱、给手机充电后休息。明天 21 日先市区慢游，约 10:00 再吃早午餐，不设置东线 07:30 集合闹钟；22 日东线事项在明晚确认。",
+            "洗漱、充电后休息。明天市区慢游，约 10:00 吃早午餐；22 日才是东线早集合。",
           category: "休息",
           checkIds: ["weather"],
           carry: ["牙刷牙膏、拖鞋、浴巾或洗脸巾", "转换插头和充电线"],
@@ -343,7 +336,7 @@ function normalEvents(dayId) {
       add("depart", "07:30", "09:00", {
         title: "集合，乘车去城山",
         description:
-          "按服务方确认的上车点集合。新济州至城山按约 80—100 分钟规划，临时堵车就减少后续停留，不压缩回船余量。",
+          "按确认的上车点集合，车程估约 80—100 分钟。堵车就减少停留，留足返船时间。",
         category: "交通",
         placeId: "peak",
       }),
@@ -352,22 +345,22 @@ function normalEvents(dayId) {
         carry: ["3 人护照原件", "先确认离岛码头与回程班次"],
       }),
       base(3, "11:20", "12:00", {
-        title: "牛岛先看一处海滩",
+        title: "牛岛看海",
         description:
-          "西滨白沙或下古水洞选一处，使用岛上观光巴士配步行。大风就取消骑行，不追求环岛。",
+          "西滨白沙、下古水洞选一处，坐岛上观光巴士配步行。大风不骑车，不赶环岛。",
       }),
       add("udo-lunch", "12:00", "13:00", {
-        title: "牛岛午餐：就近吃一份热食",
+        title: "牛岛热午餐",
         description:
-          "选海鲜面、鲍鱼粥等热餐，先看标价和上菜时间。不为餐厅长队影响 14:00 回码头。",
+          "就近吃海鲜面或鲍鱼粥，先看价格。不排长队，14:00 开始回码头。",
         category: "午餐",
         placeId: "udo",
         mealQuery: "우도 해물라면 전복죽",
       }),
       add("udo-dessert", "13:00", "14:00", {
-        title: "海滩稍坐，花生甜品少量尝鲜",
+        title: "花生甜品 · 可跳过",
         description:
-          "在下古水洞附近时可选 Blanc Rocher，三人分一份就好；排队长或交通衔接不顺就跳过。14:00 开始返码头。",
+          "顺路去 Blanc Rocher 分一份花生甜品；排队就跳过，14:00 回码头。",
         category: "咖啡甜品",
         placeId: "udo",
         foodIds: ["blanc"],
@@ -377,14 +370,13 @@ function normalEvents(dayId) {
       base(6, "16:20", "18:10", {
         title: "回新济州",
         description:
-          "车程按 80—110 分钟留余量。回到市区后再吃晚餐，遇堵车不保证 18:10 准时到达。",
+          "车程估约 80—110 分钟，回市区再吃晚餐。堵车可能晚于 18:10 抵达。",
         category: "交通",
         placeId: "stay",
       }),
       add("pork-dinner", "18:15", "19:30", {
-        title: "东线回城晚餐，热汤或烤肉选一家",
-        description:
-          "21 日若已吃烤肉，今天可换热汤、猪蹄或辣炒小章鱼；仍想吃烤肉也只选一家。候位超过 30 分钟就换店，下面可查看地图。",
+        title: "回城晚餐",
+        description: "热汤、猪蹄、小章鱼或烤肉选一家；候位超过 30 分钟就换店。",
         category: "晚餐",
         foodIds: [
           "woojin",
@@ -399,7 +391,7 @@ function normalEvents(dayId) {
       add("next-day", "20:30", "21:00", {
         title: "回住处，准备明日西线",
         description:
-          "查明日西线天气和回城用车，预收返程衣物、纪念品与行李。买好早餐、给设备充电；明天看完日落回城后只留最后打包，别到最后一晚才找送机车。",
+          "查西线天气与回城用车，先收衣物和伴手礼。买早餐、充电，确认送机车。",
         category: "明日准备",
         checkIds: ["weather", "money", "power", "departure"],
       }),
@@ -407,16 +399,16 @@ function normalEvents(dayId) {
   if (dayId === "west")
     return [
       add("pre-pack", "07:45", "08:15", {
-        title: "出门前预收行李，确认回城与送机",
+        title: "预收行李 · 确认车辆",
         description:
-          "今天是最后一个游玩日。把不再用的衣物、伴手礼先装箱；留出今晚与明早的洗漱用品，确认 24 日 05:15 接车和今晚海边回城车辆。",
+          "先装不再用的衣物和伴手礼，留出洗漱包。确认今晚回城车、24 日 05:15 送机车。",
         category: "返程准备",
         carry: DAY_CARRY.return,
       }),
       add("breakfast", "08:15", "08:50", {
-        title: "早餐与西线出门准备",
+        title: "早餐与出门准备",
         description:
-          "今天周一，仍以便利店饭团、三明治和热饮作为灵活早餐。先查天气与西线回程车辆；不在最后一天为热门早餐排长队。",
+          "便利店饭团、三明治配热饮。查天气和回程车，不排热门早餐长队。",
         category: "早餐",
         foodIds: ["storecoffee"],
         carry: DAY_CARRY.west,
@@ -430,9 +422,9 @@ function normalEvents(dayId) {
       base(3, "12:30", "13:20"),
       base(4, "13:20", "14:45"),
       base(5, "14:45", "16:00", {
-        title: "确定咖啡落脚点，再决定是否折返",
+        title: "选一家海景咖啡馆",
         description:
-          "Team Blow 在涯月；休止符在挟才。留在挟才就省掉返回涯月的车程；SLOWBOAT 在下贵一带，需要另算交通，不为打卡多跑一家。",
+          "Team Blow 在涯月，休止符在挟才；留挟才可省折返。SLOWBOAT 在下贵，需另算车程。只选一家。",
       }),
       base(6, "16:15", "17:35", {
         foodIds: ["teamblow", "comma", "slowboat"],
@@ -440,21 +432,20 @@ function normalEvents(dayId) {
           "三家只选一家。选择挟才或下贵的店时，相应调整上一段移动；先确认营业与座位，不保证晚霞。",
       }),
       add("return-to-city", "17:35", "19:00", {
-        title: "结束海边活动，预约车辆回新济州",
+        title: "乘车回新济州",
         description:
-          "约 17:35 启程，给候车与回城留到 19:00 的规划余量。涯月与挟才的返程距离不同，以实际路况为准；优先提前约车。迟到就简化晚餐，不压缩 19:40—20:30 打包。",
+          "约 17:35 出发，预留到 19:00 回城。提前约车；晚到就简化晚餐，保留 19:40—20:30 打包。",
         category: "返程交通",
         placeId: "stay",
       }),
       base(7, "19:00", "19:40", {
         foodIds: ["baro", "woojin", "bhc"],
-        description:
-          "回新济州就近吃热汤、猪蹄或炸鸡，先少量点。排队长就改外带或便利店；19:40 开始最后打包，不为餐厅延长行程。",
+        description: "就近吃热汤、猪蹄或炸鸡。排队就外带，19:40 开始打包。",
       }),
       add("next-day", "19:40", "20:30", {
-        title: "打包早睡，确认明早 05:15 接车",
+        title: "打包 · 早睡",
         description:
-          "买好明早早餐，检查司机、入口、行李件数和退房步骤。护照、手机、钱包放随身包，设置两组 04:45 闹钟，20:30 前完成行李收尾。",
+          "20:30 前收好行李、买早餐，确认退房和司机。护照、手机、钱包随身，设两组 04:45 闹钟。",
         category: "返程准备",
         checkIds: ["departure", "checkout"],
         carry: DAY_CARRY.return,
